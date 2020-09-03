@@ -13,7 +13,6 @@
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
 
   .title {
     font-family: 'Montserrat', Arial, sans-serif;
