@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <Paragraph>© 2020 — Web app coded by <a href="https://www.susmaycan.dev" target="_blank">Susana Mayo Cano</a> using VueJS.</Paragraph>
+    <p>© 2020 — Web app coded by <a href="https://www.susmaycan.dev" target="_blank">Susana Mayo Cano</a> using VueJS.</p>
   </div>
 </template>
 
