@@ -1,14 +1,16 @@
 <template>
-  <div>
-    <Subtitle>Recipes</Subtitle>
-    <div class="recipe-list-container">
-      <RecipeCard
-        v-for="(recipe, index) in recipeList"
-        :key="index"
-        :recipe="recipe"
-      />
+  <Container>
+    <div id="recipes">
+      <Subtitle>Recipes</Subtitle>
+      <div class="recipe-list-container">
+        <RecipeCard
+          v-for="(recipe, index) in recipeList"
+          :key="index"
+          :recipe="recipe"
+        />
+      </div>
     </div>
-  </div>
+  </Container>
 </template>
 
 <script lang="ts">
