@@ -1,9 +1,11 @@
 <template>
-  <div class="recipe-card-container">
-    <img :src="recipe.picture"/>
-    <p>{{recipe.name}}</p>
-    <p v-if="recipe.duration !== undefined">Duration: {{recipe.duration}} min</p>
-  </div>
+  <nuxt-link v-if="recipe._id !== undefined" :to="`recipes/${recipe._id}`">
+    <div class="recipe-card-container">
+      <img :src="recipe.picture"/>
+      <p>{{recipe.name}}</p>
+      <p v-if="recipe.duration !== undefined">Duration: {{recipe.duration}} min</p>
+    </div>
+  </nuxt-link>
 </template>
 
 <script lang="ts">

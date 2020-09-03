@@ -15,7 +15,7 @@
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator'
-  import RecipesAPI from '../api/recipes'
+  import RecipesAPI from '~/api/recipes'
   import RecipeCard from "~/components/RecipeCard.vue";
   import Subtitle from "~/components/Subtitle.vue";
 
@@ -29,7 +29,6 @@
       RecipesAPI.getAll()
         .then((response) => {
           this.recipeList = response.data
-          console.log(response.data)
         })
         .catch((e) => {
           console.log(e)

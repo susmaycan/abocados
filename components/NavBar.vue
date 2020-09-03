@@ -4,7 +4,7 @@
       <nuxt-link class="brand" to="/"><Logo />aBocados</nuxt-link>
     </div>
     <div class="nav-bar-right">
-      <nuxt-link to="/RecipeList">Recipes</nuxt-link>
+      <nuxt-link to="/recipes">Recipes</nuxt-link>
       <Button>
         <nuxt-link to="/AddRecipe">AddRecipe</nuxt-link>
       </Button>
