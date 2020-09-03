@@ -7,6 +7,9 @@
 </template>
 
 <style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap');
+
   html {
     font-family: 'Montserrat',
     'Source Sans Pro',
@@ -49,6 +52,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-weight: 400;
   }
 </style>
 <script lang="ts">
