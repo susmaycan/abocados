@@ -3,7 +3,7 @@
     <div class="recipe-card-container">
       <img :src="recipe.picture"/>
       <p>{{recipe.name}}</p>
-      <p v-if="recipe.duration !== undefined">Duration: {{recipe.duration}} min</p>
+      <Ranking :rankingList="recipe.ranking"/>
     </div>
   </nuxt-link>
 </template>
