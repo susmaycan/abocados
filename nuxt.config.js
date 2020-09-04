@@ -65,7 +65,7 @@ export default {
 
   proxy: {
     '/api': {
-      target: 'http://localhost:3001',
+      target: 'https://abocados.herokuapp.com',
       pathRewrite: {
         '^/api' : '/'
       },
