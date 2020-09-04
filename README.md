@@ -27,6 +27,6 @@ yarn build
 yarn start
 ```
 
-5. Open the following url on your browser: <http://localhost:3001/recipe>
+5. Open the following url on your browser: <http://localhost:3000>
 
 
