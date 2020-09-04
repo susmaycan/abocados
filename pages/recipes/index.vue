@@ -1,7 +1,7 @@
 <template>
   <Container>
     <div id="recipes">
-      <Subtitle>Recipes</Subtitle>
+      <Subtitle>Your recipes</Subtitle>
       <div class="recipe-list-container">
         <RecipeCard
           v-for="(recipe, index) in recipeList"
@@ -46,5 +46,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2rem;
   }
 </style>
