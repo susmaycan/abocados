@@ -6,7 +6,7 @@
         <RecipeForm :recipe="recipe" :saveRecipe="saveRecipe" />
       </div>
       <div v-else>
-        Edited recipe! Click <strong><nuxt-link :to="`/recipes/${recipe._id}`">here</nuxt-link></strong> to see the recipe.
+        Edited recipe! Click <strong><Link><nuxt-link :to="`/recipes/${recipe._id}`">here</nuxt-link></Link></strong> to see the recipe.
       </div>
     </Container>
   </div>
@@ -50,9 +50,3 @@
     }
   }
 </script>
-
-<style>
-  .input-form {
-    padding: 1rem;
-  }
-</style>

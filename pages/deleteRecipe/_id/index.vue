@@ -17,7 +17,11 @@
       </div>
       <div v-else>
         Deleted recipe!
-        <nuxt-link to="/recipes">Go back</nuxt-link>
+        <strong>
+          <Link>
+            <nuxt-link to="/recipes">Go back.</nuxt-link>
+          </Link>
+        </strong>
       </div>
     </Container>
   </div>
@@ -67,6 +71,6 @@
     flex-direction: row;
     justify-content: center;
     column-gap: 2rem;
-    margin:1rem;
+    margin: 1rem;
   }
 </style>

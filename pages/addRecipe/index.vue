@@ -6,7 +6,7 @@
         <RecipeForm :recipe="recipe" :saveRecipe="saveRecipe" />
       </div>
       <div v-else>
-        Submitted recipe! Click <nuxt-link :to="`recipes/${recipe._id}`">here</nuxt-link> to see the recipe.
+        Submitted recipe! Click <strong><Link><nuxt-link :to="`recipes/${recipe._id}`">here</nuxt-link></Link></strong> to see the recipe.
       </div>
     </Container>
   </div>
