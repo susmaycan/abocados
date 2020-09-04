@@ -1,19 +1,12 @@
 <template>
   <div class="title-container">
-    <h1 class="title"><slot/></h1>
+    <h1 class="title">
+      <slot/>
+    </h1>
   </div>
 </template>
 
-<script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator'
-
-  @Component
-  export default class Title extends Vue {
-  }
-</script>
-
 <style>
-
   .title {
     font-family: 'Montserrat', Arial, sans-serif;
     display: block;
@@ -24,6 +17,6 @@
   }
 
   .title-container {
-    padding:10px;
+    padding: 10px;
   }
 </style>

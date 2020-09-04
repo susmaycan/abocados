@@ -1,16 +1,10 @@
 <template>
   <div class="subtitle-container">
-    <h1 class="subtitle"><slot/></h1>
+    <h2 class="subtitle">
+      <slot/>
+    </h2>
   </div>
 </template>
-
-<script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator'
-
-  @Component
-  export default class Subtitle extends Vue {
-  }
-</script>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
@@ -25,6 +19,6 @@
   }
 
   .subtitle-container {
-    padding:7px;
+    padding: 7px;
   }
 </style>

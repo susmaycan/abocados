@@ -1,28 +1,13 @@
 <template>
-  <Container>
-    <div id="recipes">
-      <Subtitle>Your recipes</Subtitle>
-      <div class="recipe-list-container">
-        <RecipeCard
-          v-for="(recipe, index) in recipeList"
-          :key="index"
-          :recipe="recipe"
-        />
-      </div>
-    </div>
-  </Container>
+  <RecipeList :recipes="recipeList"/>
 </template>
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator'
   import RecipesAPI from '~/api/recipes'
-  import RecipeCard from "~/components/RecipeCard.vue";
-  import Subtitle from "~/components/Subtitle.vue";
 
-  @Component({
-    components: {Subtitle, RecipeCard}
-  })
-  export default class RecipeList extends Vue {
+  @Component
+  export default class Recipes extends Vue {
     private recipeList: any[] = []
 
     retrieveRecipeList() {
@@ -40,15 +25,3 @@
     }
   }
 </script>
-
-<style>
-  .recipe-list-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-</style>

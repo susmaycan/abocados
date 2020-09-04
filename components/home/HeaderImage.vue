@@ -190,7 +190,7 @@
 <style>
   .header-img {
     animation: 1s appear;
-    margin: 20px;
+    margin: 2rem;
   }
 
   @keyframes appear {

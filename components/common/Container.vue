@@ -4,14 +4,6 @@
   </div>
 </template>
 
-<script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator'
-
-  @Component
-  export default class Container extends Vue {
-  }
-</script>
-
 <style>
    .container {
       margin: 0 auto;

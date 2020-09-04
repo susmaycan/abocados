@@ -1,54 +1,14 @@
 <template>
-  <Container>
-    <div class="recipe-header">
-      <Subtitle>{{recipe.name}}</Subtitle>
-      <Ranking :rankingList="recipe.ranking"/>
-      <div class="recipe-icons">
-        <nuxt-link :to="`/editRecipe/${recipe._id}`">
-          <EditIcon/>Edit
-        </nuxt-link>
-        <nuxt-link :to="`/deleteRecipe/${recipe._id}`">
-          <DeleteIcon/>Delete
-        </nuxt-link>
-      </div>
-    </div>
-    <div class="recipe-detail-container">
-      <div class="container-left">
-        <img class="recipe-img" :src="recipe.picture"/>
-      </div>
-      <div class="container-right">
-        <p v-if="recipe.duration !== undefined">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="feather feather-clock">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
-          {{recipe.duration}} min
-        </p>
-        <div>
-          <h3>Ingredients</h3>
-          <p class="line-breaks" v-if="recipe.ingredients !== undefined">{{recipe.ingredients}}</p>
-        </div>
-        <div>
-          <h3>Directions</h3>
-          <p class="line-breaks" v-if="recipe.directions !== undefined">{{recipe.directions}}</p>
-        </div>
-      </div>
-    </div>
-  </Container>
+  <Recipe :recipe="recipe" />
 </template>
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator'
   import RecipesAPI from '~/api/recipes'
-  import Ranking from "~/components/Ranking.vue";
 
-  @Component({
-    components: {Ranking}
-  })
-  export default class RecipeList extends Vue {
-    private recipe: object[] = []
+  @Component
+  export default class RecipeComponent extends Vue {
+    private recipe: object = {}
 
     retrieveRecipe() {
       let id: string = this.$route.params.id
@@ -67,47 +27,3 @@
     }
   }
 </script>
-
-<style>
-
-  .recipe-detail-container {
-    display: flex;
-    flex-direction: row;
-    column-gap: 2rem;
-  }
-
-  .recipe-img {
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
-    border-radius: .5rem;
-  }
-
-  .container-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: left;
-    row-gap: 1rem;
-  }
-
-  .recipe-header {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2rem;
-  }
-
-  .feather-clock {
-    margin-bottom: -.4rem;
-  }
-
-  .line-breaks {
-    white-space: pre-wrap;
-  }
-
-  .recipe-icons {
-    padding: 1rem;
-  }
-
-</style>

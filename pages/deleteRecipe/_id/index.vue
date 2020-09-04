@@ -34,7 +34,7 @@
   @Component
   export default class DeleteRecipe extends Vue {
 
-    private recipe: Object = {}
+    private recipe: any = {}
     private deleted: boolean = false
 
 

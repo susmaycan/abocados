@@ -19,7 +19,7 @@
   @Component
   export default class AddRecipe extends Vue {
 
-    private recipe: Object = {
+    private recipe: any = {
       name: "",
       ingredients: undefined,
       directions: undefined,
@@ -32,7 +32,7 @@
 
     saveRecipe() {
       RecipesAPI.create(this.recipe)
-        .then((response) => {
+        .then((response: any) => {
           this.submitted = true
           this.recipe = response.data
         })
@@ -44,9 +44,3 @@
 
   }
 </script>
-
-<style>
-  .input-form {
-    padding: 1rem;
-  }
-</style>

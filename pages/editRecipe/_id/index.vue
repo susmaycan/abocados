@@ -3,10 +3,14 @@
     <Container>
       <Subtitle>Edit recipe</Subtitle>
       <div v-if="!submitted">
-        <RecipeForm :recipe="recipe" :saveRecipe="saveRecipe" />
+        <RecipeForm :recipe="recipe" :saveRecipe="saveRecipe"/>
       </div>
       <div v-else>
-        Edited recipe! Click <strong><Link><nuxt-link :to="`/recipes/${recipe._id}`">here</nuxt-link></Link></strong> to see the recipe.
+        Edited recipe! Click <strong>
+        <Link>
+          <nuxt-link :to="`/recipes/${recipe._id}`">here</nuxt-link>
+        </Link>
+      </strong> to see the recipe.
       </div>
     </Container>
   </div>
@@ -19,13 +23,12 @@
   @Component
   export default class EditRecipe extends Vue {
 
-    private recipe: Object = {}
+    private recipe: any = {}
     private submitted: boolean = false
-
 
     saveRecipe() {
       RecipesAPI.update(this.recipe._id, this.recipe)
-        .then((response) => {
+        .then((response: any) => {
           this.submitted = true
           this.recipe = response.data
         })
