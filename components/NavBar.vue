@@ -6,7 +6,7 @@
     <div class="nav-bar-right">
       <nuxt-link to="/recipes">Recipes</nuxt-link>
       <Button>
-        <nuxt-link to="/AddRecipe">AddRecipe</nuxt-link>
+        <nuxt-link to="/addRecipe">Add recipe</nuxt-link>
       </Button>
     </div>
   </nav>
