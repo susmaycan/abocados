@@ -2,6 +2,16 @@
   <Container>
     <div class="recipe-header">
       <Subtitle>{{recipe.name}}</Subtitle>
+      <div>
+        <nuxt-link :to="`/editRecipe/${recipe._id}`">
+          <EditIcon/>
+          Edit
+        </nuxt-link>
+        <nuxt-link :to="`/deleteRecipe/${recipe._id}`">
+          <DeleteIcon/>
+          Delete
+        </nuxt-link>
+      </div>
       <Ranking :rankingList="recipe.ranking"/>
     </div>
     <div class="recipe-detail-container">
@@ -46,7 +56,7 @@
   export default class RecipeList extends Vue {
     private recipe: object[] = []
 
-    retrieveRecipeList() {
+    retrieveRecipe() {
       let id: string = this.$route.params.id
       RecipesAPI.get(id)
         .then((response) => {
@@ -59,7 +69,7 @@
     }
 
     mounted() {
-      this.retrieveRecipeList()
+      this.retrieveRecipe()
     }
   }
 </script>
@@ -89,10 +99,13 @@
   }
 
   .recipe-header {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
     margin-bottom: 2rem;
   }
 
-  .feather-clock{
+  .feather-clock {
     margin-bottom: -.4rem;
   }
 
