@@ -18,7 +18,8 @@
       </div>
       <div class="input-form">
         <label for="picture">Picture URL: </label>
-        <input placeholder="https://www.google.es/images/asd.png" v-model="recipe.picture" name="picture" id="picture" type="url"/>
+        <input placeholder="https://www.google.es/images/asd.png" v-model="recipe.picture" name="picture" id="picture"
+               type="url"/>
       </div>
     </div>
     <div class="grid-text-area">
@@ -68,10 +69,14 @@
     padding: 1rem;
   }
 
-  .input-row {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
+  @media (max-width: 800px) {
+    .grid-form {
+      grid-template-columns:  1fr;
+    }
+
+    .grid-text-area {
+      grid-template-columns:  1fr 1fr;
+    }
   }
 
   input, textarea {
