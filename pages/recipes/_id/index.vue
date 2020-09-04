@@ -2,17 +2,15 @@
   <Container>
     <div class="recipe-header">
       <Subtitle>{{recipe.name}}</Subtitle>
-      <div>
+      <Ranking :rankingList="recipe.ranking"/>
+      <div class="recipe-icons">
         <nuxt-link :to="`/editRecipe/${recipe._id}`">
-          <EditIcon/>
-          Edit
+          <EditIcon/>Edit
         </nuxt-link>
         <nuxt-link :to="`/deleteRecipe/${recipe._id}`">
-          <DeleteIcon/>
-          Delete
+          <DeleteIcon/>Delete
         </nuxt-link>
       </div>
-      <Ranking :rankingList="recipe.ranking"/>
     </div>
     <div class="recipe-detail-container">
       <div class="container-left">
@@ -30,15 +28,11 @@
         </p>
         <div>
           <h3>Ingredients</h3>
-          <ul>
-            <li v-for="(ingredient, index) in recipe.ingredients" :key="index" v-if="recipe.ingredients !== undefined">
-              {{ingredient}}
-            </li>
-          </ul>
+          <p class="line-breaks" v-if="recipe.ingredients !== undefined">{{recipe.ingredients}}</p>
         </div>
         <div>
           <h3>Directions</h3>
-          <p v-if="recipe.directions !== undefined">{{recipe.directions}}</p>
+          <p class="line-breaks" v-if="recipe.directions !== undefined">{{recipe.directions}}</p>
         </div>
       </div>
     </div>
@@ -101,12 +95,19 @@
   .recipe-header {
     display: flex;
     flex-direction: column;
-    row-gap: 1rem;
     margin-bottom: 2rem;
   }
 
   .feather-clock {
     margin-bottom: -.4rem;
+  }
+
+  .line-breaks {
+    white-space: pre-wrap;
+  }
+
+  .recipe-icons {
+    padding: 1rem;
   }
 
 </style>

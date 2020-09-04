@@ -2,14 +2,18 @@
   <div>
     <Container>
       <Subtitle>
-        <DeleteIcon/>
         Delete recipe
       </Subtitle>
       <div v-if="!deleted">
-        <p>Are you sure you want to delete your delicious {{recipe.name}} recipe? </p>
-        <p>Once you delete it there's not turn back!</p>
-        <button @click="deleteRecipe">Yes, I'm 100% sure</button>
-        <nuxt-link :to="`/recipes/${recipe._id}`">No wait!!</nuxt-link>
+        <p>Are you sure you want to delete your delicious <strong>{{recipe.name}}</strong> recipe? </p>
+        <p>Once you delete it, there's no turn back.</p>
+        <div class="delete-button">
+          <Button :onClick="deleteRecipe">Yes, I'm 100% sure</Button>
+          <Button>
+            <nuxt-link :to="`/recipes/${recipe._id}`">No wait!!</nuxt-link>
+          </Button>
+        </div>
+
       </div>
       <div v-else>
         Deleted recipe!
@@ -58,7 +62,11 @@
 </script>
 
 <style>
-  .input-form {
-    padding: 1rem;
+  .delete-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 2rem;
+    margin:1rem;
   }
 </style>
