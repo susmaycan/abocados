@@ -37,6 +37,7 @@
     font-size: 1rem;
     text-decoration: none;
     border: solid 1px #ffffff;
+    cursor: pointer;
   }
 
   .custom-button:hover {

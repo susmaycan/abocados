@@ -5,21 +5,21 @@
       <Ranking :rankingList="recipe.ranking"/>
     </div>
     <div class="recipe-detail-container">
-      <div class="container-left">
+      <div v-if="recipe.picture" class="container-left">
         <img class="recipe-img" :src="recipe.picture"/>
       </div>
       <div class="container-right">
-        <p v-if="recipe.duration !== undefined">
+        <p v-if="recipe.duration">
           <TimeIcon/>
           {{recipe.duration}} min
         </p>
         <div>
           <h3>Ingredients</h3>
-          <p class="line-breaks" v-if="recipe.ingredients !== undefined">{{recipe.ingredients}}</p>
+          <p class="line-breaks" v-if="recipe.ingredients">{{recipe.ingredients}}</p>
         </div>
         <div>
           <h3>Directions</h3>
-          <p class="line-breaks" v-if="recipe.directions !== undefined">{{recipe.directions}}</p>
+          <p class="line-breaks" v-if="recipe.directions">{{recipe.directions}}</p>
         </div>
       </div>
     </div>

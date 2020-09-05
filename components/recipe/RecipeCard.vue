@@ -27,6 +27,10 @@
     padding: 1rem;
     margin: 1rem;
     border-radius: 0.5rem;
+    border: .5px solid #cdcdcd;
+  }
+
+  .recipe-card-container:hover {
     box-shadow: 5px 5px 5px #7F828B;
   }
 

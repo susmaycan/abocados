@@ -18,7 +18,7 @@
     </Container>
     <Container v-else-if="deleted && !error">
       <h1>Yay! Deleted recipe successfully!</h1>
-      <p><nuxt-link to="/recipes">Go home.</nuxt-link></p>
+      <Link><nuxt-link to="/recipes">Go home.</nuxt-link></Link>
     </Container>
     <Error v-else>{{errorMsg}}</Error>
   </div>
