@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Container>
+    <Loading v-if="isLoading"/>
+    <Container v-else-if="!deleted && !error">
       <Subtitle>
         Delete recipe
       </Subtitle>
@@ -13,17 +14,13 @@
             <nuxt-link :to="`/recipes/${recipe._id}`">No wait!!</nuxt-link>
           </Button>
         </div>
-
-      </div>
-      <div v-else>
-        Deleted recipe!
-        <strong>
-          <Link>
-            <nuxt-link to="/recipes">Go back.</nuxt-link>
-          </Link>
-        </strong>
       </div>
     </Container>
+    <Container v-else-if="deleted && !error">
+      <h1>Yay! Deleted recipe successfully!</h1>
+      <p><nuxt-link to="/recipes">Go home.</nuxt-link></p>
+    </Container>
+    <Error v-else>{{errorMsg}}</Error>
   </div>
 </template>
 
@@ -36,26 +33,37 @@
 
     private recipe: any = {}
     private deleted: boolean = false
-
+    private error: Boolean = false
+    private errorMsg: String = ""
+    private isLoading: Boolean = false
 
     deleteRecipe() {
+      this.isLoading = true
       RecipesAPI.delete(this.recipe._id)
-        .then(() => (
+        .then(() => {
+          this.isLoading = false
           this.deleted = true
-        ))
-        .catch((e) => {
-          console.log(e)
+          this.recipe = {}
+        })
+        .catch((error: any) => {
+          this.isLoading = false
+          this.error = true
+          this.errorMsg = error.message
         })
     }
 
     retrieveRecipe() {
       let id: string = this.$route.params.id
+      this.isLoading = true
       RecipesAPI.get(id)
-        .then((response) => {
+        .then((response: any) => {
+          this.isLoading = false
           this.recipe = response.data
         })
-        .catch((e) => {
-          console.log(e)
+        .catch((error: any) => {
+          this.isLoading = false
+          this.error = true
+          this.errorMsg = error.message
         })
     }
 
