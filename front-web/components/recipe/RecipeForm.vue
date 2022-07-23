@@ -76,21 +76,21 @@
       @input="onInputChanges('categories', $event)"
     />
 
-    <ingredients-input
-      :initial-ingredients="form.ingredients"
-      :errors="errors.ingredients && errors.ingredients[index] ? errors.ingredients[index] : null"
-      :rules="rules.directions"
+    <a-text-area
+      :value="form.ingredients"
+      :errors="errors.ingredients"
+      :counter="2000"
+      :label="$t('ingredients') | capitalize"
+      auto-grow
       @input="onInputChanges('ingredients', $event)"
     />
 
     <a-text-area
       :value="form.directions"
       :errors="errors.directions"
-      :required="true"
       :counter="2000"
       :label="$t('directions') | capitalize"
       auto-grow
-      :rules="rules.directions"
       @input="onInputChanges('directions', $event)"
     />
 
@@ -149,7 +149,7 @@ export default {
       form: {
         name: null,
         directions: null,
-        ingredients: [],
+        ingredients: null,
         rating: null,
         duration: null,
         servings: null,
@@ -159,12 +159,6 @@ export default {
       displayPicture: null,
       rules: {
         name: [
-          this.required
-        ],
-        directions: [
-          this.required
-        ],
-        ingredients: [
           this.required
         ],
         rating: [
@@ -191,9 +185,6 @@ export default {
   methods: {
     onInputChanges (key, value) {
       this.form[key] = value
-    },
-    onInputUploadedPicture (value) {
-      this.uploadedPicture = value
     },
     submitPicture () {
       this.displayPicture = URL.createObjectURL(this.form.picture)

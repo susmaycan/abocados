@@ -9,7 +9,6 @@ class RecipeFilter(filters.FilterSet):
     rating = filters.NumberFilter(field_name='rating', lookup_expr='gte')
     duration = filters.NumberFilter(field_name='duration', lookup_expr='lte')
     name = filters.CharFilter(field_name='name', lookup_expr='icontains')
-    ingredients = filters.CharFilter(field_name='ingredients', lookup_expr='icontains')
     creator = filters.CharFilter(field_name='creator')
     category = filters.CharFilter(method='filter_category')
 
@@ -20,7 +19,6 @@ class RecipeFilter(filters.FilterSet):
             'rating',
             'from_date',
             'to_date',
-            'ingredients',
             'creator',
             'category',
             'duration'

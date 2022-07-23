@@ -7,7 +7,7 @@ from user.tests.factories import UserFactory
 class RecipeFactory(DjangoModelFactory):
     name = Faker('name')
     rating = Faker('numerify')
-    ingredients = List([Faker('name')])
+    ingredients = Faker('sentence')
     directions = Faker('sentence')
     picture = Faker('file_path', extension='jpg')
     duration = Faker('numerify')

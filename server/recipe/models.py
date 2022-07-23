@@ -14,9 +14,9 @@ def upload_location(instance, filename):
 
 class Recipe(models.Model):
     name = models.CharField(_('name'), max_length=180, null=False, blank=False)
-    ingredients = ArrayField(models.CharField(db_index=True, max_length=2000), blank=True, default=list)
+    ingredients = models.CharField(_('directions'), max_length=2000, null=True, blank=True)
     rating = models.CharField(_('rating'), max_length=5, null=True, blank=True)
-    directions = models.CharField(_('directions'), max_length=2000, null=False, blank=False)
+    directions = models.CharField(_('directions'), max_length=2000, null=True, blank=True)
     picture = models.FileField(_('picture'), upload_to=upload_location, null=True, blank=True, max_length=300)
     duration = models.CharField(_('duration'), max_length=10, null=True, blank=True)
     servings = models.CharField(_('servings'), max_length=10, null=True, blank=True)

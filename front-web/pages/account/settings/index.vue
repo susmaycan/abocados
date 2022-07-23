@@ -2,20 +2,23 @@
   <page-layout :title="$t('settings') | capitalize">
     <div v-if="user" class="d-flex justify-start flex-column align-center">
       <user-image :src="user.picture" width="100" height="100" />
-      <h2 class="font-weight-bold">
-        @{{ user.username }}
-      </h2>
+      <h2 class="font-weight-bold">@{{ user.username }}</h2>
       <a-button
         text
         icon="fa-solid fa-pen"
         @click="$router.push({ name: 'account-edit' })"
       >
-        {{ $t('edit_profile') | capitalize }}
+        {{ $t("edit_profile") | capitalize }}
       </a-button>
     </div>
 
     <div>
-      <div v-for="section in sections" :key="section.name" class="clickable setting-section d-flex align-baseline p-2" @click="$router.push({ name: section.path})">
+      <div
+        v-for="section in sections"
+        :key="section.name"
+        class="clickable setting-section d-flex align-baseline p-2"
+        @click="$router.push({ name: section.path })"
+      >
         <a-icon class="section-icon" :name="section.icon" />
         <div class="ml-3">
           <p class="font-weight-bold">
@@ -34,45 +37,45 @@
         icon="fa-solid fa-right-from-bracket"
         @click="onLogOut()"
       >
-        {{ $t('logout') | capitalize }}
+        {{ $t("logout") | capitalize }}
       </a-button>
     </template>
   </page-layout>
 </template>
 <script>
 export default {
-  name: 'Settings',
-  middleware: ['auth-custom'],
-  data () {
+  name: "Settings",
+  middleware: ["auth-custom"],
+  data() {
     return {
       user: {},
       sections: [
         {
-          name: 'account_settings',
-          icon: 'fa-solid fa-user',
-          path: 'account-settings-account'
+          name: "account_settings",
+          icon: "fa-solid fa-user",
+          path: "account-settings-account",
         },
         {
-          name: 'application_settings',
-          icon: 'fa-solid fa-wrench',
-          path: 'account-settings-app'
-        }
-      ]
-    }
+          name: "application_settings",
+          icon: "fa-solid fa-wrench",
+          path: "account-settings-app",
+        },
+      ],
+    };
   },
-  mounted () {
-    this.getData()
+  mounted() {
+    this.getData();
   },
   methods: {
-    onLogOut () {
-      this.$store.commit('user/removeUser')
-      this.$router.push({ name: 'index' })
+    onLogOut() {
+      this.$store.commit("user/removeUser");
+      this.$router.push({ name: "index" });
     },
-    async getData () {
-      this.user = await this.$api.auth.getUser()
-    }
-  }
-}
+    async getData() {
+      this.user = await this.$api.auth.getUser();
+    },
+  },
+};
 </script>
 <style scoped>
 .section-icon {
@@ -82,7 +85,7 @@ export default {
   border: 1px solid black;
   border-radius: 10px;
   margin: 1em 0;
-  padding: .5em 2em;
+  padding: 0.5em 2em;
 }
 .setting-section:hover {
   border: 1px solid white;

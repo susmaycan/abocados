@@ -48,15 +48,25 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
     rating = serializers.CharField(max_length=5, required=False)
     duration = serializers.CharField(max_length=10, required=False)
     servings = serializers.CharField(max_length=10, required=False)
-    directions = serializers.CharField(max_length=2000)
+    directions = serializers.CharField(max_length=2000, required=False)
+    ingredients = serializers.CharField(max_length=2000, required=False)
     picture = serializers.FileField(required=False)
-    ingredients = serializers.ListField(child=serializers.CharField(), required=True, min_length=1)
     creator = serializers.HiddenField(default=serializers.CurrentUserDefault())
     categories = serializers.SlugRelatedField(many=True, slug_field='id', queryset=Category.objects.all())
 
     class Meta:
         model = Recipe
-        fields = ['name', 'rating', 'duration', 'directions', 'picture', 'ingredients', 'creator', 'categories', 'servings']
+        fields = [
+            'name',
+            'rating',
+            'duration',
+            'directions',
+            'picture',
+            'ingredients',
+            'creator',
+            'categories',
+            'servings'
+        ]
 
     def create(self, data):
         category_list = data.pop('categories')

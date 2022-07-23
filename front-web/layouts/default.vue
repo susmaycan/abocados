@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-main>
-      <navbar />
+      <div v-if="$device.isDesktop">
+        <navbar />
+      </div>
       <v-container v-if="!error">
         <Nuxt />
       </v-container>

@@ -93,11 +93,11 @@ class RecipeTestCase(TestCase):
         self.assertEqual(response.status_code, HTTP_201_CREATED)
         self.assertEqual(content['name'], new_recipe.name)
         self.assertEqual(content['directions'], new_recipe.directions)
+        self.assertEqual(content['ingredients'], new_recipe.ingredients)
         self.assertEqual(content['duration'], new_recipe.duration)
         self.assertEqual(content['rating'], new_recipe.rating)
         self.assertEqual(content['creator']['id'], self.user1.id)
         self.assertEqual(content['creator']['username'], self.user1.username)
-        self.assertEqual(sorted(new_recipe.ingredients), sorted(content['ingredients']))
 
         response = self.make_retrieve_recipe_call(
             uuid=content['id'],
@@ -127,14 +127,10 @@ class RecipeTestCase(TestCase):
 
         self.assertEqual(response.status_code, HTTP_400_BAD_REQUEST)
         self.assertEqual(response.content['name'][0], 'This field is required.')
-        self.assertEqual(response.content['directions'][0], 'This field is required.')
-        self.assertEqual(response.content['ingredients'][0], 'This field is required.')
 
     def test_create_recipe_with_empty_fields(self):
         body = self._get_recipe_request()
         body['name'] = ''
-        body['directions'] = ''
-        body['ingredients'] = []
 
         response = self.make_create_recipe_call(
             data=body,
@@ -143,8 +139,6 @@ class RecipeTestCase(TestCase):
 
         self.assertEqual(response.status_code, HTTP_400_BAD_REQUEST)
         self.assertEqual(response.content['name'][0], 'This field may not be blank.')
-        self.assertEqual(response.content['directions'][0], 'This field may not be blank.')
-        self.assertEqual(response.content['ingredients'][0], 'This field is required.')
 
     def test_retrieve_recipe_list_ok(self):
         RecipeFactory.create_batch(5)
@@ -205,20 +199,6 @@ class RecipeTestCase(TestCase):
         self.assertEqual(response.content['count'], 5)
         self.assertLessEqual(response.content['results'][0]['duration'], '30')
         self.assertLessEqual(response.content['results'][1]['duration'], '30')
-
-    def test_retrieve_recipe_list_filter_ingredients(self):
-        recipe1 = RecipeFactory()
-        RecipeFactory.create_batch(2)
-        query_param = {
-            'ingredients': recipe1.ingredients[0]
-        }
-        response = self.make_retrieve_recipe_list_call(
-            user=self.user1,
-            query_params=query_param
-        )
-
-        self.assertEqual(response.status_code, HTTP_200_OK)
-        self.assertEqual(response.content['count'], 1)
 
     def test_retrieve_recipe_list_filter_to_from(self):
         RecipeFactory.create_batch(3)

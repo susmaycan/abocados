@@ -12,8 +12,8 @@ services:
         context: ./server
         dockerfile: Dockerfile
     command: 'python manage.py runserver 0.0.0.0:3003'
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     volumes:
       - ./server:/app
     ports:
