@@ -1,0 +1,15 @@
+// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
+$body-font-family: 'Roboto';
+$font-size-root: 17px;
+
+$headings: (
+  'h1': (
+    'weight': 900
+  ),
+  'h2': (
+    'weight': 700
+  ),
+  'body-1': (
+    'weight': 400
+  ),
+);

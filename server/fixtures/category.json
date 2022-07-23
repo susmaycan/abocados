@@ -1,0 +1,255 @@
+[
+{
+    "model": "category.category",
+    "pk": 1,
+    "fields": {
+        "type": "1",
+        "picture": "fixtures/category/breakfast"
+    }
+},
+{
+    "model": "category.category",
+    "pk": 2,
+    "fields": {
+        "type": "1",
+        "picture": "fixtures/category/lunch"
+    }
+},
+{
+    "model": "category.category",
+    "pk": 3,
+    "fields": {
+        "type": "1",
+        "picture": "fixtures/category/snack"
+    }
+},
+{
+    "model": "category.category",
+    "pk": 4,
+    "fields": {
+        "type": "1",
+        "picture": "fixtures/category/dinner"
+    }
+},
+{
+    "model": "category.category",
+    "pk": 5,
+    "fields": {
+        "type": "2",
+        "picture": "fixtures/category/vegetarian"
+    }
+},
+{
+    "model": "category.category",
+    "pk": 6,
+    "fields": {
+        "type": "2",
+        "picture": "fixtures/category/fish"
+    }
+},
+{
+    "model": "category.category",
+    "pk": 7,
+    "fields": {
+        "type": "2",
+        "picture": "fixtures/category/meat"
+    }
+},
+{
+    "model": "category.category",
+    "pk": 8,
+    "fields": {
+        "type": "3",
+        "picture": "fixtures/category/japanese"
+    }
+},
+{
+    "model": "category.category",
+    "pk": 9,
+    "fields": {
+        "type": "3",
+        "picture": "fixtures/category/indian"
+    }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 10,
+    "fields": {
+        "language_code": "en",
+        "name": "breakfast",
+        "description": null,
+        "master": 1
+        }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 11,
+    "fields": {
+        "language_code": "es",
+        "name": "desayuno",
+        "description": null,
+        "master": 1
+    }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 12,
+    "fields": {
+        "language_code": "en",
+        "name": "lunch",
+        "description": null,
+        "master": 2
+        }
+    },
+{
+    "model": "category.categorytranslation",
+    "pk": 13,
+    "fields": {
+        "language_code": "es",
+        "name": "almuerzo",
+        "description": null,
+        "master": 2
+    }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 14,
+    "fields": {
+        "language_code": "en",
+        "name": "snack",
+        "description": null,
+        "master": 3
+    }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 15,
+    "fields": {
+        "language_code": "es",
+        "name": "merienda",
+        "description": null,
+        "master": 3
+    }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 16,
+    "fields": {
+        "language_code": "en",
+        "name": "dinner",
+        "description": null,
+        "master": 4
+        }
+    },
+{
+    "model": "category.categorytranslation",
+    "pk": 17,
+    "fields": {
+        "language_code": "es",
+        "name": "cena",
+        "description": null,
+        "master": 4
+    }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 18,
+    "fields": {
+        "language_code": "en",
+        "name": "vegetarian",
+        "description": null,
+        "master": 5
+        }
+    },
+{
+    "model": "category.categorytranslation",
+    "pk": 19,
+    "fields": {
+        "language_code": "es",
+        "name": "vegetariana",
+        "description": null,
+        "master": 5
+    }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 20,
+    "fields": {
+        "language_code": "en",
+        "name": "fish",
+        "description": null,
+        "master": 6
+        }
+    },
+{
+    "model": "category.categorytranslation",
+    "pk": 21,
+    "fields": {
+        "language_code": "es",
+        "name": "pescado",
+        "description": null,
+        "master": 6
+    }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 22,
+    "fields": {
+        "language_code": "en",
+        "name": "meat",
+        "description": null,
+        "master": 7
+        }
+    },
+{
+    "model": "category.categorytranslation",
+    "pk": 23,
+    "fields": {
+        "language_code": "es",
+        "name": "carne",
+        "description": null,
+        "master": 7
+    }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 24,
+    "fields": {
+        "language_code": "en",
+        "name": "japanese",
+        "description": null,
+        "master": 8
+    }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 25,
+    "fields": {
+        "language_code": "es",
+        "name": "japonesa",
+        "description": null,
+        "master": 8
+    }
+},
+
+{
+    "model": "category.categorytranslation",
+    "pk": 26,
+    "fields": {
+        "language_code": "en",
+        "name": "indian",
+        "description": null,
+        "master": 9
+    }
+},
+{
+    "model": "category.categorytranslation",
+    "pk": 27,
+    "fields": {
+        "language_code": "es",
+        "name": "india",
+        "description": null,
+        "master": 9
+    }
+}
+]

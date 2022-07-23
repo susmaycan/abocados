@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2022
+# This file is distributed under the same license as abocados
+# Susana Mayo Cano smayocan@gmail.com 2022
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-23 09:10+0000\n"
+"PO-Revision-Date: 2022-07-23 09:13+0000\n"
+"Last-Translator:   <admin@abocados.app>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: abocados/settings.py:186
+msgid "English"
+msgstr "inglés"
+
+#: abocados/settings.py:187
+msgid "Spanish"
+msgstr "español"
+
+#: category/constants.py:6
+msgid "time"
+msgstr "hora"
+
+#: category/constants.py:7
+msgid "food"
+msgstr "comida"
+
+#: category/constants.py:8
+msgid "cuisine"
+msgstr "cocina"
+
+#: category/models.py:17 recipe/models.py:16 user/models.py:19
+msgid "name"
+msgstr "nombre"
+
+#: category/models.py:18
+msgid "description"
+msgstr "descripcion"
+
+#: category/models.py:21
+msgid "type"
+msgstr "tipo"
+
+#: category/models.py:27 recipe/models.py:20 user/models.py:20
+msgid "picture"
+msgstr "imagen"
+
+#: recipe/models.py:18
+msgid "rating"
+msgstr "valoración"
+
+#: recipe/models.py:19
+msgid "directions"
+msgstr "descripción"
+
+#: recipe/models.py:21
+msgid "duration"
+msgstr "duracion"
+
+#: recipe/models.py:22
+msgid "servings"
+msgstr "comensales"
+
+#: templates/base.html:46
+msgid "The Abocados team"
+msgstr "El equipo de Abocados"
+
+#: templates/recover_password_email.html:6
+#: templates/recover_password_email.html:10
+msgid "Reset password"
+msgstr "Recuperar contraseña"
+
+#: templates/recover_password_email.html:7 templates/validate_email.html:7
+msgid "Hey"
+msgstr "Hola"
+
+#: templates/recover_password_email.html:8
+msgid ""
+"Youve request a password reset. To do so, please click on the link below:"
+msgstr ""
+"Has solicitado recuperar tu contraseña. Para ello, haz click en el enlace de"
+" abajo:"
+
+#: templates/validate_email.html:6
+msgid "Welcome to Abocados"
+msgstr "Te damos la bienvenida a Abocados"
+
+#: templates/validate_email.html:8
+msgid "Verify your Abocados account clicking on the link below"
+msgstr "Verifica tu cuenta de Abocados haciendo click en el botón de abajo"
+
+#: templates/validate_email.html:10
+msgid "Verify here"
+msgstr "Verificar aquí"
+
+#: user/models.py:15
+msgid "email"
+msgstr "correo electrónico"
+
+#: user/serializers.py:74
+msgid "Invalid credentials"
+msgstr "credenciales inválidas"
+
+#: user/serializers.py:147 user/serializers.py:150 user/serializers.py:214
+#: user/serializers.py:250
+msgid "Email not registered"
+msgstr "Email no registrado"
+
+#: user/serializers.py:171 user/serializers.py:180 user/serializers.py:202
+#: user/serializers.py:205 user/serializers.py:212 user/serializers.py:241
+#: user/serializers.py:248 user/views.py:124 user/views.py:151
+#: user/views.py:167
+msgid "Token is invalid or expired"
+msgstr "El token es inválido o ha expirado"
+
+#: user/serializers.py:177
+msgid "Email has already been verified"
+msgstr "El email ya ha sido confirmado"
+
+#: user/views.py:43
+msgid "register Abocados"
+msgstr "Registro Abocados"
+
+#: user/views.py:60
+msgid "Reset Password Abocados"
+msgstr "Abocados - Recuperar contraseña"
+
+#: user/views.py:109
+msgid "Email is already verified"
+msgstr "El email ya ha sido confirmado"
+
+#: user/views.py:112
+msgid "Validation email sent"
+msgstr "Email de validación enviado"
+
+#: user/views.py:114
+msgid "Not found"
+msgstr "No encontrado"
+
+#: user/views.py:128
+msgid "Email successfully confirmed"
+msgstr "El email ha sido confirmado con éxito"
+
+#: user/views.py:141
+msgid "Reset password email sent"
+msgstr "Email de recuperación de contraseña enviado"
+
+#: user/views.py:153
+msgid "Password token valid"
+msgstr "Token de contraseña correcto"
+
+#: user/views.py:174
+#| msgid "Reset Password Abocados"
+msgid "Password changed"
+msgstr "Contraseña actualizada"
+
+#: user/views.py:221
+msgid "User doesnt exist"
+msgstr "El usuario no existe"
+
+#: user/views.py:231
+msgid "Recipe cannot be created by user"
+msgstr "Recetas de usuario no pueden ser añadidas a favoritos"
+
+#: user/views.py:234
+#| msgid "Email is already verified"
+msgid "Recipe is already favourited"
+msgstr "La receta ya está añadida en favoritos"
+
+#: user/views.py:247
+msgid "Recipe is not favourited"
+msgstr "La receta no está favoriteada"
+
+#~ msgid "Recover password"
+#~ msgstr "Recuperar contraseña"
+
+#~ msgid "User is not verified yet"
+#~ msgstr "La cuenta no está verificada aun"
+
+#~ msgid "ingredients"
+#~ msgstr "ingredientes"
+
+#~ msgid "Korean"
+#~ msgstr "coreano"
+
+#~ msgid "Invalid basic header. No credentials provided."
+#~ msgstr "Credenciales no proporcionadas"
+
+#~ msgid "Authentication credentials were not provided."
+#~ msgstr "Credenciales de autenticación no proporcionadas."
+
+#~ msgid "This field is required."
+#~ msgstr "Este campo es obligatorio"
+
+#~ msgid "This field must be unique."
+#~ msgstr "Este campo tiene que ser único je"

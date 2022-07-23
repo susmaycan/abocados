@@ -1,0 +1,86 @@
+[
+    {
+        "model": "user.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$2lSSjzwjYPSdcyJVH9zqrM$J5lFUx4DolWACIsSV5eHECuUuMdNnhtgS3HtnGWNQO0=",
+            "last_login": "2022-06-17T10:10:10.939Z",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2022-06-09T11:29:58.960Z",
+            "email": "admin@abocados.app",
+            "name": null,
+            "picture": "",
+            "modified": "2022-06-17T10:09:45.721Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "user.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$F9AUP3nmECEsnORy2hrB48$cmFQS0CrU9CwwY6sHDDL/gxeMKZXDWmcPubDnx3xTEQ=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "phoebe_buffay",
+            "first_name": "",
+            "last_name": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-06-09T11:22:00.381Z",
+            "email": "phoebe_buffay@friends.com",
+            "name": "Phoebe Buffay",
+            "picture": "fixtures/user/phoebe",
+            "modified": "2022-06-17T10:09:28.318Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "user.user",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$F9AUP3nmECEsnORy2hrB48$cmFQS0CrU9CwwY6sHDDL/gxeMKZXDWmcPubDnx3xTEQ=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "joey_tribbiani",
+            "first_name": "",
+            "last_name": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-06-09T11:22:00.381Z",
+            "email": "joey_tribbiani@friends.com",
+            "name": "Joey Tribbiani",
+            "picture": "fixtures/user/joey",
+            "modified": "2022-06-17T10:09:28.318Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "user.user",
+        "pk": 4,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$F9AUP3nmECEsnORy2hrB48$cmFQS0CrU9CwwY6sHDDL/gxeMKZXDWmcPubDnx3xTEQ=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "monica_geller",
+            "first_name": "",
+            "last_name": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-06-09T11:22:00.381Z",
+            "email": "monica_geller@friends.com",
+            "name": "Monica Geller",
+            "picture": "fixtures/user/monica",
+            "modified": "2022-06-17T10:09:28.318Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]
