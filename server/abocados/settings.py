@@ -175,7 +175,9 @@ DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
+    'http://localhost',
     'http://192.168.10.45:3000',
+    'http://192.168.10.45',
 )
 
 LOCALE_PATHS = [

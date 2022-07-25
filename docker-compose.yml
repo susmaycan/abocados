@@ -9,22 +9,22 @@ services:
   server:
     container_name: abocados-server
     build:
-        context: ./server
-        dockerfile: Dockerfile
+      context: ./server
+      dockerfile: Dockerfile
     command: 'python manage.py runserver 0.0.0.0:3003'
     env_file:
       - .env
     volumes:
       - ./server:/app
     ports:
-      - "3003:3003"
+      - '3003:3003'
     depends_on:
       - db
 
   front-web:
     build:
-        context: ./front-web
-        dockerfile: Dockerfile
+      context: ./front-web
+      dockerfile: Dockerfile
     container_name: abocados-web
     restart: always
     volumes:
@@ -37,3 +37,10 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: 'npm run dev'
+
+  nginx:
+    build: ./nginx
+    ports:
+      - '80:80'
+    depends_on:
+      - front-web
