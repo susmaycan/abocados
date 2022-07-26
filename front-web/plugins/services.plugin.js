@@ -16,7 +16,8 @@ export default ({ store, $axios, i18n, error }, inject) => {
 
     const token = store?.state?.user?.token
     config.headers.common.Authorization = token ? `Token ${token}` : null
-    config.headers.common['Content-Type'] = 'multipart/form-data;boundary=BoUnDaRyStRiNg'
+    config.headers.common['Content-Type'] =
+      'multipart/form-data;boundary=BoUnDaRyStRiNg'
 
     // Transform data into form data
     if (config.data) {
@@ -62,10 +63,9 @@ export default ({ store, $axios, i18n, error }, inject) => {
     store.commit('setIsLoading', false)
   })
 
-  $axios.onResponseError((whatever) => {
+  $axios.onResponseError(({ response }) => {
+    console.log('ERROR')
     store.commit('setIsLoading', false)
-    console.log({ whatever })
-    const { response } = whatever
     if (response && response.status === HTTP_ERROR_CODES.BAD_REQUEST) {
       return Promise.reject(response)
     } else {
