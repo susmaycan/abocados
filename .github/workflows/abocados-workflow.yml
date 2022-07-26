@@ -9,12 +9,12 @@ name: Abocados CI
 on: push
 
 env:
-  POSTGRES_HOST: db
-  POSTGRES_PORT: 5432
-  POSTGRES_DB: test-db
-  POSTGRES_USER: test-user
-  POSTGRES_PASSWORD: test-password
-  DJANGO_SECRET_KEY: django-test-key
+  POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+  POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+  POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+  POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+  DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
 
 jobs:
   build:
@@ -27,13 +27,6 @@ jobs:
         run: make build
 
       - name: Run migrations
-        env:
-          POSTGRES_HOST: db
-          POSTGRES_PORT: 5432
-          POSTGRES_DB: test-db
-          POSTGRES_USER: test-user
-          POSTGRES_PASSWORD: test-password
-          DJANGO_SECRET_KEY: django-test-key
         run: make migrate_full
 
       - name: Run tests
