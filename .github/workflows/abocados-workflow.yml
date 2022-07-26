@@ -23,8 +23,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: test
+        run: echo "la key $DJANGO_SECRET_KEY"
+
       - name: Install dependencies
         run: make build
+
+      - name: test
 
       - name: Run migrations
         run: make migrate_full
