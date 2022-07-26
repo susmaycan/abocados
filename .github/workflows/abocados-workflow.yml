@@ -29,8 +29,6 @@ jobs:
       - name: Install dependencies
         run: make build
 
-      - name: test
-
       - name: Run migrations
         run: make migrate_full
 
