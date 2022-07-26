@@ -2,10 +2,7 @@
   <v-container>
     <page-layout :title="$t(title) | capitalize">
       <p>{{ $t(message) | capitalize }}</p>
-      <a-button
-        class="my-2"
-        @click="$router.push({ name: 'index' })"
-      >
+      <a-button class="my-2" @click="$router.push({ name: 'index' })">
         {{ $t("go_home") | capitalize }}
       </a-button>
     </page-layout>
@@ -30,26 +27,32 @@ export default {
   },
   computed: {
     title () {
-      if (!this.error) {
-        return ''
+      switch (this.error) {
+        case HTTP_ERROR_CODES.NOT_FOUND:
+          return 'not_found_error'
+        case HTTP_ERROR_CODES.UNAUTHORIZED:
+        case HTTP_ERROR_CODES.FORBIDDEN:
+          return 'forbidden_error'
+        case HTTP_ERROR_CODES.INTERNAL_SERVER_ERROR:
+          return 'server_error'
+        default: {
+          return 'server_error'
+        }
       }
-      return {
-        [HTTP_ERROR_CODES.NOT_FOUND]: 'not_found_error',
-        [HTTP_ERROR_CODES.FORBIDDEN]: 'forbidden_error',
-        [HTTP_ERROR_CODES.UNAUTHORIZED]: 'forbidden_error',
-        [HTTP_ERROR_CODES.SERVER]: 'server_error'
-      }[this.error]
     },
     message () {
-      if (!this.error) {
-        return ''
+      switch (this.error) {
+        case HTTP_ERROR_CODES.NOT_FOUND:
+          return 'not_found_error_message'
+        case HTTP_ERROR_CODES.UNAUTHORIZED:
+        case HTTP_ERROR_CODES.FORBIDDEN:
+          return 'forbidden_error_message'
+        case HTTP_ERROR_CODES.INTERNAL_SERVER_ERROR:
+          return 'server_error_message'
+        default: {
+          return 'server_error_message'
+        }
       }
-      return {
-        [HTTP_ERROR_CODES.NOT_FOUND]: 'not_found_error_message',
-        [HTTP_ERROR_CODES.FORBIDDEN]: 'forbidden_error_message',
-        [HTTP_ERROR_CODES.UNAUTHORIZED]: 'forbidden_error_message',
-        [HTTP_ERROR_CODES.SERVER]: 'server_error_message'
-      }[this.error]
     }
   }
 }
