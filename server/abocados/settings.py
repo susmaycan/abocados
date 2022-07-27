@@ -95,14 +95,15 @@ WSGI_APPLICATION = 'abocados.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 # development
 MODE = os.environ.get("MODE", default="bla")
+database_value = {}
 if MODE == "dev":
     DB_NAME = os.environ.get('POSTGRES_DB')
     DB_USER = os.environ.get('POSTGRES_USER')
     DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
     DB_HOST = os.environ.get('POSTGRES_HOST')
     DB_PORT = os.environ.get('POSTGRES_PORT')
-    DATABASES = {
-        'default': {
+
+    database_value = {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': DB_NAME,
             'USER': DB_USER,
@@ -110,13 +111,14 @@ if MODE == "dev":
             'HOST': DB_HOST,
             'PORT': DB_PORT,
         }
-    }
 # production
 else:
     DB_URL= os.environ.get('DATABASE_URL')
-    DATABASES = {
-        'default': dj_database_url.config(default=DB_URL)
-    }
+    database_value = dj_database_url.config(default=DB_URL)
+
+DATABASES = {
+    'default': database_value
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
