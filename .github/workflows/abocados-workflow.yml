@@ -61,6 +61,7 @@ jobs:
           MODE: 'workflow'
         run: |
           echo "mode is $MODE"
+          echo "database is $DATABASE_URL"
           make migrate_full
 
       - name: Run tests
