@@ -115,7 +115,7 @@ if MODE == "dev":
 else:
     DB_URL= os.environ.get('DATABASE_URL')
     DATABASES = {
-        "default": dj_database_url.config(default=DB_URL)
+        'default': dj_database_url.config(default=DB_URL)
     }
 
 # Password validation
