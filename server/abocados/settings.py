@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
 import environ
 from django.utils.translation import gettext_lazy as _
 
@@ -92,23 +93,30 @@ WSGI_APPLICATION = 'abocados.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DB_NAME = os.environ.get('POSTGRES_DB')
-DB_USER = os.environ.get('POSTGRES_USER')
-DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
-DB_HOST = os.environ.get('POSTGRES_HOST')
-DB_PORT = os.environ.get('POSTGRES_PORT')
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+# development
+MODE = os.environ.get("MODE", default="dev")
+if MODE == "dev":
+    DB_NAME = os.environ.get('POSTGRES_DB')
+    DB_USER = os.environ.get('POSTGRES_USER')
+    DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+    DB_HOST = os.environ.get('POSTGRES_HOST')
+    DB_PORT = os.environ.get('POSTGRES_PORT')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': DB_NAME,
+            'USER': DB_USER,
+            'PASSWORD': DB_PASSWORD,
+            'HOST': DB_HOST,
+            'PORT': DB_PORT,
+        }
     }
-}
-
+# production
+else:
+    DB_URL= os.environ.get('DATABASE_URL')
+    DATABASES = {
+        "default": dj_database_url.config(default=DB_URL)
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
