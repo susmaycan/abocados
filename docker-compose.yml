@@ -39,6 +39,7 @@ services:
     command: 'npm run dev'
 
   nginx:
+    container_name: abocados-nginx
     build: ./nginx
     ports:
       - '80:80'
