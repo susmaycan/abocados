@@ -40,11 +40,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: test
-        run: echo "la key $DJANGO_SECRET_KEY"
-
       - name: Install dependencies
         run: make build
+
+      - name: Setup test database
+        env:
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+
+        run: |
+          export DATABASE_URL=postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.POSTGRES_HOST }}:${{ secrets.POSTGRES_PORT }}/${{ POSTGRES_DB }}
+          export SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
+          export DEBUG=1
 
       - name: Run migrations
         run: make migrate_full
