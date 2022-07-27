@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'abocados.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 # development
-MODE = os.environ.get("MODE", default="dev")
+MODE = os.environ.get("MODE", default="bla")
 if MODE == "dev":
     DB_NAME = os.environ.get('POSTGRES_DB')
     DB_USER = os.environ.get('POSTGRES_USER')

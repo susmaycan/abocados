@@ -59,6 +59,7 @@ jobs:
       - name: Run migrations
         run: |
           export DATABASE_URL=postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.POSTGRES_HOST }}:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}
+          echo "mode is $MODE"
           make migrate_full
 
       - name: Run tests
