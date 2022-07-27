@@ -43,7 +43,7 @@ jobs:
       - name: Install dependencies
         run: make build
 
-      - name: Setup test database
+      - name: Setup database
         env:
           POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
           POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
@@ -51,14 +51,18 @@ jobs:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+        run: |
+          echo "postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.POSTGRES_HOST }}:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}"
 
+      - name: Run migrations
         run: |
           export DATABASE_URL=postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.POSTGRES_HOST }}:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}
           export SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
           export DEBUG=1
-
-      - name: Run migrations
-        run: make migrate_full
+          export ALLOWED_HOSTS=localhost
+          export GITHUB_WORKFLOW=True
+          export MODE=workflow
+          make migrate_full
 
       - name: Run tests
         run: make test
