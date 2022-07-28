@@ -34,7 +34,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        run: pg_ctl -D /var/lib/***ql/data -l logfile start
 
     steps:
       - uses: actions/checkout@v3
@@ -53,6 +52,7 @@ jobs:
         run: |
           export DATABASE_URL=postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.POSTGRES_HOST }}:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}
           export DEBUG=1
+          pg_ctl -D /var/lib/***ql/data -l logfile start
 
       # - name: Run migrations
       #   env:
