@@ -5,7 +5,7 @@ services:
     container_name: abocados-db
     image: postgres
     env_file:
-      - ./.env
+      - .env
   server:
     container_name: abocados-server
     build:
