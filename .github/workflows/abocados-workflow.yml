@@ -53,7 +53,7 @@ jobs:
           export DEBUG=1
 
       - name: Run migrations
-          make migrate_full
+        run: make migrate_full
 
       # - name: Run tests
       #   run: make test
