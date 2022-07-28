@@ -34,12 +34,13 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        run: pg_ctl -D /var/lib/***ql/data -l logfile start
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: make build
+      # - name: Install dependencies
+      #   run: make build
 
       - name: Setup database
         env:
@@ -53,14 +54,14 @@ jobs:
           export DATABASE_URL=postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.POSTGRES_HOST }}:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}
           export DEBUG=1
 
-      - name: Run migrations
-        env:
-          DATABASE_URL: postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.POSTGRES_HOST }}:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}
-          MODE: 'workflow'
-        run: |
-          echo "mode is $MODE"
-          echo "database is $DATABASE_URL"
-          make migrate_full
+      # - name: Run migrations
+      #   env:
+      #     DATABASE_URL: postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.POSTGRES_HOST }}:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}
+      #     MODE: 'workflow'
+      #   run: |
+      #     echo "mode is $MODE"
+      #     echo "database is $DATABASE_URL"
+      #     make migrate_full
 
-      - name: Run tests
-        run: make test
+      # - name: Run tests
+      #   run: make test
