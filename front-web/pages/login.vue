@@ -60,6 +60,7 @@
 
 <script>
 import RulesMixin from '@/utils/mixins/rules'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
@@ -83,6 +84,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['loadCategories']),
     async onSubmit () {
       if (this.valid) {
         this.showPassword = false
@@ -90,6 +92,7 @@ export default {
           const data = await this.$api.auth.login(this.form)
           if (data) {
             this.$store.commit('user/setUser', data)
+            this.loadCategories()
             this.$router.push({
               name: 'index'
             })
