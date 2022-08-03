@@ -14,7 +14,6 @@ jobs:
           host: ${{secrets.DIGITAL_OCEAN_HOST}}
           key: ${{secrets.DIGITAL_OCEAN_TOKEN}}
           username: ${{ secrets.DIGITAL_OCEAN_USER }}
-          password: ${{ secrets.DIGITAL_OCEAN_PASSWORD }}
           passphrase: ${{ secrets.DIGITAL_OCEAN_TOKEN_PASSPHRASE }}
 
           script: |
