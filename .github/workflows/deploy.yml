@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy NodeJS app
+      - name: Deploy and test app
         uses: appleboy/ssh-action@master
         with:
           host: ${{secrets.DIGITAL_OCEAN_HOST}}
@@ -16,4 +16,9 @@ jobs:
           username: ${{ secrets.DIGITAL_OCEAN_USER }}
           passphrase: ${{ secrets.DIGITAL_OCEAN_TOKEN_PASSPHRASE }}
           script: |
-            sh build.sh
+            cd abocados-2.0/
+            git pull
+            make build
+            make migrate_full
+            make test
+            make run
