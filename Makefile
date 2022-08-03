@@ -32,6 +32,7 @@ help:
 
 DOCKER_COMPOSE_LOCAL=docker-compose.yml
 SERVER_SERVICE=server
+FRONT_SERVICE=front-web
 SERVER_CONTAINER=abocados-server
 
 # ===================== DOCKER COMMANDS ===================== #
@@ -47,6 +48,10 @@ build:
 .PHONY: restart_api
 restart_api:
 	docker-compose -f $(DOCKER_COMPOSE_LOCAL) restart $(SERVER_SERVICE)
+
+.PHONY: restart_front
+restart_front:
+	docker-compose -f $(DOCKER_COMPOSE_LOCAL) restart $(FRONT_SERVICE)
 
 .PHONY: stop
 stop:
