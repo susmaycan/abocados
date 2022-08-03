@@ -32,7 +32,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    '167.99.38.227'
+    '167.99.38.227',
+    'abocados.rocks',
+    'www.abocados.rocks'
 ]
 
 
@@ -185,6 +187,8 @@ CORS_ORIGIN_WHITELIST = (
     'http://167.99.38.227:3000',
     'http://79.116.130.176',
     'http://79.116.130.176:3000',
+    'http://www.abocados.rocks',
+    'http://www.abocados.rocks:3000'
 )
 
 LOCALE_PATHS = [
