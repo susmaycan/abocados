@@ -15,8 +15,5 @@ jobs:
           key: ${{secrets.DIGITAL_OCEAN_TOKEN}}
           username: ${{ secrets.DIGITAL_OCEAN_USER }}
           passphrase: ${{ secrets.DIGITAL_OCEAN_TOKEN_PASSPHRASE }}
-
           script: |
-            mkdir test
-            cd test
-            echo 'Deployment successful to digital ocean'
+            sh build.sh
