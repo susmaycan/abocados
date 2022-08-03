@@ -2,15 +2,14 @@ import createRepository from '../services/repository.services'
 import createFavouriteRepository from '../services/favourites.services'
 import createAuthRepository from '../services/auth.services'
 import { HTTP_ERROR_CODES } from '../utils/consts'
-const BASE_URL = 'http://localhost:3003/'
 
-export default ({ store, $axios, i18n, error }, inject) => {
+export default ({ store, $axios, i18n, $config }, inject) => {
   const repositoryWithAxios = createRepository($axios)
   const authRepositoryWithAxios = createAuthRepository($axios)
   const favouriteRepositoryWithAxios = createFavouriteRepository($axios)
 
   $axios.onRequest((config) => {
-    config.baseURL = BASE_URL
+    config.baseURL = $config.server
     const language = i18n.localeProperties?.code || 'en'
     config.headers.common['Accept-Language'] = language
 
