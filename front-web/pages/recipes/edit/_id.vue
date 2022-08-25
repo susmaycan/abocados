@@ -5,6 +5,7 @@
       :global-error="globalError"
       :recipe="recipe"
       @submit=" onSubmit"
+      :edit="true"
     />
   </page-layout>
 </template>

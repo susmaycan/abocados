@@ -8,6 +8,8 @@
   </page-layout>
 </template>
 <script>
+import { SAVE_TYPE } from '@/utils/consts'
+
 export default {
   name: 'AddRecipe',
   middleware: ['auth-custom'],
@@ -18,11 +20,12 @@ export default {
     }
   },
   methods: {
-    onSubmit (form) {
+    onSubmit (form, saveType) {
       this.$api.recipe.create(form)
         .then((data) => {
           if (data.id) {
-            this.$router.replace({ name: 'recipes-id', params: { id: data.id } })
+            const route = saveType === SAVE_TYPE.SAVE ? { name: 'recipes-id', params: { id: data.id } } : { name: 'recipes-add' }
+            this.$router.replace(route)
           }
         })
         .catch((response) => {

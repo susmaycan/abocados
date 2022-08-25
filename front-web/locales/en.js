@@ -50,6 +50,7 @@ export default {
   accept: 'accept',
   cancel: 'cancel',
   save: 'save',
+  save_add: 'save and add another',
   close: 'close',
   delete_recipe: 'delete recipe',
   delete_recipe_text: 'Are you sure you want to delete recipe',

@@ -11,3 +11,8 @@ export const CATEGORY_TYPE = {
   FOOD: '2',
   CUISINE: '3'
 }
+
+export const SAVE_TYPE = {
+  SAVE: 'save',
+  SAVE_AND_ADD: 'save and add'
+}

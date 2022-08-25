@@ -128,6 +128,5 @@ export default {
       this.errors = {}
     }
   }
-
 }
 </script>

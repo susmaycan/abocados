@@ -103,10 +103,11 @@
       color="primary"
       fab
       class="save-recipe-mobile"
-      @click="onSubmit()"
+      @click="onSubmit(SAVE_TYPE.SAVE)"
     />
-    <div v-else class="my-2">
+    <div v-else class="my-2 d-flex justify-center">
       <a-button
+        class="mr-2"
         color="secondary"
         @click="onCancel"
       >
@@ -114,10 +115,19 @@
       </a-button>
       <a-button
         :disabled="!valid"
+        class="mr-2"
         color="secondary"
-        @click="onSubmit"
+        @click="onSubmit(SAVE_TYPE.SAVE)"
       >
-        {{ $t('submit') | capitalize }}
+        {{ $t('save') | capitalize }}
+      </a-button>
+      <a-button
+        v-if="!edit"
+        :disabled="!valid"
+        color="secondary"
+        @click="onSubmit(SAVE_TYPE.SAVE_AND_ADD)"
+      >
+        {{ $t('save_add') | capitalize }}
       </a-button>
     </div>
   </v-form>
@@ -126,6 +136,8 @@
 <script>
 import { mapState } from 'vuex'
 import RulesMixin from '@/utils/mixins/rules'
+import { SAVE_TYPE } from '@/utils/consts'
+
 export default {
   name: 'RecipeForm',
   mixins: [RulesMixin],
@@ -141,6 +153,10 @@ export default {
     recipe: {
       type: Object,
       default () { return null }
+    },
+    edit: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -169,7 +185,8 @@ export default {
       items: [
         this.$t('ingredients'),
         this.$t('directions')
-      ]
+      ],
+      SAVE_TYPE
     }
   },
   computed: {
@@ -191,16 +208,15 @@ export default {
       this.displayPicture = URL.createObjectURL(this.form.picture)
       this.$modal.hide('recipe-picture-edit-modal')
     },
-    onSubmit () {
+    onSubmit (saveType) {
       if (this.valid) {
-        this.$emit('submit', this.form)
+        this.$emit('submit', this.form, saveType)
       }
     },
     onCancel () {
       this.$router.go(-1)
     }
   }
-
 }
 </script>
 

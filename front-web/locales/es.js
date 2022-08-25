@@ -50,6 +50,7 @@ export default {
   accept: 'aceptar',
   cancel: 'cancelar',
   save: 'guardar',
+  save_add: 'guardar y añadir otra',
   close: 'cerrar',
   delete_recipe: 'borrar receta',
   delete_recipe_text: '¿Confirmas el borrado de la receta ',
