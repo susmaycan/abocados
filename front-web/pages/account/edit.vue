@@ -108,7 +108,7 @@ export default {
         .then((data) => {
           if (data.id) {
             this.getData()
-            this.success = this.$t('successfully saved')
+            this.success = this.$t('successfully_saved')
             this.clearErrors()
           }
         })

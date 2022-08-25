@@ -44,7 +44,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 
 
 class RecipeCreateSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(max_length=180)
+    name = serializers.CharField(max_length=50)
     rating = serializers.CharField(max_length=5, required=False)
     duration = serializers.CharField(max_length=10, required=False)
     servings = serializers.CharField(max_length=10, required=False)

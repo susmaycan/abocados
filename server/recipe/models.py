@@ -13,7 +13,7 @@ def upload_location(instance, filename):
 
 
 class Recipe(models.Model):
-    name = models.CharField(_('name'), max_length=180, null=False, blank=False)
+    name = models.CharField(_('name'), max_length=50, null=False, blank=False)
     ingredients = models.CharField(_('directions'), max_length=2000, null=True, blank=True)
     rating = models.CharField(_('rating'), max_length=5, null=True, blank=True)
     directions = models.CharField(_('directions'), max_length=2000, null=True, blank=True)

@@ -35,7 +35,7 @@
       :errors="errors.name"
       :label="$t('name')"
       :rules="rules.name"
-      :counter="180"
+      :counter="50"
       @input="onInputChanges('name', $event)"
     />
 
@@ -159,7 +159,8 @@ export default {
       displayPicture: null,
       rules: {
         name: [
-          this.required
+          this.required,
+          v => this.maxLength(v, 50)
         ],
         rating: [
           v => this.minMax(0, 5, v)

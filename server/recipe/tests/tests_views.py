@@ -140,6 +140,19 @@ class RecipeTestCase(TestCase):
         self.assertEqual(response.status_code, HTTP_400_BAD_REQUEST)
         self.assertEqual(response.content['name'][0], 'This field may not be blank.')
 
+
+    def test_create_recipe_with_long_name(self):
+        body = self._get_recipe_request(name='a'*100)
+
+
+        response = self.make_create_recipe_call(
+            data=body,
+            user=self.user1
+        )
+
+        self.assertEqual(response.status_code, HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.content['name'][0], 'Ensure this field has no more than 50 characters.')
+
     def test_retrieve_recipe_list_ok(self):
         RecipeFactory.create_batch(5)
         response = self.make_retrieve_recipe_list_call(
