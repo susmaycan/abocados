@@ -128,5 +128,6 @@ export default {
   favourites_empty_message: 'No tienes ninguna receta en favoritos aun',
   favourites_subtitle: 'Aquí puedes ver tus recetas favoritas',
   recipe_book_subtitle: 'Aquí puedes ver tus recetas creadas',
-  explore_recipes: 'explora recetas'
+  explore_recipes: 'explora recetas',
+  profile: 'perfil'
 }
