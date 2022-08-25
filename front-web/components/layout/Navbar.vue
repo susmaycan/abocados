@@ -64,72 +64,72 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 
 export default {
-  name: "Navbar",
-  data() {
+  name: 'Navbar',
+  data () {
     return {
       sidebar: false,
       itemsRight: [
         {
-          title: "login",
-          path: "login",
-          icon: "fa-solid fa-arrow-right-to-bracket",
-          logged: false,
+          title: 'login',
+          path: 'login',
+          icon: 'fa-solid fa-arrow-right-to-bracket',
+          logged: false
         },
         {
-          title: "register",
-          path: "register",
-          icon: "fa-solid fa-user-plus",
-          logged: false,
+          title: 'register',
+          path: 'register',
+          icon: 'fa-solid fa-user-plus',
+          logged: false
         },
         {
-          title: "recipe_book",
-          path: "recipes",
-          icon: "fa-solid fa-bookmark",
-          logged: true,
-        },
+          title: 'recipe_book',
+          path: 'recipes',
+          icon: 'fa-solid fa-bookmark',
+          logged: true
+        }
       ],
       itemsLeft: [
         {
-          title: "search_recipes",
-          path: "search",
-          icon: "fa-solid fa-magnifying-glass",
-          logged: true,
-        },
+          title: 'search_recipes',
+          path: 'search',
+          icon: 'fa-solid fa-magnifying-glass',
+          logged: true
+        }
       ],
       dropdownItems: [
         {
-          title: "profile",
-          path: "account",
-          icon: "fa-solid fa-user",
-          logged: true,
+          title: 'profile',
+          path: 'account',
+          icon: 'fa-solid fa-user',
+          logged: true
         },
         {
-          title: "settings",
-          path: "account-settings",
-          icon: "fa-solid fa-gear",
-          logged: true,
-        },
+          title: 'settings',
+          path: 'account-settings',
+          icon: 'fa-solid fa-gear',
+          logged: true
+        }
       ],
-      openMenu: false,
-    };
+      openMenu: false
+    }
   },
   computed: {
-    ...mapState("user", ["user"]),
-    isLoggedIn() {
-      return this.$store.state.user.loggedIn;
-    },
+    ...mapState('user', ['user']),
+    isLoggedIn () {
+      return this.$store.state.user.loggedIn
+    }
   },
   methods: {
-    onClick(path) {
-      this.$router.push({ name: path });
+    onClick (path) {
+      this.$router.push({ name: path })
     },
-    onLogOut() {
-      this.$store.commit("user/removeUser");
-      this.$router.push({ name: "index" });
-    },
-  },
-};
+    onLogOut () {
+      this.$store.commit('user/removeUser')
+      this.$router.push({ name: 'index' })
+    }
+  }
+}
 </script>

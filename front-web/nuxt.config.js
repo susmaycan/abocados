@@ -127,4 +127,8 @@ export default {
     s3: process.env.AWS_S3_ENDPOINT_URL,
     server: process.env.SERVER_ENDPOINT,
   },
+
+  eslint: {
+    fix: true
+  },
 }

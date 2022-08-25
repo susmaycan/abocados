@@ -17,11 +17,11 @@
         </vertical-scroll-container>
       </div>
       <div v-else>
-        <grid>
+        <flex-grid>
           <div v-for="category in categories" :key="category.id">
             <category :category="category" @click="goToCategoryListing" />
           </div>
-        </grid>
+        </flex-grid>
       </div>
     </div>
   </div>

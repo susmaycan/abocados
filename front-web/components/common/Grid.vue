@@ -1,26 +1,34 @@
 <template>
-  <div :class="this.$device.isDesktop ? 'list-container-desktop' : 'list-container-mobile'">
+  <div class="list-container" :style="cssProps">
     <slot />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Grid'
+  name: 'Grid',
+  props: {
+    cols: {
+      type: Number,
+      default: 3
+    }
+  },
+  computed: {
+    cssProps () {
+      return {
+        '--grid-columns': this.$device.isMobile ? 'repeat(1, 1fr)' : `repeat(${this.cols}, 1fr)`
+      }
+    }
+  }
+
 }
 </script>
 
 <style scoped>
-.list-container-desktop {
+.list-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: var(--grid-columns);
   grid-gap: 1em;
   grid-auto-rows: minmax(100px, auto);
-}
-.list-container-mobile {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  row-gap: 1em;
 }
 </style>
