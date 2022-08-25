@@ -21,11 +21,11 @@
         </vertical-scroll-container>
       </div>
       <div v-else>
-        <flex-grid>
+        <grid :cols="4">
           <div v-for="recipe in recipes" :key="recipe.id">
             <recipe-card :recipe="recipe" :show-favourite="false" />
           </div>
-        </flex-grid>
+        </grid>
         <a-button full-width @click="$emit('all')">
           {{ $t("all_recipes") | uppercase }}
         </a-button>
