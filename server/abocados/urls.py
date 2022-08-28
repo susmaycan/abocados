@@ -8,4 +8,5 @@ urlpatterns = [
     path('', include(('user.urls', 'user'), namespace='users')),
     path('', include(('recipe.urls', 'recipe'), namespace='recipes')),
     path('', include(('category.urls', 'category'), namespace='categories')),
+    path('', include(('meal.urls', 'meal'), namespace='meals')),
 ]

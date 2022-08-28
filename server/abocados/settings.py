@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'rosetta',
     'parler',
     'django_extensions',
+    'meal',
 ]
 
 MIDDLEWARE = [

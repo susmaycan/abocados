@@ -83,3 +83,24 @@ class RecipeUpdateSerializer(RecipeSerializer):
             serializer = RecipeSerializer(instance)
             return serializer.data
         return super().to_representation(instance)
+
+
+class RecipeMealSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    creator = UserRecipeSerializer()
+
+    class Meta:
+        model = Recipe
+        fields = (
+            'id',
+            'name',
+            'rating',
+            'picture',
+            'duration',
+            'servings',
+            'creator',
+        )
+        read_only_fields = (
+            'id',
+            'creator'
+        )

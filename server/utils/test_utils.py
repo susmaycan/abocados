@@ -1,6 +1,7 @@
 from rest_framework.test import APIClient
 from django.test.client import encode_multipart
 import json
+import datetime
 
 
 class PATH:
@@ -9,6 +10,7 @@ class PATH:
     USER = '/users/'
     AUTH = '/auth/'
     FAVOURITE = '/favourites/'
+    MEAL = '/meals/'
 
 
 class API_ACTIONS:
@@ -63,3 +65,9 @@ def make_login_call(data):
         token=None,
         body=data
     )
+
+
+def format_date (str_date):
+    current_date_obj = datetime.datetime.strptime(str_date, '%Y-%m-%d')
+    formatted_date = current_date_obj.strftime('%d/%m/%Y')
+    return formatted_date
