@@ -1,13 +1,14 @@
-from django.contrib.auth import password_validation, authenticate
+from django.contrib.auth import authenticate, password_validation
+from django.http import Http404
+from django.utils.encoding import DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_decode
+from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.validators import UniqueValidator
+
 from recipe.models import Recipe
 from user.models import User
-from django.utils.translation import gettext_lazy as _
-from django.utils.http import urlsafe_base64_decode
-from django.utils.encoding import DjangoUnicodeDecodeError
-from django.http import Http404
 
 
 class UserRecipeSerializer(serializers.ModelSerializer):

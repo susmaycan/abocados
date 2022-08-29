@@ -1,8 +1,10 @@
-from django.db import models
 import uuid
-from category.constants import CategoryTypes
+
+from django.db import models
 from django.utils.translation import gettext_lazy as _
 from parler.models import TranslatableModel, TranslatedFields
+
+from category.constants import CategoryTypes
 
 
 def upload_location(instance, filename):

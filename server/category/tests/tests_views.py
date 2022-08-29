@@ -1,13 +1,10 @@
 from django.test import TestCase
-from rest_framework.status import (
-    HTTP_200_OK,
-    HTTP_401_UNAUTHORIZED,
-    HTTP_403_FORBIDDEN,
-    HTTP_404_NOT_FOUND,
-)
-from utils.test_utils import PATH, API_ACTIONS, make_api_call
+from rest_framework.status import (HTTP_200_OK, HTTP_401_UNAUTHORIZED,
+                                   HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND)
+
 from category.tests.factories import CategoryFactory
 from user.tests.factories import UserFactory
+from utils.test_utils import API_ACTIONS, PATH, make_api_call
 
 
 class CategoryTestCase(TestCase):

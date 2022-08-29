@@ -1,9 +1,11 @@
 from rest_framework import serializers
+from rest_framework.fields import SerializerMethodField
+
 from category.models import Category
 from category.serializers import CategorySelectSerializer
 from user.serializers import UserRecipeSerializer
+
 from .models import Recipe
-from rest_framework.fields import SerializerMethodField
 
 
 class RecipeSerializer(serializers.ModelSerializer):

@@ -1,8 +1,10 @@
 from django.forms import ValidationError
 from rest_framework import serializers
-from category.constants import CategoryTypes
-from .models import Category
 from rest_framework.validators import UniqueValidator
+
+from category.constants import CategoryTypes
+
+from .models import Category
 
 
 class CategorySerializer(serializers.ModelSerializer):

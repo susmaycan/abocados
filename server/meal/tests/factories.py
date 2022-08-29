@@ -1,8 +1,9 @@
 from factory import Faker, SubFactory, post_generation
 from factory.django import DjangoModelFactory
+
 from meal.models import Meal
-from user.tests.factories import UserFactory
 from recipe.tests.factories import RecipeFactory
+from user.tests.factories import UserFactory
 
 
 class MealFactory(DjangoModelFactory):

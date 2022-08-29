@@ -1,13 +1,15 @@
 from rest_framework import mixins, status, viewsets
-from rest_framework.response import Response
-from meal.models import Meal
-from utils.pagination import BasePagination
-from meal.serializers import MealCreateSerializer, MealSerializer, MealUpdateSerializer
 from rest_framework.permissions import IsAuthenticated
-from user.permissions import IsStandardUser
-from utils.mixins import EnablePartialUpdateMixin
-from utils.constants import RestFrameworkActions
+from rest_framework.response import Response
+
 from meal.filters import MealFilter
+from meal.models import Meal
+from meal.serializers import (MealCreateSerializer, MealSerializer,
+                              MealUpdateSerializer)
+from user.permissions import IsStandardUser
+from utils.constants import RestFrameworkActions
+from utils.mixins import EnablePartialUpdateMixin
+from utils.pagination import BasePagination
 
 
 class MealViewSet(

@@ -1,50 +1,37 @@
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.mixins import (
-    ListModelMixin,
-    DestroyModelMixin,
-    RetrieveModelMixin,
-    UpdateModelMixin,
-)
-from rest_framework.viewsets import GenericViewSet
-from rest_framework.status import (
-    HTTP_200_OK,
-    HTTP_201_CREATED,
-    HTTP_404_NOT_FOUND,
-    HTTP_400_BAD_REQUEST,
-)
-from user.serializers import (
-    AuthenticatedUserSerializer,
-    UserLoginSerializer,
-    UserSerializer,
-    UserSignUpSerializer,
-    UserRetrieveSerializer,
-    ResetPasswordEmailRequestSerializer,
-    ActivateAccountSerializer,
-    PasswordRecoveryCheckSerializer,
-    PasswordRecoveryConfirmSerializer,
-    FavouriteRecipeSerializer,
-)
-from user.models import User
-from user.permissions import IsStandardUser, IsOwnUser, IsOwnUserNested
-from utils.constants import RestFrameworkActions
-from utils.mixins import EnablePartialUpdateMixin
-from utils.email import EmailUtils
-from django.template.loader import get_template
-from django.utils.translation import gettext_lazy as _
 from django.conf import settings
-from django.contrib.auth.tokens import (
-    default_token_generator,
-    PasswordResetTokenGenerator,
-)
+from django.contrib.auth.tokens import (PasswordResetTokenGenerator,
+                                        default_token_generator)
+from django.template.loader import get_template
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
+from django.utils.translation import gettext_lazy as _
+from rest_framework.decorators import action
+from rest_framework.exceptions import NotFound
+from rest_framework.mixins import (DestroyModelMixin, ListModelMixin,
+                                   RetrieveModelMixin, UpdateModelMixin)
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED,
+                                   HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND)
+from rest_framework.viewsets import GenericViewSet
+
 from recipe.models import Recipe
 from recipe.serializers import RecipeSerializer
-from rest_framework.exceptions import NotFound
-from utils.pagination import BasePagination
 from user.filters import UserRecipesFilter
+from user.models import User
+from user.permissions import IsOwnUser, IsOwnUserNested, IsStandardUser
+from user.serializers import (ActivateAccountSerializer,
+                              AuthenticatedUserSerializer,
+                              FavouriteRecipeSerializer,
+                              PasswordRecoveryCheckSerializer,
+                              PasswordRecoveryConfirmSerializer,
+                              ResetPasswordEmailRequestSerializer,
+                              UserLoginSerializer, UserRetrieveSerializer,
+                              UserSerializer, UserSignUpSerializer)
+from utils.constants import RestFrameworkActions
+from utils.email import EmailUtils
+from utils.mixins import EnablePartialUpdateMixin
+from utils.pagination import BasePagination
 
 
 def send_validation_email(user):

@@ -1,8 +1,10 @@
-from django.db import models
-from user.models import User
 import uuid
-from category.models import Category
+
+from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+from category.models import Category
+from user.models import User
 
 
 def upload_location(instance, filename):

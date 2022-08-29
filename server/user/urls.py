@@ -1,11 +1,8 @@
 from django.urls import include, path
-from user.views import (
-    UserViewSet,
-    AuthViewSet,
-    UserRecipesViewSet,
-    UserFavouriteRecipesViewSet,
-)
 from rest_framework_nested import routers
+
+from user.views import (AuthViewSet, UserFavouriteRecipesViewSet,
+                        UserRecipesViewSet, UserViewSet)
 
 router = routers.SimpleRouter()
 router.register(r"auth", AuthViewSet, basename="auth")

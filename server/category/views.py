@@ -1,11 +1,10 @@
 from rest_framework import mixins, status, viewsets
-from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from user.permissions import IsStandardUser
+from rest_framework.response import Response
 
-from category.serializers import CategorySerializer, CategoryCreateSerializer
 from category.models import Category
-
+from category.serializers import CategoryCreateSerializer, CategorySerializer
+from user.permissions import IsStandardUser
 from utils.constants import RestFrameworkActions
 from utils.mixins import EnablePartialUpdateMixin
 from utils.pagination import LargePagination

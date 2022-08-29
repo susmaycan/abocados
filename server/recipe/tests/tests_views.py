@@ -1,19 +1,16 @@
-from django.test import TestCase
-from rest_framework.status import (
-    HTTP_200_OK,
-    HTTP_201_CREATED,
-    HTTP_204_NO_CONTENT,
-    HTTP_400_BAD_REQUEST,
-    HTTP_401_UNAUTHORIZED,
-    HTTP_403_FORBIDDEN,
-    HTTP_404_NOT_FOUND,
-)
 import datetime
+
 from django.conf import settings
-from utils.test_utils import PATH, API_ACTIONS, make_api_call
-from user.tests.factories import UserFactory
+from django.test import TestCase
+from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED,
+                                   HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST,
+                                   HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN,
+                                   HTTP_404_NOT_FOUND)
+
 from category.tests.factories import CategoryFactory
 from recipe.tests.factories import RecipeFactory
+from user.tests.factories import UserFactory
+from utils.test_utils import API_ACTIONS, PATH, make_api_call
 
 
 class RecipeTestCase(TestCase):

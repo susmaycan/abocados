@@ -1,5 +1,6 @@
 from factory import Faker, SubFactory
 from factory.django import DjangoModelFactory
+
 from recipe.models import Recipe
 from user.tests.factories import UserFactory
 

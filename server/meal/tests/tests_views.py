@@ -1,16 +1,12 @@
 from django.test import TestCase
-from rest_framework.status import (
-    HTTP_200_OK,
-    HTTP_201_CREATED,
-    HTTP_204_NO_CONTENT,
-    HTTP_401_UNAUTHORIZED,
-    HTTP_400_BAD_REQUEST,
-    HTTP_404_NOT_FOUND,
-)
+from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED,
+                                   HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST,
+                                   HTTP_401_UNAUTHORIZED, HTTP_404_NOT_FOUND)
+
 from meal.tests.factories import MealFactory
 from recipe.tests.factories import RecipeFactory
-from utils.test_utils import PATH, API_ACTIONS, make_api_call, format_date
 from user.tests.factories import UserFactory
+from utils.test_utils import API_ACTIONS, PATH, format_date, make_api_call
 
 
 class MealTestCase(TestCase):

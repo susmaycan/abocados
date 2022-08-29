@@ -1,5 +1,6 @@
 from factory import Faker, Iterator
 from factory.django import DjangoModelFactory
+
 from category.constants import CategoryTypes
 from category.models import Category
 

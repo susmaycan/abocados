@@ -1,5 +1,6 @@
-from meal.models import Meal
 from django_filters import rest_framework as filters
+
+from meal.models import Meal
 
 
 class MealFilter(filters.FilterSet):

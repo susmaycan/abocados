@@ -1,5 +1,6 @@
 from factory import Faker, PostGenerationMethodCall
 from factory.django import DjangoModelFactory
+
 from user.models import User
 
 
