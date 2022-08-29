@@ -10,13 +10,24 @@ from utils.constants import RestFrameworkActions
 from meal.filters import MealFilter
 
 
-class MealViewSet(mixins.ListModelMixin, viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.CreateModelMixin, EnablePartialUpdateMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+class MealViewSet(
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    EnablePartialUpdateMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+):
     queryset = Meal.objects.all()
     pagination_class = BasePagination
     filter_class = MealFilter
 
     def get_serializer_class(self):
-        if self.action in [RestFrameworkActions.PARTIAL_UPDATE, RestFrameworkActions.UPDATE]:
+        if self.action in [
+            RestFrameworkActions.PARTIAL_UPDATE,
+            RestFrameworkActions.UPDATE,
+        ]:
             return MealUpdateSerializer
         return MealSerializer
 
@@ -26,10 +37,12 @@ class MealViewSet(mixins.ListModelMixin, viewsets.GenericViewSet, mixins.Retriev
 
     def get_queryset(self):
         user = self.request.user
-        return Meal.objects.filter(creator=user).order_by('date')
+        return Meal.objects.filter(creator=user).order_by("date")
 
     def create(self, request, *args, **kwargs):
-        serializer = MealCreateSerializer(data=request.data, context={'request': self.request})
+        serializer = MealCreateSerializer(
+            data=request.data, context={"request": self.request}
+        )
         serializer.is_valid(raise_exception=True)
         saved_meal = serializer.save()
         data = MealSerializer(saved_meal).data

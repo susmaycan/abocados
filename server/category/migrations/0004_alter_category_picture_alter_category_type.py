@@ -7,18 +7,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('category', '0003_remove_category_description_remove_category_name_and_more'),
+        ("category", "0003_remove_category_description_remove_category_name_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='category',
-            name='picture',
-            field=models.FileField(blank=True, null=True, upload_to=category.models.upload_location, verbose_name='picture'),
+            model_name="category",
+            name="picture",
+            field=models.FileField(
+                blank=True,
+                null=True,
+                upload_to=category.models.upload_location,
+                verbose_name="picture",
+            ),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='type',
-            field=models.CharField(choices=[('1', 'time'), ('2', 'food'), ('3', 'cuisine')], default='1', max_length=10, verbose_name='type'),
+            model_name="category",
+            name="type",
+            field=models.CharField(
+                choices=[("1", "time"), ("2", "food"), ("3", "cuisine")],
+                default="1",
+                max_length=10,
+                verbose_name="type",
+            ),
         ),
     ]

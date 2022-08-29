@@ -7,13 +7,18 @@ import recipe.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('recipe', '0012_alter_recipe_ingredients'),
+        ("recipe", "0012_alter_recipe_ingredients"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='recipe',
-            name='picture',
-            field=models.FileField(blank=True, max_length=300, null=True, upload_to=recipe.models.upload_location),
+            model_name="recipe",
+            name="picture",
+            field=models.FileField(
+                blank=True,
+                max_length=300,
+                null=True,
+                upload_to=recipe.models.upload_location,
+            ),
         ),
     ]

@@ -8,17 +8,32 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=180, unique=True)),
-                ('description', models.CharField(blank=True, max_length=2000, null=True)),
-                ('picture', models.FileField(blank=True, null=True, upload_to=category.models.upload_location)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=180, unique=True)),
+                (
+                    "description",
+                    models.CharField(blank=True, max_length=2000, null=True),
+                ),
+                (
+                    "picture",
+                    models.FileField(
+                        blank=True, null=True, upload_to=category.models.upload_location
+                    ),
+                ),
             ],
         ),
     ]

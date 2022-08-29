@@ -6,14 +6,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('category', '0002_category_type'),
-        ('recipe', '0010_remove_recipe_categories_recipe_categories'),
+        ("category", "0002_category_type"),
+        ("recipe", "0010_remove_recipe_categories_recipe_categories"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='recipe',
-            name='categories',
-            field=models.ManyToManyField(blank=True, to='category.category'),
+            model_name="recipe",
+            name="categories",
+            field=models.ManyToManyField(blank=True, to="category.category"),
         ),
     ]

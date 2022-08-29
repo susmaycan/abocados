@@ -7,7 +7,7 @@ from recipe.tests.factories import RecipeFactory
 
 class MealFactory(DjangoModelFactory):
     creator = SubFactory(UserFactory)
-    date = Faker('date')
+    date = Faker("date")
 
     class Meta:
         model = Meal

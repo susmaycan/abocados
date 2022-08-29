@@ -1,4 +1,3 @@
-
 from rest_framework.permissions import BasePermission
 from user.models import User
 
@@ -15,7 +14,7 @@ class IsStandardUser(BasePermission):
 class IsOwnUser(BasePermission):
     def has_permission(self, request, view):
         try:
-            user_id = request.resolver_match.kwargs.get('pk')
+            user_id = request.resolver_match.kwargs.get("pk")
             User.objects.get(id=user_id)
             if int(user_id) != request.user.id:
                 return False
@@ -27,7 +26,7 @@ class IsOwnUser(BasePermission):
 class IsOwnUserNested(BasePermission):
     def has_permission(self, request, view):
         try:
-            user_id = request.resolver_match.kwargs.get('user_pk')
+            user_id = request.resolver_match.kwargs.get("user_pk")
             User.objects.get(id=user_id)
             if int(user_id) != request.user.id:
                 return False

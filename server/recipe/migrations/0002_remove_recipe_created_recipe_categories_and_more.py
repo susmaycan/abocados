@@ -7,47 +7,52 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('recipe', '0001_initial'),
+        ("recipe", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='recipe',
-            name='created',
+            model_name="recipe",
+            name="created",
         ),
         migrations.AddField(
-            model_name='recipe',
-            name='categories',
+            model_name="recipe",
+            name="categories",
             field=models.CharField(blank=True, max_length=180, null=True),
         ),
         migrations.AddField(
-            model_name='recipe',
-            name='created_at',
+            model_name="recipe",
+            name="created_at",
             field=models.DateTimeField(auto_now_add=True, null=True),
         ),
         migrations.AddField(
-            model_name='recipe',
-            name='duration',
+            model_name="recipe",
+            name="duration",
             field=models.CharField(blank=True, max_length=10, null=True),
         ),
         migrations.AddField(
-            model_name='recipe',
-            name='ingredients',
-            field=django.contrib.postgres.fields.ArrayField(base_field=models.CharField(db_index=True, max_length=100), blank=True, default=list, size=None),
+            model_name="recipe",
+            name="ingredients",
+            field=django.contrib.postgres.fields.ArrayField(
+                base_field=models.CharField(db_index=True, max_length=100),
+                blank=True,
+                default=list,
+                size=None,
+            ),
         ),
         migrations.AddField(
-            model_name='recipe',
-            name='picture',
+            model_name="recipe",
+            name="picture",
             field=models.CharField(blank=True, max_length=1000, null=True),
         ),
         migrations.AddField(
-            model_name='recipe',
-            name='picture_filename',
+            model_name="recipe",
+            name="picture_filename",
             field=models.CharField(blank=True, max_length=1000, null=True),
         ),
         migrations.AlterField(
-            model_name='recipe',
-            name='directions',
+            model_name="recipe",
+            name="directions",
             field=models.CharField(max_length=2000),
         ),
     ]

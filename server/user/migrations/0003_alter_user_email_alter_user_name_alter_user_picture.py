@@ -7,23 +7,30 @@ import user.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0002_remove_user_picture_id_alter_user_picture'),
+        ("user", "0002_remove_user_picture_id_alter_user_picture"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='email',
-            field=models.EmailField(max_length=254, unique=True, verbose_name='email'),
+            model_name="user",
+            name="email",
+            field=models.EmailField(max_length=254, unique=True, verbose_name="email"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='name',
-            field=models.CharField(blank=True, max_length=100, null=True, verbose_name='name'),
+            model_name="user",
+            name="name",
+            field=models.CharField(
+                blank=True, max_length=100, null=True, verbose_name="name"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='picture',
-            field=models.FileField(blank=True, null=True, upload_to=user.models.upload_location, verbose_name='picture'),
+            model_name="user",
+            name="picture",
+            field=models.FileField(
+                blank=True,
+                null=True,
+                upload_to=user.models.upload_location,
+                verbose_name="picture",
+            ),
         ),
     ]

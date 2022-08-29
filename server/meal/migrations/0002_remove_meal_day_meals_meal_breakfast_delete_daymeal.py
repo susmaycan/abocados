@@ -6,21 +6,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('recipe', '0017_alter_recipe_name'),
-        ('meal', '0001_initial'),
+        ("recipe", "0017_alter_recipe_name"),
+        ("meal", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='meal',
-            name='day_meals',
+            model_name="meal",
+            name="day_meals",
         ),
         migrations.AddField(
-            model_name='meal',
-            name='breakfast',
-            field=models.ManyToManyField(blank=True, to='recipe.recipe'),
+            model_name="meal",
+            name="breakfast",
+            field=models.ManyToManyField(blank=True, to="recipe.recipe"),
         ),
         migrations.DeleteModel(
-            name='DayMeal',
+            name="DayMeal",
         ),
     ]
