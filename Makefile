@@ -109,6 +109,11 @@ createsuperuser:
 check_linting:
 	docker exec $(SERVER_CONTAINER) bash -c "flake8"
 
+.PHONY: fix_formatting
+fix_formatting:
+	docker exec $(SERVER_CONTAINER) bash -c "black ."
+	docker exec $(SERVER_CONTAINER) bash -c "isort ."
+
 .PHONY: generate_translations
 generate_translations:
 	docker exec $(SERVER_CONTAINER) bash -c "python manage.py makemessages -a"
