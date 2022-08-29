@@ -84,6 +84,38 @@ class MealTestCase(TestCase):
 
         self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
 
+    def test_retrieve_meal_list_filter_date(self):
+        date = '2022-10-22'
+        MealFactory.create_batch(3, date=date, creator=self.user1)
+        MealFactory.create_batch(2, date='2023-10-22')
+        query_param = {
+            'date': date
+        }
+        response = self.make_retrieve_meal_list_call(
+            user=self.user1,
+            query_params=query_param
+        )
+
+        self.assertEqual(response.status_code, HTTP_200_OK)
+        self.assertEqual(response.content['count'], 3)
+        self.assertEqual(response.content['results'][0]['date'], format_date(date))
+
+
+    def test_retrieve_meal_list_filter_to_from(self):
+        MealFactory.create_batch(3, date='2022-05-19', creator=self.user1)
+        MealFactory.create_batch(3, date='2023-05-19', creator=self.user1)
+        query_param = {
+            'from_date': '2022-05-17',
+            'to_date': '2022-06-17',
+        }
+        response = self.make_retrieve_meal_list_call(
+            user=self.user1,
+            query_params=query_param
+        )
+
+        self.assertEqual(response.status_code, HTTP_200_OK)
+        self.assertEqual(response.content['count'], 3)
+
     def test_retrieve_meal_by_id_ok(self):
         meal = MealFactory(creator=self.user1)
         response = self.make_retrieve_meal_call(

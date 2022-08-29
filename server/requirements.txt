@@ -19,3 +19,5 @@ django-parler==2.3
 django-extensions==3.2.0
 factory-boy==3.2.1
 drf-nested-routers==0.93.4
+black==22.6.0
+fiximports==0.1.18

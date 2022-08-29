@@ -7,10 +7,13 @@ from rest_framework.permissions import IsAuthenticated
 from user.permissions import IsStandardUser
 from utils.mixins import EnablePartialUpdateMixin
 from utils.constants import RestFrameworkActions
+from meal.filters import MealFilter
+
 
 class MealViewSet(mixins.ListModelMixin, viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.CreateModelMixin, EnablePartialUpdateMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     queryset = Meal.objects.all()
     pagination_class = BasePagination
+    filter_class = MealFilter
 
     def get_serializer_class(self):
         if self.action in [RestFrameworkActions.PARTIAL_UPDATE, RestFrameworkActions.UPDATE]:
