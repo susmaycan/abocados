@@ -231,12 +231,11 @@ class PasswordRecoveryConfirmSerializer(serializers.Serializer):
 
             if not user or not token:
                 raise serializers.ValidationError(_("Token is invalid or expired"))
-
             user_id = urlsafe_base64_decode(user).decode()
             user_obj = User.objects.get(id=user_id)
             new_data["user"] = user_obj
             return new_data
-        except (UnicodeDecodeError, DjangoUnicodeDecodeError):
+        except (UnicodeDecodeError, DjangoUnicodeDecodeError, ValueError):
             raise serializers.ValidationError(_("Token is invalid or expired"))
         except (User.DoesNotExist):
             raise serializers.ValidationError(_("Email not registered"))
