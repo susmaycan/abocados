@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 from recipe.models import Recipe
@@ -50,6 +51,12 @@ class MealCreateSerializer(serializers.ModelSerializer):
             "dinner",
             "creator",
         ]
+
+    def validate_date(self, value):
+        user = self.context.get("request").user
+        if Meal.objects.filter(creator=user.id).exists():
+            raise serializers.ValidationError(_("Meal with that date already exists"))
+        return value
 
     def create(self, data):
         breakfast_recipes = data.pop("breakfast")

@@ -73,20 +73,24 @@ class MealTestCase(TestCase):
 
     def test_retrieve_meal_list_filter_date(self):
         date = "2022-10-22"
-        MealFactory.create_batch(3, date=date, creator=self.user1)
-        MealFactory.create_batch(2, date="2023-10-22")
+        MealFactory(date=date, creator=self.user1)
+        MealFactory(date="2022-10-23")
+        MealFactory(date="2022-10-24")
         query_param = {"date": date}
         response = self.make_retrieve_meal_list_call(
             user=self.user1, query_params=query_param
         )
 
         self.assertEqual(response.status_code, HTTP_200_OK)
-        self.assertEqual(response.content["count"], 3)
+        self.assertEqual(response.content["count"], 1)
         self.assertEqual(response.content["results"][0]["date"], format_date(date))
 
     def test_retrieve_meal_list_filter_to_from(self):
-        MealFactory.create_batch(3, date="2022-05-19", creator=self.user1)
-        MealFactory.create_batch(3, date="2023-05-19", creator=self.user1)
+        MealFactory(date="2022-04-19", creator=self.user1)
+        MealFactory(date="2022-05-19", creator=self.user1)
+        MealFactory(date="2022-06-01", creator=self.user1)
+        MealFactory(date="2022-05-30", creator=self.user1)
+        MealFactory(date="2023-05-19", creator=self.user1)
         query_param = {
             "from_date": "2022-05-17",
             "to_date": "2022-06-17",
@@ -180,6 +184,23 @@ class MealTestCase(TestCase):
             response.content["date"][0],
             "Date has wrong format. Use one of these formats instead: YYYY-MM-DD.",
         )
+
+    def test_create_meal_duplicated_date(self):
+        date = "2022-02-22"
+        MealFactory(date=date, creator=self.user1)
+
+        body = self._get_meal_request(date=date)
+        response = self.make_create_meal_call(data=body, user=self.user1)
+
+        self.assertEqual(response.status_code, HTTP_400_BAD_REQUEST)
+        self.assertEqual(
+            response.content["date"][0],
+            "Meal with that date already exists",
+        )
+
+        response = self.make_create_meal_call(data=body, user=self.user2)
+
+        self.assertEqual(response.status_code, HTTP_201_CREATED)
 
     def test_update_meal_ok(self):
         original_meal = MealFactory(creator=self.user1)
