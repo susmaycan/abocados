@@ -14,6 +14,12 @@
       :favourite="recipe.favourited"
       @refresh="toggleFavourite"
     />
+    <recipe-card-select
+      v-if="showSelect"
+      class="recipe-favourite-button"
+      :selected="selected"
+      @select="select"
+    />
   </div>
 </template>
 
@@ -31,11 +37,22 @@ export default {
     showFavourite: {
       type: Boolean,
       default: true
+    },
+    showSelect: {
+      type: Boolean,
+      default: false
+    },
+    selected: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     toggleFavourite (value) {
       this.$emit('toggle-favourite', value)
+    },
+    select (value) {
+      this.$emit('select', value)
     }
   }
 }

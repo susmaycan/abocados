@@ -65,7 +65,6 @@
 
 <script>
 import { mapState } from 'vuex'
-
 export default {
   name: 'Navbar',
   data () {
@@ -88,6 +87,12 @@ export default {
           title: 'recipe_book',
           path: 'recipes',
           icon: 'fa-solid fa-bookmark',
+          logged: true
+        },
+        {
+          title: 'meals',
+          path: 'meals',
+          icon: 'fa-solid fa-calendar-days',
           logged: true
         }
       ],

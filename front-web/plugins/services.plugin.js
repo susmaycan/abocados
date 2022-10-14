@@ -78,6 +78,7 @@ export default ({ store, $axios, i18n, $config }, inject) => {
     user: repositoryWithAxios('users', 'recipes'),
     auth: authRepositoryWithAxios('auth'),
     category: repositoryWithAxios('categories'),
+    meal: repositoryWithAxios('meals'),
     favourite: favouriteRepositoryWithAxios('users', 'favourites')
   }
 

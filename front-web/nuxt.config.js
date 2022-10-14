@@ -40,6 +40,7 @@ export default {
       '~/components/common/',
       '~/components/layout/',
       '~/components/recipe/',
+      '~/components/meal/',
       '~/components/search/'
     ]
   },

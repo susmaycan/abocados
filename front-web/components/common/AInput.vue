@@ -9,6 +9,7 @@
     :success-messages="success"
     @input="onInput()"
     @change="onChange()"
+    v-on="on"
   >
     <template #prepend>
       <slot name="icon-left" />
@@ -60,6 +61,10 @@ export default {
     fullWidth: {
       type: Boolean,
       default: false
+    },
+    on: {
+      type: Object,
+      default: null
     }
   },
   data () {

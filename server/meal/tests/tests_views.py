@@ -6,7 +6,7 @@ from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED,
 from meal.tests.factories import MealFactory
 from recipe.tests.factories import RecipeFactory
 from user.tests.factories import UserFactory
-from utils.test_utils import API_ACTIONS, PATH, format_date, make_api_call
+from utils.test_utils import API_ACTIONS, PATH, make_api_call
 
 
 class MealTestCase(TestCase):
@@ -83,7 +83,7 @@ class MealTestCase(TestCase):
 
         self.assertEqual(response.status_code, HTTP_200_OK)
         self.assertEqual(response.content["count"], 1)
-        self.assertEqual(response.content["results"][0]["date"], format_date(date))
+        self.assertEqual(response.content["results"][0]["date"], date)
 
     def test_retrieve_meal_list_filter_to_from(self):
         MealFactory(date="2022-04-19", creator=self.user1)
@@ -108,7 +108,7 @@ class MealTestCase(TestCase):
         self.assertEqual(response.status_code, HTTP_200_OK)
         content = response.content
         self.assertEqual(content["creator"]["id"], self.user1.id)
-        self.assertEqual(content["date"], format_date(meal.date))
+        self.assertEqual(content["date"], meal.date)
         self.assertEqual(len(content["breakfast"]), len(meal.breakfast.all()))
         self.assertEqual(len(content["lunch"]), len(meal.lunch.all()))
         self.assertEqual(len(content["dinner"]), len(meal.dinner.all()))
@@ -121,7 +121,8 @@ class MealTestCase(TestCase):
         self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
 
     def test_create_meal_ok(self):
-        new_meal = MealFactory.build()
+        MealFactory(creator=self.user1)
+        new_meal = MealFactory.build(creator=self.user1)
         breakfast_recipe = RecipeFactory()
         lunch_recipe_1 = RecipeFactory()
         lunch_recipe_2 = RecipeFactory()
@@ -141,7 +142,7 @@ class MealTestCase(TestCase):
         self.assertEqual(content["lunch"][0]["id"], lunch_recipe_1.id)
         self.assertEqual(content["lunch"][1]["id"], lunch_recipe_2.id)
         self.assertEqual(content["dinner"][0]["id"], dinner_recipe.id)
-        self.assertEqual(content["date"], format_date(new_meal.date))
+        self.assertEqual(content["date"], new_meal.date)
         self.assertEqual(content["creator"]["id"], self.user1.id)
 
         response = self.make_retrieve_meal_call(uuid=content["id"], user=self.user1)
@@ -202,7 +203,7 @@ class MealTestCase(TestCase):
 
         self.assertEqual(response.status_code, HTTP_201_CREATED)
 
-    def test_update_meal_ok(self):
+    def test_update_meal_date_readonly_field(self):
         original_meal = MealFactory(creator=self.user1)
         updated_meal = MealFactory.build()
         body = {
@@ -213,7 +214,7 @@ class MealTestCase(TestCase):
         )
         content = response.content
         self.assertEqual(response.status_code, HTTP_200_OK)
-        self.assertEqual(content["date"], format_date(updated_meal.date))
+        self.assertEqual(content["date"], original_meal.date)
         # check that the rest of the fields are not altered
         self.assertEqual(len(content["breakfast"]), len(original_meal.breakfast.all()))
         self.assertEqual(len(content["lunch"]), len(original_meal.lunch.all()))

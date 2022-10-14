@@ -138,7 +138,9 @@ export default {
   },
   mounted () {
     this.filters = { ...this.initFilters }
-    this.filters.category = [this.initFilters.category]
+    if (this.filters.category) {
+      this.filters.category = [this.initFilters.category]
+    }
   },
   methods: {
     capitalize,

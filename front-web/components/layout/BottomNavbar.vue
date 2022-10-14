@@ -24,7 +24,8 @@ const PATH_LIST = {
   INDEX: 'index',
   SEARCH: 'search',
   RECIPES: 'recipes',
-  ACCOUNT: 'account'
+  ACCOUNT: 'account',
+  MEALS: 'meals'
 }
 
 export default {
@@ -49,6 +50,12 @@ export default {
           title: 'recipe_book',
           path: PATH_LIST.RECIPES,
           icon: 'fa-solid fa-bookmark',
+          logged: true
+        },
+        {
+          title: 'meals',
+          path: PATH_LIST.MEALS,
+          icon: 'fa-solid fa-calendar-days',
           logged: true
         },
         {

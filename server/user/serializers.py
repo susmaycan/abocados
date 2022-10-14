@@ -200,7 +200,7 @@ class PasswordRecoveryCheckSerializer(serializers.Serializer):
             user_obj = User.objects.get(id=user_id)
             new_data["user"] = user_obj
             return new_data
-        except (UnicodeDecodeError, DjangoUnicodeDecodeError):
+        except (ValueError, UnicodeDecodeError, DjangoUnicodeDecodeError):
             raise serializers.ValidationError(_("Token is invalid or expired"))
         except (User.DoesNotExist):
             raise serializers.ValidationError(_("Email not registered"))

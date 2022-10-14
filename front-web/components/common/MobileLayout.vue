@@ -31,7 +31,7 @@
       <div v-if="loading">
         <loader />
       </div>
-      <div v-else class="mobile-content">
+      <div v-show="!loading" class="mobile-content">
         <slot />
       </div>
     </div>

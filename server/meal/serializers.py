@@ -14,7 +14,7 @@ class MealSerializer(serializers.ModelSerializer):
     breakfast = RecipeMealSerializer(many=True)
     lunch = RecipeMealSerializer(many=True)
     dinner = RecipeMealSerializer(many=True)
-    date = serializers.DateField(format="%d/%m/%Y")
+    date = serializers.DateField(format="%Y-%m-%d")
 
     class Meta:
         model = Meal
@@ -54,7 +54,7 @@ class MealCreateSerializer(serializers.ModelSerializer):
 
     def validate_date(self, value):
         user = self.context.get("request").user
-        if Meal.objects.filter(creator=user.id).exists():
+        if Meal.objects.filter(creator=user.id, date=value).exists():
             raise serializers.ValidationError(_("Meal with that date already exists"))
         return value
 
@@ -69,7 +69,7 @@ class MealCreateSerializer(serializers.ModelSerializer):
         return created_meal
 
 
-class MealUpdateSerializer(MealSerializer):
+class MealUpdateSerializer(serializers.ModelSerializer):
     breakfast = serializers.SlugRelatedField(
         many=True, slug_field="id", queryset=Recipe.objects.all()
     )
@@ -79,6 +79,13 @@ class MealUpdateSerializer(MealSerializer):
     dinner = serializers.SlugRelatedField(
         many=True, slug_field="id", queryset=Recipe.objects.all()
     )
+    class Meta:
+        model = Meal
+        fields = (
+            "breakfast",
+            "lunch",
+            "dinner",
+        )
 
     def to_representation(self, instance):
         if self.context["request"].method == "PUT":

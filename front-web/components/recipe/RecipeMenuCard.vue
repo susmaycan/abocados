@@ -1,22 +1,18 @@
 <template>
   <div
-    class="recipe-card clickable"
-    @click="!showSelect ? goToDetail() : null"
+    class="recipe-card"
   >
-    <recipe-card-image
-      :recipe="recipe"
-      :show-favourite="showFavourite"
-      :show-select="showSelect"
-      :selected="selected"
-      @toggle-favourite="toggleFavourite"
-      @select="select"
+    <recipe-image
+      width="120"
+      height="120"
+      :src="recipe.picture"
     />
     <div class="mx-2">
       <h3 class="recipe-card-title">
         {{ recipe.name }}
       </h3>
       <div
-        class="d-flex align-stretch justify-center"
+        class="d-flex align-stretch justify-start"
       >
         <span v-if="recipe.duration" class="mr-2"><a-icon name="fa-solid fa-clock" /> {{ recipe.duration }} {{ $t('min') }}</span>
         <a-rating :rating="recipe.rating" />
@@ -53,17 +49,6 @@ export default {
     rating () {
       return parseInt(this.recipe.rating)
     }
-  },
-  methods: {
-    goToDetail () {
-      this.$router.push({ name: 'recipes-id', params: { id: this.recipe.id } })
-    },
-    toggleFavourite (value) {
-      this.$emit('refresh', value)
-    },
-    select (value) {
-      this.$emit('select', value)
-    }
   }
 }
 </script>
@@ -72,12 +57,8 @@ export default {
 .recipe-card {
   margin: .7em 1em;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-.recipe-card:hover {
-  opacity: 0.6;
+  align-items: center;
+  justify-content: flex-start;
 }
 .recipe-card-title {
   margin: .25em 0;
