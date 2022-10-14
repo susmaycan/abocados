@@ -119,7 +119,8 @@ export default {
     }
   },
   mounted () {
-    const today = new Date()
+    const queryDate = this.$route?.query?.date
+    const today = queryDate && !isNaN(new Date(queryDate).getTime()) ? new Date(queryDate) : new Date()
     this.selectedDay = getDate(new Date(today.getFullYear(), today.getMonth(), today.getDate()))
     this.getData()
   },
@@ -127,6 +128,7 @@ export default {
     async getData () {
       const data = await this.$api.meal.list({ date: outputDate(this.selectedDay.date) })
       this.selectedMeal = data.count > 0 ? data.results[0] : null
+      this.updateDateQueryParam()
     },
     addMeal () {
       this.$router.push({ name: 'meals-add', query: { date: outputDate(this.selectedDay.date) } })
@@ -155,6 +157,14 @@ export default {
     },
     isToday (date) {
       return date.time === this.selectedDay.time
+    },
+    updateDateQueryParam () {
+      const { name } = this.$route
+
+      this.$router.replace({
+        name,
+        query: { date: outputDate(this.selectedDay.date) }
+      }).catch(() => {})
     }
   }
 }

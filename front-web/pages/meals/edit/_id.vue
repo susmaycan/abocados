@@ -42,7 +42,7 @@ export default {
       this.$api.meal.update(this.meal.id, form)
         .then((data) => {
           if (data.id) {
-            this.$router.replace({ name: 'meals' })
+            this.$router.replace({ name: 'meals', query: { date: data.date } })
           }
         })
         .catch((response) => {
