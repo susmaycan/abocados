@@ -1,12 +1,9 @@
 <template>
   <page-layout :title="$t('account_settings') | capitalize">
-    <p>{{ $t('account_settings_description') }}</p>
-    <h2>{{ $t('edit_email') | capitalize }}</h2>
-    <v-form
-      ref="email-form"
-      v-model="validEmail"
-    >
-      <a-input
+    <p>{{ $t("account_settings_description") }}</p>
+    <h2>{{ $t("edit_email") | capitalize }}</h2>
+    <v-form ref="email-form" v-model="validEmail">
+      <form-text-input
         :value="form.email"
         :errors="errors.email"
         :rules="rules.email"
@@ -18,30 +15,21 @@
         <template #icon-left>
           <a-icon name="fa-solid fa-at" />
         </template>
-      </a-input>
-      <a-button
-        :disabled="!validEmail"
-        @click="onSubmitEmail"
-      >
-        {{ $t('edit') | capitalize }}
+      </form-text-input>
+      <a-button :disabled="!validEmail" @click="onSubmitEmail">
+        {{ $t("edit") | capitalize }}
       </a-button>
     </v-form>
-    <h2>{{ $t('edit_password') | capitalize }}</h2>
-    <v-form
-      ref="password-form"
-      v-model="validPassword"
-    >
-      <a-password-input
+    <h2>{{ $t("edit_password") | capitalize }}</h2>
+    <v-form ref="password-form" v-model="validPassword">
+      <form-password-input
         :show-confirm-password="true"
         :success="success.password"
         :errors="errors.password"
         @input="onInputChanges('password', $event)"
       />
-      <a-button
-        :disabled="!validPassword"
-        @click="onSubmitPassword"
-      >
-        {{ $t('edit') | capitalize }}
+      <a-button :disabled="!validPassword" @click="onSubmitPassword">
+        {{ $t("edit") | capitalize }}
       </a-button>
     </v-form>
     <template #footer>
@@ -52,7 +40,7 @@
         icon="fa-solid fa-trash"
         @click="$router.push({ name: 'account-delete' })"
       >
-        {{ $t('delete_account') | capitalize }}
+        {{ $t("delete_account") | capitalize }}
       </a-button>
     </template>
   </page-layout>
@@ -76,11 +64,7 @@ export default {
       errors: [],
       success: {},
       rules: {
-        email: [
-          this.required,
-          this.emailFormat,
-          v => this.maxLength(v, 64)
-        ]
+        email: [this.required, this.emailFormat, v => this.maxLength(v, 64)]
       },
       validPassword: false,
       validEmail: false
@@ -103,7 +87,8 @@ export default {
     },
     onSubmitPassword () {
       if (this.validPassword) {
-        this.$api.user.update(this.user.id, { password: this.form.password })
+        this.$api.user
+          .update(this.user.id, { password: this.form.password })
           .then((data) => {
             if (data.id) {
               this.success.password = capitalize(this.$t('successfully_saved'))
@@ -118,7 +103,8 @@ export default {
     },
     onSubmitEmail () {
       if (this.validEmail) {
-        this.$api.user.update(this.user.id, { email: this.form.email })
+        this.$api.user
+          .update(this.user.id, { email: this.form.email })
           .then((data) => {
             if (data.id) {
               this.success.email = capitalize(this.$t('successfully_saved'))

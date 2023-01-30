@@ -1,5 +1,5 @@
 <template>
-  <a-select
+  <form-select
     :value="selectedRating"
     :errors="errors"
     :items="ratingList"
@@ -17,7 +17,9 @@ export default {
   props: {
     errors: {
       type: [String, Array],
-      default () { return [] }
+      default () {
+        return []
+      }
     },
     initialValue: {
       type: String,
@@ -54,6 +56,5 @@ export default {
       this.$emit('input', this.selectedRating)
     }
   }
-
 }
 </script>

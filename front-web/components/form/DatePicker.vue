@@ -10,7 +10,7 @@
       min-width="auto"
     >
       <template #activator="{ on }">
-        <a-input
+        <form-text-input
           readonly
           :value="inputDateFormatted"
           :label="label"
@@ -20,7 +20,7 @@
           <template #icon-left>
             <a-icon name="fa-solid fa-calendar" />
           </template>
-        </a-input>
+        </form-text-input>
       </template>
       <v-date-picker
         v-model="inputValue"
@@ -30,19 +30,11 @@
         @change="onChange()"
       >
         <v-spacer />
-        <a-button
-          text
-          color="primary"
-          @click="menu = false"
-        >
-          {{ $t('cancel') | capitalize }}
+        <a-button text color="primary" @click="menu = false">
+          {{ $t("cancel") | capitalize }}
         </a-button>
-        <a-button
-          text
-          color="primary"
-          @click="$refs.menu.save(inputValue)"
-        >
-          {{ $t('accept') | capitalize }}
+        <a-button text color="primary" @click="$refs.menu.save(inputValue)">
+          {{ $t("accept") | capitalize }}
         </a-button>
       </v-date-picker>
     </v-menu>
@@ -128,7 +120,9 @@ export default {
       this.$emit('change', this.inputValue)
     },
     formatDate (date) {
-      if (!date) { return null }
+      if (!date) {
+        return null
+      }
 
       const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`
@@ -137,10 +131,10 @@ export default {
 }
 </script>
 <style>
-  .full-width-input {
-    width: 80vw;
-  }
-  .text-error {
-    color: red;
-  }
+.full-width-input {
+  width: 80vw;
+}
+.text-error {
+  color: red;
+}
 </style>

@@ -26,11 +26,9 @@ export default {
   plugins: [
     '~/plugins/services.plugin.js',
     '~/plugins/filter.plugin.js',
-    '~/plugins/init.client.js',
     '~plugins/modal.plugin.js',
     '~plugins/route.plugin.js',
     '~plugins/fontawesome.plugin.js',
-    '~plugins/material.plugin.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

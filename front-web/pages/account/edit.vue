@@ -1,18 +1,20 @@
 <template>
-  <page-layout :title=" $t('edit_profile') | capitalize">
-    <v-form
-      ref="user-form"
-      v-model="valid"
-    >
-      <user-image :src="user.picture" width="150" height="150" :edition="true" />
+  <page-layout :title="$t('edit_profile') | capitalize">
+    <v-form ref="user-form" v-model="valid">
+      <user-image
+        :src="user.picture"
+        width="150"
+        height="150"
+        :edition="true"
+      />
       <a-modal name="user-picture-edit-modal" :display-button-actions="false">
         <template #title>
           <a-subtitle>
             <a-icon name="fa-solid fa-image" />
-            {{ $t('upload_picture') | capitalize }}
+            {{ $t("upload_picture") | capitalize }}
           </a-subtitle>
         </template>
-        <a-file-input
+        <form-file-input
           :value="form.picture"
           :error-messages="errors.picture"
           :label="$t('picture')"
@@ -26,16 +28,16 @@
             :disabled="!!form.picture"
             @click="submitPicture"
           >
-            {{ $t('upload') | capitalize }}
+            {{ $t("upload") | capitalize }}
           </a-button>
         </template>
       </a-modal>
-      <a-input
+      <form-text-input
         :value="user.username"
         :label="$t('username')"
         :disabled="true"
       />
-      <a-input
+      <form-text-input
         :value="form.name"
         :errors="errors.name"
         :label="$t('name')"
@@ -50,7 +52,11 @@
       </a-alert>
 
       <a-notification color="success" :display="!!success" :timeout="2000">
-        <p><a-icon class="mr-2" name="fa-solid fa-check" />{{ success | capitalize }}</p>
+        <p>
+          <a-icon class="mr-2" name="fa-solid fa-check" />{{
+            success | capitalize
+          }}
+        </p>
       </a-notification>
 
       <a-button
@@ -60,7 +66,7 @@
         full-width
         @click="submitForm"
       >
-        {{ $t('save') | capitalize }}
+        {{ $t("save") | capitalize }}
       </a-button>
     </v-form>
   </page-layout>
@@ -104,7 +110,8 @@ export default {
       }
     },
     submit (body) {
-      this.$api.user.update(this.user.id, body)
+      this.$api.user
+        .update(this.user.id, body)
         .then((data) => {
           if (data.id) {
             this.getData()

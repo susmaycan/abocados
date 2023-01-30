@@ -39,7 +39,7 @@ export default {
   edit_user: 'editar usuario',
   categories: 'categorías',
   edit_recipe: 'editar receta',
-  error_field: 'error in this field',
+  error_field: 'error en este campo',
   this_field_is_required: 'este campo es obligatorio',
   wrong_value: 'wrong value',
   field_minimum_value: 'field value must be bigger than ',

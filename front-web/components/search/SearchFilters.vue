@@ -2,7 +2,11 @@
   <div>
     <a-drawer :show="showFilters" @change="toggleShowFilters">
       <div class="filters px-6 my-3">
-        <a-subtitle><a-icon name="fa-solid fa-filter" />{{ $t('filters') | capitalize }}</a-subtitle>
+        <a-subtitle>
+          <a-icon name="fa-solid fa-filter" />{{
+            $t("filters") | capitalize
+          }}
+        </a-subtitle>
         <category-search-selector
           class="my-3"
           :name="$t('time') | capitalize"
@@ -44,12 +48,12 @@
           icon="fa-solid fa-circle-xmark"
           @click="clearFilters"
         >
-          {{ $t('reset') }}
+          {{ $t("reset") }}
         </a-button>
       </div>
     </a-drawer>
     <div class="d-flex justify-center align-center filters my-2">
-      <a-input
+      <form-text-input
         :value="filters.name"
         :label="$t('search_placeholder')"
         class="name-filter-input"
@@ -63,11 +67,8 @@
         <template #icon-left-inner>
           <a-icon name="fa-solid fa-magnifying-glass" class="mr-2" />
         </template>
-      </a-input>
-      <a-badge
-        :show="!filtersEmpty"
-        color="primary"
-      >
+      </form-text-input>
+      <a-badge :show="!filtersEmpty" color="primary">
         <a-button
           icon="fa-solid fa-filter"
           color="secondary"
@@ -90,7 +91,9 @@ export default {
   props: {
     initFilters: {
       type: Object,
-      default () { return {} }
+      default () {
+        return {}
+      }
     }
   },
   data () {
@@ -129,7 +132,9 @@ export default {
       handler (val) {
         const initialFilters = { ...val }
         if (initialFilters.category) {
-          initialFilters.category = this.parseCategories(initialFilters.category)
+          initialFilters.category = this.parseCategories(
+            initialFilters.category
+          )
         }
         this.filters = initialFilters
       },
@@ -170,7 +175,9 @@ export default {
           return [parsedInt]
         }
       }
-      return initialCategories.map(categoryString => parseInt(categoryString))
+      return initialCategories.map(categoryString =>
+        parseInt(categoryString)
+      )
     },
     selectCategory (id) {
       if (!this.filters.category) {
@@ -183,7 +190,9 @@ export default {
       this.getData()
     },
     unselectCategory (id) {
-      const filteredCategories = this.filters.category.filter(categoryId => categoryId !== id)
+      const filteredCategories = this.filters.category.filter(
+        categoryId => categoryId !== id
+      )
 
       if (filteredCategories.length === 0) {
         this.filters = {

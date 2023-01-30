@@ -1,18 +1,15 @@
 <template>
-  <v-form
-    ref="recipe-form"
-    v-model="valid"
-  >
+  <v-form ref="recipe-form" v-model="valid">
     <recipe-form-image :src="displayPicture" />
 
     <a-modal name="recipe-picture-edit-modal" :display-button-actions="false">
       <template #title>
         <a-subtitle>
           <a-icon name="fa-solid fa-image" />
-          {{ $t('upload_picture') | capitalize }}
+          {{ $t("upload_picture") | capitalize }}
         </a-subtitle>
       </template>
-      <a-file-input
+      <form-file-input
         :value="form.picture"
         :error-messages="errors.picture"
         :label="$t('picture')"
@@ -26,11 +23,11 @@
           :disabled="!form.picture"
           @click="submitPicture"
         >
-          {{ $t('upload') | capitalize }}
+          {{ $t("upload") | capitalize }}
         </a-button>
       </template>
     </a-modal>
-    <a-input
+    <form-text-input
       :value="form.name"
       :errors="errors.name"
       :label="$t('name')"
@@ -40,7 +37,7 @@
     />
 
     <div class="d-flex justify-center">
-      <a-input
+      <form-text-input
         :value="form.duration"
         :errors="errors.duration"
         :label="$t('duration')"
@@ -55,7 +52,7 @@
       />
     </div>
     <div>
-      <a-input
+      <form-text-input
         :value="form.servings"
         :errors="errors.servings"
         :label="$t('servings')"
@@ -64,7 +61,7 @@
       />
     </div>
 
-    <a-select
+    <form-select
       :value="form.categories"
       :errors="errors.categories"
       :items="categories"
@@ -76,7 +73,7 @@
       @input="onInputChanges('categories', $event)"
     />
 
-    <a-text-area
+    <form-text-area
       :value="form.ingredients"
       :errors="errors.ingredients"
       :counter="2000"
@@ -85,7 +82,7 @@
       @input="onInputChanges('ingredients', $event)"
     />
 
-    <a-text-area
+    <form-text-area
       :value="form.directions"
       :errors="errors.directions"
       :counter="2000"
@@ -106,12 +103,8 @@
       @click="onSubmit(SAVE_TYPE.SAVE)"
     />
     <div v-else class="my-2 d-flex justify-center">
-      <a-button
-        class="mr-2"
-        color="secondary"
-        @click="onCancel"
-      >
-        {{ $t('cancel') | capitalize }}
+      <a-button class="mr-2" color="secondary" @click="onCancel">
+        {{ $t("cancel") | capitalize }}
       </a-button>
       <a-button
         :disabled="!valid"
@@ -119,7 +112,7 @@
         color="secondary"
         @click="onSubmit(SAVE_TYPE.SAVE)"
       >
-        {{ $t('save') | capitalize }}
+        {{ $t("save") | capitalize }}
       </a-button>
       <a-button
         v-if="!edit"
@@ -127,7 +120,7 @@
         color="secondary"
         @click="onSubmit(SAVE_TYPE.SAVE_AND_ADD)"
       >
-        {{ $t('save_add') | capitalize }}
+        {{ $t("save_add") | capitalize }}
       </a-button>
     </div>
   </v-form>
@@ -144,15 +137,21 @@ export default {
   props: {
     errors: {
       type: Object,
-      default () { return {} }
+      default () {
+        return {}
+      }
     },
     globalError: {
       type: String,
-      default () { return null }
+      default () {
+        return null
+      }
     },
     recipe: {
       type: Object,
-      default () { return null }
+      default () {
+        return null
+      }
     },
     edit: {
       type: Boolean,
@@ -174,18 +173,10 @@ export default {
       },
       displayPicture: null,
       rules: {
-        name: [
-          this.required,
-          v => this.maxLength(v, 50)
-        ],
-        rating: [
-          v => this.minMax(0, 5, v)
-        ]
+        name: [this.required, v => this.maxLength(v, 50)],
+        rating: [v => this.minMax(0, 5, v)]
       },
-      items: [
-        this.$t('ingredients'),
-        this.$t('directions')
-      ],
+      items: [this.$t('ingredients'), this.$t('directions')],
       SAVE_TYPE
     }
   },

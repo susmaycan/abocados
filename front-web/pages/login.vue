@@ -5,13 +5,10 @@
       <a-title>
         {{ $t("welcome_back") | capitalize }}
       </a-title>
-      <p>{{ $t('login_to_your_account') | capitalize }}</p>
+      <p>{{ $t("login_to_your_account") | capitalize }}</p>
     </template>
-    <v-form
-      ref="login-form"
-      v-model="valid"
-    >
-      <a-input
+    <v-form ref="login-form" v-model="valid">
+      <form-text-input
         :value="form.email"
         :errors="errors.email"
         :rules="rules.email"
@@ -22,14 +19,14 @@
         <template #icon-left>
           <a-icon name="fa-solid fa-at" />
         </template>
-      </a-input>
-      <a-password-input
+      </form-text-input>
+      <form-password-input
         :errors="errors.password"
         @input="onInputChanges('password', $event)"
       />
       <div class="d-flex justify-end">
         <p class="font-weight-bold clickable" @click="goToPasswordRecoveryPage">
-          {{ $t('forgot_password') | capitalize }}
+          {{ $t("forgot_password") | capitalize }}
         </p>
       </div>
 
@@ -45,13 +42,16 @@
         full-width
         @click="onSubmit"
       >
-        {{ $t('login') }}
+        {{ $t("login") }}
       </a-button>
     </v-form>
     <template #footer>
       <div class="text-center">
         <p class="clickable">
-          {{ $t('dont_have_account') }} <span class="font-weight-bold" @click="goToRegisterPage">{{ $t('sign_up_here') }}</span>
+          {{ $t("dont_have_account") }}
+          <span class="font-weight-bold" @click="goToRegisterPage">{{
+            $t("sign_up_here")
+          }}</span>
         </p>
       </div>
     </template>
@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import RulesMixin from '@/utils/mixins/rules'
 import { mapActions } from 'vuex'
+import RulesMixin from '@/utils/mixins/rules'
 
 export default {
   name: 'Login',
@@ -76,10 +76,7 @@ export default {
       errors: {},
       globalErrors: [],
       rules: {
-        email: [
-          this.required,
-          this.emailFormat
-        ]
+        email: [this.required, this.emailFormat]
       }
     }
   },
@@ -118,6 +115,5 @@ export default {
       })
     }
   }
-
 }
 </script>

@@ -5,11 +5,11 @@
       <a-title>
         {{ $t("change_password") | capitalize }}
       </a-title>
-      <p> {{ $t("change_password_message") | capitalize }}</p>
+      <p>{{ $t("change_password_message") | capitalize }}</p>
     </template>
     <div v-if="submit.success" class="my-3">
       <a-alert type="success">
-        <p>{{ $t('reset_password_success') }}</p>
+        <p>{{ $t("reset_password_success") }}</p>
       </a-alert>
       <a-button
         class="my-2"
@@ -21,11 +21,8 @@
       </a-button>
     </div>
     <div v-else-if="check.success">
-      <v-form
-        ref="update-password-form"
-        v-model="valid"
-      >
-        <a-password-input
+      <v-form ref="update-password-form" v-model="valid">
+        <form-password-input
           :errors="submit.errors.password"
           :show-confirm-password="true"
           @input="onInputChanges('password', $event)"
@@ -45,13 +42,13 @@
           class="my-2"
           @click="onSubmit"
         >
-          {{ $t('reset_password') | capitalize }}
+          {{ $t("reset_password") | capitalize }}
         </a-button>
       </v-form>
     </div>
     <div v-else-if="checkErrors">
       <a-alert type="error">
-        <p>{{ $t('password_check_error_message') }}</p>
+        <p>{{ $t("password_check_error_message") }}</p>
         <span class="font-weight-bold">{{ checkErrors }}</span>
       </a-alert>
       <a-button
@@ -108,7 +105,10 @@ export default {
       this.$router.replace({ name: 'index' })
     }
     try {
-      await this.$api.auth.passwordRecoveryCheck({ token: this.token, user: this.userId })
+      await this.$api.auth.passwordRecoveryCheck({
+        token: this.token,
+        user: this.userId
+      })
       this.check = {
         success: true,
         errors: []
@@ -128,7 +128,11 @@ export default {
     async onSubmit () {
       if (this.valid) {
         try {
-          await this.$api.auth.passwordRecoveryConfirm({ token: this.token, user: this.userId, password: this.form.password })
+          await this.$api.auth.passwordRecoveryConfirm({
+            token: this.token,
+            user: this.userId,
+            password: this.form.password
+          })
           this.submit = {
             errors: {},
             success: true,

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-input
+    <form-text-input
       :value="password"
       :errors="errors"
       :rules="rules.password"
@@ -13,10 +13,14 @@
         <a-icon name="fa-solid fa-lock" />
       </template>
       <template #icon-right>
-        <span @click="toggleShowPassword"><a-icon :name="showPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'" /></span>
+        <span
+          @click="toggleShowPassword"
+        ><a-icon
+          :name="showPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
+        /></span>
       </template>
-    </a-input>
-    <a-input
+    </form-text-input>
+    <form-text-input
       v-if="showConfirmPassword"
       :value="confirmPassword"
       type="password"
@@ -29,7 +33,7 @@
       <template #icon-left>
         <a-icon name="fa-solid fa-lock" />
       </template>
-    </a-input>
+    </form-text-input>
   </div>
 </template>
 <script>
@@ -62,9 +66,7 @@ export default {
           v => this.minLength(v, 8),
           v => this.maxLength(v, 64)
         ],
-        confirmPassword: [
-          this.required
-        ]
+        confirmPassword: [this.required]
       },
       showPassword: false
     }
@@ -78,7 +80,9 @@ export default {
       this.showPassword = false
       this.confirmPassword = value
       if (this.confirmPassword !== this.password) {
-        this.confirmPasswordErrors = capitalize(this.$t('passwords_dont_match'))
+        this.confirmPasswordErrors = capitalize(
+          this.$t('passwords_dont_match')
+        )
       } else {
         this.confirmPasswordErrors = null
       }

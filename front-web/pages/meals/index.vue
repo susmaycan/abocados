@@ -3,9 +3,12 @@
     <template #title>
       <a-title>
         <a-icon name="fa-solid fa-bookmark" />
-        {{ $t('meals') | capitalize }}
+        {{ $t("meals") | capitalize }}
       </a-title>
     </template>
+    <div class="text-right">
+      <form-date-picker :value="calendarDate" @input="onCalendarDateChange" />
+    </div>
     <vertical-scroll-container v-if="selectedDay" class="align-center">
       <a-button
         text
@@ -13,7 +16,14 @@
         class="pagination-button"
         @click="onPreviousWeek()"
       />
-      <div v-for="day in week" :key="day.key" :class="day.time === selectedDay.time ? 'week-day-selected' : 'week-day'" @click="selectDay(day.date)">
+      <div
+        v-for="day in week"
+        :key="day.key"
+        :class="
+          day.time === selectedDay.time ? 'week-day-selected' : 'week-day'
+        "
+        @click="selectDay(day.date)"
+      >
         <p>{{ $t(day.weekDayShort) | capitalize }}</p>
         <p>{{ day.day }}</p>
       </div>
@@ -24,9 +34,13 @@
         @click="onNextWeek()"
       />
     </vertical-scroll-container>
-    <div v-if="selectedDay" class="d-flex align-center justify-space-between my-2 text-left">
+    <div
+      v-if="selectedDay"
+      class="d-flex align-center justify-space-between my-2 text-left"
+    >
       <a-subtitle>
-        {{ $t(selectedDay.weekDay) | capitalize }}, {{ selectedDay.day }} {{ $t(selectedDay.monthText) | capitalize }}
+        {{ $t(selectedDay.weekDay) | capitalize }}, {{ selectedDay.day }}
+        {{ $t(selectedDay.monthText) | capitalize }}
       </a-subtitle>
       <a-button
         v-if="!selectedMeal"
@@ -54,19 +68,19 @@
       </div>
     </div>
     <div v-if="selectedMeal" class="text-left">
-      <a-subtitle>{{ $t('breakfast') | capitalize }}</a-subtitle>
+      <a-subtitle>{{ $t("breakfast") | capitalize }}</a-subtitle>
       <meal-recipe-list
         :recipe-list="selectedMeal.breakfast"
         :empty-message="$t('meal_empty_recipes_breakfast')"
       />
 
-      <a-subtitle>{{ $t('lunch') | capitalize }}</a-subtitle>
+      <a-subtitle>{{ $t("lunch") | capitalize }}</a-subtitle>
       <meal-recipe-list
         :recipe-list="selectedMeal.lunch"
         :empty-message="$t('meal_empty_recipes_lunch')"
       />
 
-      <a-subtitle>{{ $t('dinner') | capitalize }}</a-subtitle>
+      <a-subtitle>{{ $t("dinner") | capitalize }}</a-subtitle>
       <meal-recipe-list
         :recipe-list="selectedMeal.dinner"
         :empty-message="$t('meal_empty_recipes_dinner')"
@@ -76,16 +90,16 @@
         <template #title>
           <a-subtitle>
             <a-icon name="fa-solid fa-triangle-exclamation" />
-            {{ $t('delete_meal') | capitalize }}
+            {{ $t("delete_meal") | capitalize }}
           </a-subtitle>
         </template>
         <p>
-          {{ $t('delete_meal_text') }}
+          {{ $t("delete_meal_text") }}
         </p>
       </a-modal>
     </div>
     <p v-else>
-      {{ $t('no_meal_for_day') }}
+      {{ $t("no_meal_for_day") }}
     </p>
   </page-layout>
 </template>
@@ -112,26 +126,41 @@ export default {
       const weekArray = []
       const today = this.selectedDay
       for (let i = 0; i < 7; i++) {
-        const day = getDate(new Date(today.year, today.date.getMonth(), today.day + i))
+        const day = getDate(
+          new Date(today.year, today.date.getMonth(), today.day + i)
+        )
         weekArray.push(day)
       }
       return weekArray
+    },
+    calendarDate () {
+      return this.selectedDay ? outputDate(this.selectedDay.date) : null
     }
   },
   mounted () {
     const queryDate = this.$route?.query?.date
-    const today = queryDate && !isNaN(new Date(queryDate).getTime()) ? new Date(queryDate) : new Date()
-    this.selectedDay = getDate(new Date(today.getFullYear(), today.getMonth(), today.getDate()))
+    const today =
+      queryDate && !isNaN(new Date(queryDate).getTime())
+        ? new Date(queryDate)
+        : new Date()
+    this.selectedDay = getDate(
+      new Date(today.getFullYear(), today.getMonth(), today.getDate())
+    )
     this.getData()
   },
   methods: {
     async getData () {
-      const data = await this.$api.meal.list({ date: outputDate(this.selectedDay.date) })
+      const data = await this.$api.meal.list({
+        date: outputDate(this.selectedDay.date)
+      })
       this.selectedMeal = data.count > 0 ? data.results[0] : null
       this.updateDateQueryParam()
     },
     addMeal () {
-      this.$router.push({ name: 'meals-add', query: { date: outputDate(this.selectedDay.date) } })
+      this.$router.push({
+        name: 'meals-add',
+        query: { date: outputDate(this.selectedDay.date) }
+      })
     },
     editMeal (mealId) {
       this.$router.push({ name: 'meals-edit-id', params: { id: mealId } })
@@ -148,11 +177,23 @@ export default {
       this.getData()
     },
     onPreviousWeek () {
-      this.selectedDay = getDate(new Date(this.selectedDay.year, this.selectedDay.date.getMonth(), this.selectedDay.day - 1))
+      this.selectedDay = getDate(
+        new Date(
+          this.selectedDay.year,
+          this.selectedDay.date.getMonth(),
+          this.selectedDay.day - 1
+        )
+      )
       this.getData()
     },
     onNextWeek () {
-      this.selectedDay = getDate(new Date(this.selectedDay.year, this.selectedDay.date.getMonth(), this.selectedDay.day + 1))
+      this.selectedDay = getDate(
+        new Date(
+          this.selectedDay.year,
+          this.selectedDay.date.getMonth(),
+          this.selectedDay.day + 1
+        )
+      )
       this.getData()
     },
     isToday (date) {
@@ -161,10 +202,21 @@ export default {
     updateDateQueryParam () {
       const { name } = this.$route
 
-      this.$router.replace({
-        name,
-        query: { date: outputDate(this.selectedDay.date) }
-      }).catch(() => {})
+      this.$router
+        .replace({
+          name,
+          query: { date: outputDate(this.selectedDay.date) }
+        })
+        .catch(() => {})
+    },
+    onCalendarDateChange (value) {
+      if (value && !isNaN(new Date(value).getTime())) {
+        const newDate = new Date(value)
+        this.selectedDay = getDate(
+          new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate())
+        )
+        this.getData()
+      }
     }
   }
 }
@@ -173,7 +225,7 @@ export default {
 .week-day {
   border: 1px solid var(--v-secondary-base);
   padding: 1em;
-  margin: .5em;
+  margin: 0.5em;
   border-radius: 10px;
 }
 .week-day:hover {
@@ -187,8 +239,7 @@ export default {
   background: var(--v-secondary-base);
   color: white;
   padding: 1em;
-  margin: .5em;
+  margin: 0.5em;
   border-radius: 10px;
 }
-
 </style>

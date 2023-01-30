@@ -1,6 +1,6 @@
 <template>
   <div v-bind="$attrs">
-    <a-select
+    <form-select
       :top="true"
       :value="selectedLanguage"
       :items="languages"
@@ -13,7 +13,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'LanguageSelector',
   data () {
@@ -32,6 +31,5 @@ export default {
       this.$i18n.setLocale(this.selectedLanguage)
     }
   }
-
 }
 </script>

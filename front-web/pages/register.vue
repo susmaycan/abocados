@@ -5,13 +5,10 @@
       <a-title>
         {{ $t("register") | capitalize }}
       </a-title>
-      <p>{{ $t('create_your_account') | capitalize }}</p>
+      <p>{{ $t("create_your_account") | capitalize }}</p>
     </template>
-    <v-form
-      ref="register-form"
-      v-model="valid"
-    >
-      <a-input
+    <v-form ref="register-form" v-model="valid">
+      <form-text-input
         :value="form.username"
         :errors="errors.username"
         :label="$t('username')"
@@ -23,9 +20,9 @@
         <template #icon-left>
           <a-icon name="fa-solid fa-user" />
         </template>
-      </a-input>
+      </form-text-input>
 
-      <a-input
+      <form-text-input
         :value="form.email"
         :errors="errors.email"
         :rules="rules.email"
@@ -37,9 +34,9 @@
         <template #icon-left>
           <a-icon name="fa-solid fa-at" />
         </template>
-      </a-input>
+      </form-text-input>
 
-      <a-password-input
+      <form-password-input
         :show-confirm-password="true"
         :errors="errors.password"
         @input="onInputChanges('password', $event)"
@@ -58,13 +55,16 @@
         full-width
         @click="onSubmit"
       >
-        {{ $t('register') | capitalize }}
+        {{ $t("register") | capitalize }}
       </a-button>
     </v-form>
     <template #footer>
       <div class="text-center">
         <p class="clickable">
-          {{ $t('already_have_account') }} <span class="font-weight-bold" @click="goToLoginPage">{{ $t('login_here') }}</span>
+          {{ $t("already_have_account") }}
+          <span class="font-weight-bold" @click="goToLoginPage">{{
+            $t("login_here")
+          }}</span>
         </p>
       </div>
     </template>
@@ -94,11 +94,7 @@ export default {
           v => this.minLength(v, 3),
           v => this.maxLength(v, 20)
         ],
-        email: [
-          this.required,
-          this.emailFormat,
-          v => this.maxLength(v, 64)
-        ]
+        email: [this.required, this.emailFormat, v => this.maxLength(v, 64)]
       }
     }
   },
@@ -114,7 +110,10 @@ export default {
         try {
           const data = await this.$api.auth.register(this.form)
           if (data.id) {
-            this.$router.replace({ name: 'account-validation', query: { user: data.id } })
+            this.$router.replace({
+              name: 'account-validation',
+              query: { user: data.id }
+            })
           }
         } catch (response) {
           this.globalErrors = response?.data?.non_field_errors || []
@@ -128,6 +127,5 @@ export default {
       })
     }
   }
-
 }
 </script>

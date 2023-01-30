@@ -58,7 +58,7 @@ export default ({ store, $axios, i18n, $config }, inject) => {
     store.commit('setIsLoading', true)
   })
 
-  $axios.onResponse((config) => {
+  $axios.onResponse((data, headers) => {
     store.commit('setIsLoading', false)
   })
 

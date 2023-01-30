@@ -5,13 +5,10 @@
       <a-title>
         {{ $t("recover_password") | capitalize }}
       </a-title>
-      <p>{{ $t('enter_email_address') | capitalize }}</p>
+      <p>{{ $t("enter_email_address") | capitalize }}</p>
     </template>
-    <v-form
-      ref="recover-password-form"
-      v-model="valid"
-    >
-      <a-input
+    <v-form ref="recover-password-form" v-model="valid">
+      <form-text-input
         :value="form.email"
         :errors="errors.email"
         :rules="rules.email"
@@ -22,7 +19,7 @@
         <template #icon-left>
           <a-icon name="fa-solid fa-at" />
         </template>
-      </a-input>
+      </form-text-input>
 
       <div v-if="globalErrors.length > 0" class="my-3">
         <a-alert type="error">
@@ -33,7 +30,7 @@
       </div>
       <div v-if="success" class="my-3">
         <a-alert type="success">
-          <p>{{ $t('recover_password_ok') }}</p>
+          <p>{{ $t("recover_password_ok") }}</p>
         </a-alert>
       </div>
 
@@ -44,7 +41,7 @@
         class="my-2"
         @click="onSubmit"
       >
-        {{ $t('send_reset_email') | capitalize }}
+        {{ $t("send_reset_email") | capitalize }}
       </a-button>
     </v-form>
   </page-layout>
@@ -66,10 +63,7 @@ export default {
       errors: {},
       globalErrors: [],
       rules: {
-        email: [
-          this.required,
-          this.emailFormat
-        ]
+        email: [this.required, this.emailFormat]
       },
       success: false
     }
@@ -82,7 +76,9 @@ export default {
     async onSubmit () {
       if (this.valid) {
         try {
-          await this.$api.auth.passwordRecoveryRequest({ email: this.form.email })
+          await this.$api.auth.passwordRecoveryRequest({
+            email: this.form.email
+          })
           this.success = true
         } catch (response) {
           this.globalErrors = response?.data?.non_field_errors || null
@@ -91,6 +87,5 @@ export default {
       }
     }
   }
-
 }
 </script>

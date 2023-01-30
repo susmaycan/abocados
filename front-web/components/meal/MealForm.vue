@@ -1,9 +1,6 @@
 <template>
-  <v-form
-    ref="meal-form"
-    v-model="valid"
-  >
-    <a-date-picker
+  <v-form ref="meal-form" v-model="valid">
+    <form-date-picker
       :value="form.date"
       :errors="errors.date"
       :label="$t('date')"
@@ -14,7 +11,7 @@
 
     <div class="text-left">
       <div class="d-flex justify-space-between">
-        <a-subtitle>{{ $t('breakfast') | capitalize }}</a-subtitle>
+        <a-subtitle>{{ $t("breakfast") | capitalize }}</a-subtitle>
         <meal-recipe-selector
           :title="$t('select_breakfast_recipes')"
           :initial-recipe-list="form.breakfast"
@@ -29,7 +26,7 @@
 
     <div class="text-left">
       <div class="d-flex justify-space-between">
-        <a-subtitle>{{ $t('lunch') | capitalize }}</a-subtitle>
+        <a-subtitle>{{ $t("lunch") | capitalize }}</a-subtitle>
         <meal-recipe-selector
           :title="$t('select_lunch_recipes')"
           :initial-recipe-list="form.lunch"
@@ -44,7 +41,7 @@
 
     <div class="text-left">
       <div class="d-flex justify-space-between">
-        <a-subtitle>{{ $t('dinner') | capitalize }}</a-subtitle>
+        <a-subtitle>{{ $t("dinner") | capitalize }}</a-subtitle>
         <meal-recipe-selector
           :title="$t('select_dinner_recipes')"
           :initial-recipe-list="form.dinner"
@@ -61,12 +58,8 @@
       {{ globalError }}
     </a-alert>
     <div class="my-2 d-flex justify-center">
-      <a-button
-        class="mr-2"
-        color="secondary"
-        @click="onCancel"
-      >
-        {{ $t('cancel') | capitalize }}
+      <a-button class="mr-2" color="secondary" @click="onCancel">
+        {{ $t("cancel") | capitalize }}
       </a-button>
       <a-button
         :disabled="!valid"
@@ -74,7 +67,7 @@
         color="secondary"
         @click="onSubmit"
       >
-        {{ $t('save') | capitalize }}
+        {{ $t("save") | capitalize }}
       </a-button>
     </div>
   </v-form>
@@ -89,15 +82,21 @@ export default {
   props: {
     errors: {
       type: Object,
-      default () { return {} }
+      default () {
+        return {}
+      }
     },
     globalError: {
       type: String,
-      default () { return null }
+      default () {
+        return null
+      }
     },
     meal: {
       type: Object,
-      default () { return null }
+      default () {
+        return null
+      }
     },
     edit: {
       type: Boolean,
@@ -118,10 +117,7 @@ export default {
         dinner: []
       },
       rules: {
-        date: [
-          this.required,
-          v => this.maxLength(v, 50)
-        ]
+        date: [this.required, v => this.maxLength(v, 50)]
       }
     }
   },

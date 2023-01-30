@@ -2,7 +2,7 @@
   <div class="mb-4">
     <div class="d-flex justify-space-between align-center">
       <a-label>
-        {{ $t('ingredients') | capitalize }}
+        {{ $t("ingredients") | capitalize }}
       </a-label>
       <a-button
         icon="fa-solid fa-circle-plus"
@@ -13,7 +13,7 @@
     </div>
     <div v-if="ingredients.length === 0">
       <p class="small-input">
-        {{ $t('ingredients_list_empty') }}
+        {{ $t("ingredients_list_empty") }}
       </p>
     </div>
     <div
@@ -22,7 +22,7 @@
       :key="index"
       class="d-flex justify-space-between align-center my-0 py-0"
     >
-      <a-input
+      <form-text-input
         :value="ingredients[index]"
         :errors="errors"
         :placeholder="$t('ingredient')"
@@ -30,7 +30,11 @@
         v-bind="$attrs"
         @input="onIngredientChanges(index, $event)"
       />
-      <a-button text icon="fa-solid fa-circle-minus" @click="deleteIngredient(index)" />
+      <a-button
+        text
+        icon="fa-solid fa-circle-minus"
+        @click="deleteIngredient(index)"
+      />
     </div>
   </div>
 </template>
@@ -40,11 +44,15 @@ export default {
   props: {
     errors: {
       type: Object,
-      default () { return {} }
+      default () {
+        return {}
+      }
     },
     initialIngredients: {
       type: Array,
-      default () { return [] }
+      default () {
+        return []
+      }
     }
   },
   data () {
@@ -71,7 +79,6 @@ export default {
       this.ingredients.splice(index, 1)
     }
   }
-
 }
 </script>
 
