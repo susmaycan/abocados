@@ -3,12 +3,12 @@
     <template #title>
       <a-title>
         <a-icon name="fa-solid fa-heart" />
-        {{ $t("favourites") | capitalize }}
+        {{ $t('favourites') | capitalize }}
       </a-title>
       <p>{{ $t('favourites_subtitle') | capitalize }}</p>
     </template>
     <recipe-list-layout
-      :recipes="recipes"
+      :recipes="list"
       :empty-message="$t('favourites_empty_message')"
       :next="!!next"
       :previous="!!previous"
@@ -19,38 +19,27 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import ListMixin from '@/mixins/list'
 export default {
   name: 'FavouriteList',
   middleware: ['auth-custom'],
-  data () {
-    return {
-      recipes: null,
-      previous: null,
-      next: null
-    }
-  },
+  mixins: [ListMixin],
   computed: {
-    ...mapState('user', ['user'])
-  },
-  mounted () {
-    this.getData()
+    ...mapState('user', ['user']),
   },
   methods: {
-    async getData (queryParams) {
+    async getData(queryParams) {
       const data = await this.$api.favourite.list(this.user.id, queryParams)
-      this.recipes = data.results
-      this.previous = data.previous
-      this.next = data.next
+      this.setData(data)
     },
-    search (pageFilter) {
-      this.getData({ page: pageFilter })
-    },
-    toggleFavourite (recipeId, value) {
-      const recipeIndex = this.recipes.findIndex(recipe => recipeId === recipe.id)
+    toggleFavourite(recipeId, value) {
+      const recipeIndex = this.recipes.findIndex(
+        (recipe) => recipeId === recipe.id
+      )
       if (recipeIndex !== -1) {
         this.recipes.splice(recipeIndex, 1)
       }
-    }
-  }
+    },
+  },
 }
 </script>

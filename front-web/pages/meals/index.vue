@@ -106,7 +106,7 @@
 <script>
 import { mapState } from 'vuex'
 import ASubtitle from '../../components/common/ASubtitle.vue'
-import RouteMixin from '@/utils/mixins/route'
+import RouteMixin from '@/mixins/route'
 import { getDate, outputDate } from '@/utils/functions'
 
 export default {

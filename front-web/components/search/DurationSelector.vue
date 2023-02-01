@@ -6,12 +6,15 @@
     </div>
     <vertical-scroll-container class="py-3">
       <div v-for="duration in durationList" :key="duration">
-        <small-filter-container :selected="isSelected(duration)" @click="selectDuration(duration)">
+        <search-small-filter-container
+          :selected="isSelected(duration)"
+          @click="selectDuration(duration)"
+        >
           <span>
             {{ duration | capitalize }}
             <a-icon name="fa-solid fa-clock" />
           </span>
-        </small-filter-container>
+        </search-small-filter-container>
       </div>
     </vertical-scroll-container>
   </div>
@@ -23,27 +26,28 @@ export default {
   props: {
     errors: {
       type: [String, Array],
-      default () { return [] }
+      default() {
+        return []
+      },
     },
     value: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
-  data () {
+  data() {
     return {
-      durationList: ['10', '15', '30', '45', '60']
+      durationList: ['10', '15', '30', '45', '60'],
     }
   },
   methods: {
-    isSelected (selectedDuration) {
+    isSelected(selectedDuration) {
       return this.value === selectedDuration
     },
-    selectDuration (value) {
+    selectDuration(value) {
       const inputValue = this.isSelected(value) ? null : value
       this.$emit('input', inputValue)
-    }
-  }
-
+    },
+  },
 }
 </script>

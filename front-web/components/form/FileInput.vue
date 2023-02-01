@@ -1,6 +1,6 @@
 <template>
   <v-file-input
-    v-model="inputFile"
+    v-model="inputValue"
     v-bind="$attrs"
     :label="label | capitalize"
     show-size
@@ -10,27 +10,9 @@
 </template>
 
 <script>
+import InputMixin from '@/mixins/input'
 export default {
-  name: 'AFileInput',
-  props: {
-    label: {
-      type: String,
-      default: ''
-    },
-    value: null
-  },
-  data () {
-    return {
-      inputFile: null
-    }
-  },
-  mounted () {
-    this.inputFile = this.value
-  },
-  methods: {
-    onInput () {
-      this.$emit('input', this.inputFile)
-    }
-  }
+  name: 'FileInput',
+  mixins: [InputMixin]
 }
 </script>

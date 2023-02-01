@@ -1,26 +1,18 @@
 <template>
   <v-dialog
     v-model="dialog"
+    fullscreen
     hide-overlay
     transition="dialog-bottom-transition"
   >
     <template #activator="{ on }">
-      <a-button
-        icon="fa-solid fa-pen"
-        color="primary"
-        fab
-        small
-        :on="on"
-      />
+      <a-button icon="fa-solid fa-pen" color="primary" fab small :on="on" />
     </template>
     <div class="recipe-list-selector p-2">
       <a-subtitle>{{ title | capitalize }}</a-subtitle>
-      <search-filters
-        :init-filters="filters"
-        @filter="filter"
-      />
+      <search-filters :init-filters="filters" @filter="filter" />
       <recipe-list-layout
-        :recipes="recipes"
+        :recipes="list"
         :empty-message="$t('recipe_search_empty')"
         :next="!!next"
         :previous="!!previous"
@@ -30,11 +22,7 @@
         @select="select"
       />
       <div class="my-2 d-flex justify-center">
-        <a-button
-          class="mr-2"
-          color="secondary"
-          @click="onCancel"
-        >
+        <a-button class="mr-2" color="secondary" @click="onCancel">
           {{ $t('cancel') | capitalize }}
         </a-button>
         <a-button
@@ -51,76 +39,65 @@
 </template>
 
 <script>
-import RulesMixin from '@/utils/mixins/rules'
+import ListMixin from '@/mixins/list'
 
 export default {
   name: 'MealRecipeSelector',
-  mixins: [RulesMixin],
+  mixins: [ListMixin],
   props: {
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     initialRecipeList: {
       type: Array,
-      default () { return [] }
-    }
+      default() {
+        return []
+      },
+    },
   },
-  data () {
+  data() {
     return {
-      recipes: [],
-      next: null,
-      previous: null,
-      filters: {},
-      selectedRecipes: [],
-      dialog: false
+      dialog: false,
     }
   },
   watch: {
-    initialRecipeList () {
+    initialRecipeList() {
       this.selectedRecipes = this.initialRecipeList
-    }
+    },
   },
-  mounted () {
+  mounted() {
+    this.queryParams = false
     this.getData(this.filters)
     this.selectedRecipes = this.initialRecipeList
   },
   methods: {
-    onCancel () {
+    onCancel() {
       this.dialog = false
     },
-    onSelect () {
+    onSelect() {
       this.$emit('accept', this.selectedRecipes)
       this.dialog = false
     },
-    async getData (queryParams) {
+    async getData(queryParams) {
       const data = await this.$api.recipe.list(queryParams)
-      this.recipes = data.results
-      this.previous = data.previous
-      this.next = data.next
+      this.setData(data)
     },
-    search (pageFilter) {
-      this.getData({
-        ...this.filters,
-        page: pageFilter
-      })
-    },
-    filter (queryParams) {
-      this.getData(queryParams)
-    },
-    select (selectedRecipe, value) {
+    select(selectedRecipe, value) {
       if (value) {
         this.selectedRecipes.push(selectedRecipe)
       } else {
-        const findRecipe = this.selectedRecipes.findIndex(recipe => selectedRecipe.id === recipe.id)
+        const findRecipe = this.selectedRecipes.findIndex(
+          (recipe) => selectedRecipe.id === recipe.id
+        )
         this.selectedRecipes.splice(findRecipe, 1)
       }
-    }
-  }
+    },
+  },
 }
 </script>
 <style scoped>

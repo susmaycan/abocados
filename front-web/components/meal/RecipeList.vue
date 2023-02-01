@@ -5,9 +5,7 @@
     </p>
     <grid v-else>
       <div v-for="recipe in recipeList" :key="recipe.id">
-        <recipe-menu-card
-          :recipe="recipe"
-        />
+        <recipe-card-menu :recipe="recipe" />
       </div>
     </grid>
   </div>
@@ -19,11 +17,15 @@ export default {
   props: {
     recipeList: {
       type: Array,
-      default () { return [] }
+      default () {
+        return []
+      }
     },
     emptyMessage: {
       type: String,
-      default () { return null }
+      default () {
+        return null
+      }
     }
   }
 }

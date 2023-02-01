@@ -3,9 +3,9 @@
     <template #title>
       <a-title>
         <a-icon name="fa-solid fa-bookmark" />
-        {{ $t("recipe_book") | capitalize }}
+        {{ $t('recipe_book') | capitalize }}
       </a-title>
-      <p>{{ $t("recipe_book_subtitle") }}</p>
+      <p>{{ $t('recipe_book_subtitle') }}</p>
     </template>
     <template #buttons>
       <a-button
@@ -17,13 +17,10 @@
       </a-button>
     </template>
     <template #filters>
-      <search-filters
-        :init-filters="filters"
-        @filter="filter"
-      />
+      <search-filters :init-filters="filters" @filter="filter" />
     </template>
     <recipe-list-layout
-      :recipes="recipes"
+      :recipes="list"
       :empty-message="$t('recipe_list_empty')"
       :next="!!next"
       :previous="!!previous"
@@ -41,49 +38,24 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import RouteMixin from '@/utils/mixins/route'
+import ListMixin from '@/mixins/list'
 
 export default {
   name: 'RecipeList',
-  mixins: [RouteMixin],
+  mixins: [ListMixin],
   middleware: ['auth-custom'],
-  data () {
-    return {
-      recipes: null,
-      previous: null,
-      next: null,
-      categories: [],
-      filters: {}
-    }
-  },
   computed: {
-    ...mapState('user', ['user'])
-  },
-  mounted () {
-    this.setFilters()
-    this.getData(this.filters)
+    ...mapState('user', ['user']),
   },
   methods: {
-    async getData (queryParams) {
+    async getData(queryParams) {
       const data = await this.$api.user.sublist(this.user.id, queryParams)
-      this.recipes = data.results
-      this.previous = data.previous
-      this.next = data.next
+      this.setData(data)
     },
-    addRecipe () {
+    addRecipe() {
       this.$router.push({ name: 'recipes-add' })
     },
-    search (pageFilter) {
-      this.getData({
-        ...this.filters,
-        page: pageFilter
-      })
-    },
-    filter (queryParams) {
-      this.applyFilters(queryParams)
-      this.getData(queryParams)
-    }
-  }
+  },
 }
 </script>
 <style scoped>

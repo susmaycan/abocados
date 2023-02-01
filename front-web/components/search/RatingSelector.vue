@@ -3,12 +3,15 @@
     <a-label>{{ $t('rating') | capitalize }}:</a-label>
     <vertical-scroll-container class="py-3">
       <div v-for="rating in ratingList" :key="rating">
-        <small-filter-container :selected="isSelected(rating)" @click="selectRating(rating)">
+        <search-small-filter-container
+          :selected="isSelected(rating)"
+          @click="selectRating(rating)"
+        >
           <span>
             {{ rating | capitalize }}
             <a-icon name="fa-solid fa-star" />
           </span>
-        </small-filter-container>
+        </search-small-filter-container>
       </div>
     </vertical-scroll-container>
   </div>
@@ -20,27 +23,28 @@ export default {
   props: {
     errors: {
       type: [String, Array],
-      default () { return [] }
+      default() {
+        return []
+      },
     },
     value: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
-  data () {
+  data() {
     return {
-      ratingList: ['1', '2', '3', '4', '5']
+      ratingList: ['1', '2', '3', '4', '5'],
     }
   },
   methods: {
-    isSelected (selectedRating) {
+    isSelected(selectedRating) {
       return this.value === selectedRating
     },
-    selectRating (value) {
+    selectRating(value) {
       const inputValue = this.isSelected(value) ? null : value
       this.$emit('input', inputValue)
-    }
-  }
-
+    },
+  },
 }
 </script>

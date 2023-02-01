@@ -1,28 +1,24 @@
 <template>
-  <div
-    class="recipe-card"
-  >
-    <recipe-image
-      width="120"
-      height="120"
-      :src="recipe.picture"
-    />
+  <div class="recipe-card">
+    <recipe-image width="120" height="120" :src="recipe.picture" />
     <div class="mx-2">
       <h3 class="recipe-card-title">
         {{ recipe.name }}
       </h3>
-      <div
-        class="d-flex align-stretch justify-start"
-      >
-        <span v-if="recipe.duration" class="mr-2"><a-icon name="fa-solid fa-clock" /> {{ recipe.duration }} {{ $t('min') }}</span>
-        <a-rating :rating="recipe.rating" />
+      <div class="d-flex align-stretch justify-start">
+        <span
+          v-if="recipe.duration"
+          class="mr-2"
+        ><a-icon name="fa-solid fa-clock" /> {{ recipe.duration }}
+          {{ $t("min") }}</span>
+        <recipe-rating :rating="recipe.rating" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import mixin from '@/utils/mixins/global'
+import mixin from '@/mixins/global'
 
 export default {
   name: 'RecipeCard',
@@ -55,13 +51,13 @@ export default {
 
 <style scoped>
 .recipe-card {
-  margin: .7em 1em;
+  margin: 0.7em 1em;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 .recipe-card-title {
-  margin: .25em 0;
+  margin: 0.25em 0;
   font-weight: bold;
 }
 </style>

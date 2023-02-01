@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import mixin from '@/utils/mixins/global'
+import mixin from '@/mixins/global'
 
 Vue.mixin(mixin)

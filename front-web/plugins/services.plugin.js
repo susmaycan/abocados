@@ -63,10 +63,13 @@ export default ({ store, $axios, i18n, $config }, inject) => {
   })
 
   $axios.onResponseError(({ response }) => {
-    console.log('ERROR')
     store.commit('setIsLoading', false)
-    if (response && response.status === HTTP_ERROR_CODES.BAD_REQUEST) {
-      return Promise.reject(response)
+    if (
+      response &&
+      response.data &&
+      response.status === HTTP_ERROR_CODES.BAD_REQUEST
+    ) {
+      return Promise.reject(response.data)
     } else {
       store.commit('setError', response)
       return Promise.reject(response)
@@ -79,7 +82,7 @@ export default ({ store, $axios, i18n, $config }, inject) => {
     auth: authRepositoryWithAxios('auth'),
     category: repositoryWithAxios('categories'),
     meal: repositoryWithAxios('meals'),
-    favourite: favouriteRepositoryWithAxios('users', 'favourites')
+    favourite: favouriteRepositoryWithAxios('users', 'favourites'),
   }
 
   inject('api', apiFinal)

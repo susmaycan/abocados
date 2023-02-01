@@ -38,7 +38,7 @@
 </template>
 <script>
 import { capitalize } from 'lodash'
-import RulesMixin from '@/utils/mixins/rules'
+import RulesMixin from '@/mixins/rules'
 
 export default {
   name: 'APasswordInput',

@@ -2,20 +2,20 @@
   <v-form ref="meal-form" v-model="valid">
     <form-date-picker
       :value="form.date"
-      :errors="errors.date"
+      :errors="formErrors.date"
       :label="$t('date')"
       :rules="rules.date"
-      :disabled="edit"
+      :disabled="isEditMode"
       @input="onInputChanges('date', $event)"
     />
 
     <div class="text-left">
       <div class="d-flex justify-space-between">
-        <a-subtitle>{{ $t("breakfast") | capitalize }}</a-subtitle>
+        <a-subtitle>{{ $t('breakfast') | capitalize }}</a-subtitle>
         <meal-recipe-selector
           :title="$t('select_breakfast_recipes')"
           :initial-recipe-list="form.breakfast"
-          @accept="selectBreakfastRecipe"
+          @accept="onInputChanges('breakfast', $event)"
         />
       </div>
       <meal-recipe-list
@@ -26,11 +26,11 @@
 
     <div class="text-left">
       <div class="d-flex justify-space-between">
-        <a-subtitle>{{ $t("lunch") | capitalize }}</a-subtitle>
+        <a-subtitle>{{ $t('lunch') | capitalize }}</a-subtitle>
         <meal-recipe-selector
           :title="$t('select_lunch_recipes')"
           :initial-recipe-list="form.lunch"
-          @accept="selectLunchRecipe"
+          @accept="onInputChanges('lunch', $event)"
         />
       </div>
       <meal-recipe-list
@@ -41,11 +41,11 @@
 
     <div class="text-left">
       <div class="d-flex justify-space-between">
-        <a-subtitle>{{ $t("dinner") | capitalize }}</a-subtitle>
+        <a-subtitle>{{ $t('dinner') | capitalize }}</a-subtitle>
         <meal-recipe-selector
           :title="$t('select_dinner_recipes')"
           :initial-recipe-list="form.dinner"
-          @accept="selectDinnerRecipe"
+          @accept="onInputChanges('dinner', $event)"
         />
       </div>
       <meal-recipe-list
@@ -54,12 +54,11 @@
       />
     </div>
 
-    <a-alert v-if="globalError" type="error">
-      {{ globalError }}
-    </a-alert>
+    <form-errors :errors="globalErrors" />
+
     <div class="my-2 d-flex justify-center">
       <a-button class="mr-2" color="secondary" @click="onCancel">
-        {{ $t("cancel") | capitalize }}
+        {{ $t('cancel') | capitalize }}
       </a-button>
       <a-button
         :disabled="!valid"
@@ -67,80 +66,44 @@
         color="secondary"
         @click="onSubmit"
       >
-        {{ $t("save") | capitalize }}
+        {{ $t('save') | capitalize }}
       </a-button>
     </div>
   </v-form>
 </template>
 
 <script>
-import RulesMixin from '@/utils/mixins/rules'
+import RulesMixin from '@/mixins/rules'
+import FormMixin from '@/mixins/form'
 
 export default {
   name: 'MealForm',
-  mixins: [RulesMixin],
+  mixins: [RulesMixin, FormMixin],
   props: {
-    errors: {
-      type: Object,
-      default () {
-        return {}
-      }
-    },
-    globalError: {
-      type: String,
-      default () {
-        return null
-      }
-    },
-    meal: {
-      type: Object,
-      default () {
-        return null
-      }
-    },
-    edit: {
-      type: Boolean,
-      default: false
-    },
     date: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
-  data () {
+  data() {
     return {
-      valid: false,
-      form: {
-        date: null,
-        breakfast: [],
-        lunch: [],
-        dinner: []
-      },
       rules: {
-        date: [this.required, v => this.maxLength(v, 50)]
-      }
+        date: [this.required, (v) => this.maxLength(v, 50)],
+      },
     }
   },
   watch: {
-    date (newValue) {
+    date(newValue) {
       this.form.date = newValue
     },
-    meal (newVal) {
-      this.form = newVal
-    }
   },
-  mounted () {
-    if (this.meal) {
-      this.form = this.meal
-    } else if (this.date) {
+  mounted() {
+    if (this.date) {
       this.form.date = this.date
     }
   },
   methods: {
-    onInputChanges (key, value) {
-      this.form[key] = value
-    },
-    onSubmit () {
+    onSubmit() {
       if (this.valid) {
         const newForm = { ...this.form }
         newForm.breakfast = this.parseRecipes(newForm.breakfast)
@@ -149,21 +112,12 @@ export default {
         this.$emit('submit', newForm)
       }
     },
-    onCancel () {
-      this.$router.go(-1)
+    parseRecipes(recipeList) {
+      if (!recipeList) {
+        return []
+      }
+      return recipeList.map((recipe) => recipe.id)
     },
-    selectBreakfastRecipe (selectedRecipes) {
-      this.form.breakfast = selectedRecipes
-    },
-    selectLunchRecipe (selectedRecipes) {
-      this.form.lunch = selectedRecipes
-    },
-    selectDinnerRecipe (selectedRecipes) {
-      this.form.dinner = selectedRecipes
-    },
-    parseRecipes (recipeList) {
-      return recipeList.map(recipe => recipe.id)
-    }
-  }
+  },
 }
 </script>

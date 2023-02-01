@@ -54,7 +54,7 @@
         ><a-icon name="fa-solid fa-clock" /> {{ recipe.duration }}
           {{ $t("min") }}</span>
         <v-divider v-if="recipe.duration" vertical />
-        <a-rating class="ml-2" :rating="recipe.rating" />
+        <recipe-rating class="ml-2" :rating="recipe.rating" />
       </div>
       <servings v-if="recipe.servings" :servings="recipe.servings" />
 
@@ -99,7 +99,7 @@
   </page-layout>
 </template>
 <script>
-import mixin from '@/utils/mixins/global'
+import mixin from '@/mixins/global'
 
 export default {
   name: 'RecipeDetail',

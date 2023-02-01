@@ -3,11 +3,9 @@
     <a-drawer :show="showFilters" @change="toggleShowFilters">
       <div class="filters px-6 my-3">
         <a-subtitle>
-          <a-icon name="fa-solid fa-filter" />{{
-            $t("filters") | capitalize
-          }}
+          <a-icon name="fa-solid fa-filter" />{{ $t('filters') | capitalize }}
         </a-subtitle>
-        <category-search-selector
+        <search-category-selector
           class="my-3"
           :name="$t('time') | capitalize"
           :categories="getCategoriesByType(categoryType.TIME)"
@@ -15,7 +13,7 @@
           @select="selectCategory"
           @unselect="unselectCategory"
         />
-        <category-search-selector
+        <search-category-selector
           class="my-3"
           :name="$t('cuisine') | capitalize"
           :categories="getCategoriesByType(categoryType.CUISINE)"
@@ -23,7 +21,7 @@
           @select="selectCategory"
           @unselect="unselectCategory"
         />
-        <category-search-selector
+        <search-category-selector
           class="my-3"
           :name="$t('food') | capitalize"
           :categories="getCategoriesByType(categoryType.FOOD)"
@@ -31,12 +29,12 @@
           @select="selectCategory"
           @unselect="unselectCategory"
         />
-        <rating-search-selector
+        <search-rating-selector
           class="my-3"
           :value="filters.rating"
           @input="onInputChanges('rating', $event)"
         />
-        <duration-search-selector
+        <search-duration-selector
           class="my-3"
           :value="filters.duration"
           @input="onInputChanges('duration', $event)"
@@ -48,7 +46,7 @@
           icon="fa-solid fa-circle-xmark"
           @click="clearFilters"
         >
-          {{ $t("reset") }}
+          {{ $t('reset') }}
         </a-button>
       </div>
     </a-drawer>
@@ -82,7 +80,7 @@
 <script>
 import { capitalize, isEmpty } from 'lodash'
 import { mapState } from 'vuex'
-import RouteMixin from '@/utils/mixins/route'
+import RouteMixin from '@/mixins/route'
 import { CATEGORY_TYPE } from '@/utils/consts'
 
 export default {
@@ -91,21 +89,21 @@ export default {
   props: {
     initFilters: {
       type: Object,
-      default () {
+      default() {
         return {}
-      }
-    }
+      },
+    },
   },
-  data () {
+  data() {
     return {
       filters: {},
       showFilters: false,
-      categoryType: CATEGORY_TYPE
+      categoryType: CATEGORY_TYPE,
     }
   },
   computed: {
     ...mapState(['categories']),
-    parsedFilters () {
+    parsedFilters() {
       const finalFilters = []
       Object.entries(this.filters).forEach(([key, value]) => {
         if (Array.isArray(value) && value.length > 0) {
@@ -120,16 +118,16 @@ export default {
       })
       return finalFilters
     },
-    filtersEmpty () {
+    filtersEmpty() {
       return isEmpty(this.filters)
     },
-    filterCount () {
+    filterCount() {
       return Object.keys(this.filters).length
-    }
+    },
   },
   watch: {
     initFilters: {
-      handler (val) {
+      handler(val) {
         const initialFilters = { ...val }
         if (initialFilters.category) {
           initialFilters.category = this.parseCategories(
@@ -138,10 +136,10 @@ export default {
         }
         this.filters = initialFilters
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
-  mounted () {
+  mounted() {
     this.filters = { ...this.initFilters }
     if (this.filters.category) {
       this.filters.category = [this.initFilters.category]
@@ -149,22 +147,22 @@ export default {
   },
   methods: {
     capitalize,
-    onInputChanges (key, value) {
+    onInputChanges(key, value) {
       this.filters = { ...this.filters, [key]: value }
       this.getData()
     },
-    clearFilters () {
+    clearFilters() {
       this.filters = {}
       this.getData()
       this.toggleShowFilters(false)
     },
-    toggleShowFilters (value) {
+    toggleShowFilters(value) {
       this.showFilters = value
     },
-    getData () {
+    getData() {
       this.$emit('filter', this.filters)
     },
-    parseCategories (categories) {
+    parseCategories(categories) {
       const initialCategories = categories
       if (!initialCategories) {
         return null
@@ -175,50 +173,48 @@ export default {
           return [parsedInt]
         }
       }
-      return initialCategories.map(categoryString =>
-        parseInt(categoryString)
-      )
+      return initialCategories.map((categoryString) => parseInt(categoryString))
     },
-    selectCategory (id) {
+    selectCategory(id) {
       if (!this.filters.category) {
         this.filters.category = []
       }
       this.filters = {
         ...this.filters,
-        category: [...this.filters.category, id]
+        category: [...this.filters.category, id],
       }
       this.getData()
     },
-    unselectCategory (id) {
+    unselectCategory(id) {
       const filteredCategories = this.filters.category.filter(
-        categoryId => categoryId !== id
+        (categoryId) => categoryId !== id
       )
 
       if (filteredCategories.length === 0) {
         this.filters = {
           ...this.filters,
-          category: null
+          category: null,
         }
         delete this.filters.category
       } else {
         this.filters = {
           ...this.filters,
-          category: filteredCategories
+          category: filteredCategories,
         }
       }
       this.getData()
     },
-    selectRating (id) {
+    selectRating(id) {
       this.filters = {
         ...this.filters,
-        rating: id
+        rating: id,
       }
       this.getData()
     },
-    getCategoriesByType (type) {
-      return this.categories.filter(category => category.type === type)
-    }
-  }
+    getCategoriesByType(type) {
+      return this.categories.filter((category) => category.type === type)
+    },
+  },
 }
 </script>
 <style scoped>

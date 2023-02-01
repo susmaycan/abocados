@@ -26,15 +26,15 @@
         v-model="inputValue"
         no-title
         scrollable
-        @input="onInput()"
-        @change="onChange()"
+        @input="onInput"
+        @change="onChange"
       >
         <v-spacer />
         <a-button text color="primary" @click="menu = false">
-          {{ $t("cancel") | capitalize }}
+          {{ $t('cancel') | capitalize }}
         </a-button>
         <a-button text color="primary" @click="$refs.menu.save(inputValue)">
-          {{ $t("accept") | capitalize }}
+          {{ $t('accept') | capitalize }}
         </a-button>
       </v-date-picker>
     </v-menu>
@@ -43,59 +43,18 @@
     </p>
   </div>
 </template>
-
 <script>
+import InputMixin from '@/mixins/input'
+
 export default {
-  name: 'ADatePicker',
-  props: {
-    label: {
-      type: String,
-      default: ''
-    },
-    value: {
-      type: [String, Array, Number],
-      required: false,
-      default: null
-    },
-    errors: {
-      type: [String, Array, Object],
-      required: false,
-      default: ''
-    },
-    required: {
-      type: Boolean,
-      default: false
-    },
-    fullWidth: {
-      type: Boolean,
-      default: false
-    }
-  },
+  name: 'DatePicker',
+  mixins: [InputMixin],
   data () {
     return {
-      inputValue: null,
       menu: false
     }
   },
   computed: {
-    inputErrors () {
-      if (!this.errors) {
-        return ''
-      }
-      if (typeof this.errors === 'string') {
-        return this.errors
-      } else if (Array.isArray(this.errors)) {
-        return this.errors.join()
-      }
-      return this.$t('error_field')
-    },
-    inputClass () {
-      let base = ''
-      if (this.fullWidth) {
-        base += ' full-width-input'
-      }
-      return base
-    },
     inputDateFormatted () {
       if (!this.inputValue) {
         return ''
@@ -104,21 +63,7 @@ export default {
       return this.formatDate(this.inputValue)
     }
   },
-  watch: {
-    value () {
-      this.inputValue = this.value
-    }
-  },
-  mounted () {
-    this.inputValue = this.value
-  },
   methods: {
-    onInput () {
-      this.$emit('input', this.inputValue)
-    },
-    onChange () {
-      this.$emit('change', this.inputValue)
-    },
     formatDate (date) {
       if (!date) {
         return null

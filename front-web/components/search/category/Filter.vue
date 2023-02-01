@@ -1,3 +1,4 @@
+
 <template>
   <filter-container :selected="selected" @click="onClick">
     <a-image :src="category.picture" height="40" width="40" />

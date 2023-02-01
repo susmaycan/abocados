@@ -4,23 +4,19 @@ export default {
     titleTemplate: '%s - abocados',
     title: 'abocados',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '@fortawesome/fontawesome-svg-core/styles.css'
-  ],
+  css: ['@fortawesome/fontawesome-svg-core/styles.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -33,25 +29,17 @@ export default {
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: {
-    dirs: [
-      '~/components',
-      '~/components/common/',
-      '~/components/layout/',
-      '~/components/recipe/',
-      '~/components/meal/',
-      '~/components/search/'
-    ]
+    dirs: ['~/components', '~/components/common/', '~/components/layout/'],
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     '@nuxtjs/google-fonts',
     // https://github.com/nuxt-community/device-module
-    '@nuxtjs/device'
+    '@nuxtjs/device',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -59,7 +47,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/i18n',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -71,33 +59,32 @@ export default {
     treeShake: true,
     theme: {
       options: {
-        customProperties: true
+        customProperties: true,
       },
       themes: {
         light: {
           primary: '#8fcb42',
           secondary: '#3a3b3b',
           accent: '#2e8449',
-          orangee: '#FF4322'
-        }
-      }
-    }
+          orangee: '#FF4322',
+        },
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  },
+  build: {},
 
   i18n: {
     locales: [
       { code: 'es', name: 'Español', file: 'es.js' },
-      { code: 'en', name: 'English', file: 'en.js' }
+      { code: 'en', name: 'English', file: 'en.js' },
       // { code: 'ko', name: '한국어', file: 'kr.js' }
     ],
     defaultLocale: 'en',
     langDir: '~/locales/',
     skipSettingLocaleOnNavigate: true,
-    strategy: 'no_prefix'
+    strategy: 'no_prefix',
   },
 
   googleFonts: {
@@ -107,8 +94,8 @@ export default {
       Raleway: [100, 400, 700],
       Roboto: [100, 400, 700, 900],
       Exo: [100, 400, 700, 900],
-      Poppins: [100, 400, 700, 900]
-    }
+      Poppins: [100, 400, 700, 900],
+    },
   },
 
   server: {
@@ -128,6 +115,6 @@ export default {
   },
 
   eslint: {
-    fix: true
+    fix: true,
   },
 }

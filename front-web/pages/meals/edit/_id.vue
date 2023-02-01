@@ -1,16 +1,10 @@
 <template>
   <page-layout :title="$t('edit_meal')">
-    <meal-form
-      :errors="errors"
-      :meal="meal"
-      :global-error="globalError"
-      :edit="true"
-      @submit=" onSubmit"
-    />
+    <meal-form :errors="errors" :data="meal" @submit="onSubmit" />
   </page-layout>
 </template>
 <script>
-import mixin from '@/utils/mixins/global'
+import mixin from '@/mixins/global'
 
 export default {
   name: 'EditMeal',
@@ -39,18 +33,17 @@ export default {
   },
   methods: {
     onSubmit (form) {
-      this.$api.meal.update(this.meal.id, form)
+      this.$api.meal
+        .update(this.meal.id, form)
         .then((data) => {
           if (data.id) {
             this.$router.replace({ name: 'meals', query: { date: data.date } })
           }
         })
         .catch((response) => {
-          this.globalError = response?.data?.message
-          this.errors = response?.data
+          this.errors = response
         })
     }
   }
 }
-
 </script>

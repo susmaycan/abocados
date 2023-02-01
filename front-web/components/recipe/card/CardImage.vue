@@ -1,12 +1,6 @@
 <template>
-  <div
-    v-if="recipe"
-    class="recipe-image-container"
-  >
-    <recipe-image
-      v-bind="$attrs"
-      :src="recipe.picture"
-    />
+  <div v-if="recipe" class="recipe-image-container">
+    <recipe-image v-bind="$attrs" :src="recipe.picture" />
     <recipe-favourite
       v-if="!isCreator(recipe) && showFavourite"
       :id="recipe.id"
@@ -24,7 +18,7 @@
 </template>
 
 <script>
-import mixin from '@/utils/mixins/global'
+import mixin from '@/mixins/global'
 
 export default {
   name: 'RecipeCardImage',
