@@ -3,7 +3,7 @@
     <template #title>
       <app-logo v-if="$device.isMobile" width="100" height="100" />
       <a-title>
-        {{ $t("account_validation") | capitalize }}
+        {{ $t('account_validation') | capitalize }}
       </a-title>
     </template>
     <div v-if="success">
@@ -16,13 +16,15 @@
         full-width
         @click="$router.replace({ name: 'login' })"
       >
-        {{ $t("login") | capitalize }}
+        {{ $t('login') | capitalize }}
       </a-button>
     </div>
-    <div v-else-if="error">
+    <div v-else>
       <a-alert type="error">
         <p>{{ $t('account_validation_error_message') }}</p>
-        <span class="font-weight-bold">{{ error }}</span>
+        <span v-for="error in errors" :key="error" class="font-weight-bold">{{
+          error
+        }}</span>
       </a-alert>
       <a-button
         class="my-2"
@@ -30,7 +32,7 @@
         full-width
         @click="$router.replace({ name: 'index' })"
       >
-        {{ $t("go_home") | capitalize }}
+        {{ $t('go_home') | capitalize }}
       </a-button>
     </div>
   </page-layout>
@@ -40,29 +42,32 @@
 export default {
   name: 'Activate',
   middleware: ['logged-auth'],
-  data () {
+  data() {
     return {
       success: false,
-      error: null
+      errors: [],
     }
   },
   computed: {
-    token () {
+    token() {
       return this.$route.query.token
     },
-    userId () {
+    userId() {
       return this.$route.query.user
-    }
+    },
   },
-  async mounted () {
+  async mounted() {
     try {
-      await this.$api.auth.activateAccount({ token: this.token, user: this.userId })
+      await this.$api.auth.activateAccount({
+        token: this.token,
+        user: this.userId,
+      })
       this.success = true
-      this.error = null
+      this.errors = null
     } catch (response) {
       this.success = false
-      this.error = response?.data?.non_field_errors[0] || []
+      this.errors = response.non_field_errors || []
     }
-  }
+  },
 }
 </script>

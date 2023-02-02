@@ -1,37 +1,18 @@
 <template>
   <page-layout :title="$t('account_settings') | capitalize">
-    <p>{{ $t("account_settings_description") }}</p>
-    <h2>{{ $t("edit_email") | capitalize }}</h2>
-    <v-form ref="email-form" v-model="validEmail">
-      <form-text-input
-        :value="form.email"
-        :errors="errors.email"
-        :rules="rules.email"
-        :success="success.email"
-        :label="$t('email')"
-        full-width
-        @input="onInputChanges('email', $event)"
-      >
-        <template #icon-left>
-          <a-icon name="fa-solid fa-at" />
-        </template>
-      </form-text-input>
-      <a-button :disabled="!validEmail" @click="onSubmitEmail">
-        {{ $t("edit") | capitalize }}
-      </a-button>
-    </v-form>
-    <h2>{{ $t("edit_password") | capitalize }}</h2>
-    <v-form ref="password-form" v-model="validPassword">
-      <form-password-input
-        :show-confirm-password="true"
-        :success="success.password"
-        :errors="errors.password"
-        @input="onInputChanges('password', $event)"
+    <p>{{ $t('account_settings_description') }}</p>
+    <section class="my-2">
+      <h2>{{ $t('edit_email') | capitalize }}</h2>
+      <user-form-email @submit="onSubmitEmail" :data="user" :errors="errors" />
+    </section>
+    <section class="my-2">
+      <h2>{{ $t('edit_password') | capitalize }}</h2>
+      <user-form-password
+        @submit="onSubmitPassword"
+        :data="user"
+        :errors="errors"
       />
-      <a-button :disabled="!validPassword" @click="onSubmitPassword">
-        {{ $t("edit") | capitalize }}
-      </a-button>
-    </v-form>
+    </section>
     <template #footer>
       <a-button
         color="error"
@@ -40,83 +21,57 @@
         icon="fa-solid fa-trash"
         @click="$router.push({ name: 'account-delete' })"
       >
-        {{ $t("delete_account") | capitalize }}
+        {{ $t('delete_account') | capitalize }}
       </a-button>
     </template>
   </page-layout>
 </template>
 <script>
 import { capitalize } from 'lodash'
-import RulesMixin from '@/mixins/rules'
 
 export default {
   name: 'AccountSettings',
-  mixins: [RulesMixin],
   middleware: ['auth-custom'],
-  data () {
+  data() {
     return {
       user: {},
-      form: {
-        email: null,
-        password: null,
-        confirmPassword: null
-      },
-      errors: [],
-      success: {},
-      rules: {
-        email: [this.required, this.emailFormat, v => this.maxLength(v, 64)]
-      },
-      validPassword: false,
-      validEmail: false
+      errors: {},
     }
   },
-  mounted () {
+  mounted() {
     this.getData()
   },
   methods: {
-    onDelete () {
+    onDelete() {
       this.$router.push({ name: 'account-delete' })
     },
-    async getData () {
+    async getData() {
       this.user = await this.$api.auth.getUser()
-      this.form.email = this.user.email
     },
-    onInputChanges (key, value) {
-      this.form[key] = value
-      this.errors[key] = null
+    onSubmitPassword(form) {
+      this.$api.user
+        .update(this.user.id, form)
+        .then((data) => {
+          if (data.id) {
+            this.errors = null
+          }
+        })
+        .catch((response) => {
+          this.errors = response
+        })
     },
-    onSubmitPassword () {
-      if (this.validPassword) {
-        this.$api.user
-          .update(this.user.id, { password: this.form.password })
-          .then((data) => {
-            if (data.id) {
-              this.success.password = capitalize(this.$t('successfully_saved'))
-            }
-          })
-          .catch(({ response }) => {
-            this.globalErrors = response?.data?.non_field_errors || []
-            this.errors = response?.data
-            this.success.email = null
-          })
-      }
+    onSubmitEmail(form) {
+      this.$api.user
+        .update(this.user.id, form)
+        .then((data) => {
+          if (data.id) {
+            this.errors = null
+          }
+        })
+        .catch((response) => {
+          this.errors = response
+        })
     },
-    onSubmitEmail () {
-      if (this.validEmail) {
-        this.$api.user
-          .update(this.user.id, { email: this.form.email })
-          .then((data) => {
-            if (data.id) {
-              this.success.email = capitalize(this.$t('successfully_saved'))
-            }
-          })
-          .catch(({ response }) => {
-            this.globalErrors = response?.data?.non_field_errors || []
-            this.errors = response?.data
-            this.success.password = null
-          })
-      }
-    }
-  }
+  },
 }
 </script>

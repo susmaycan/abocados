@@ -17,7 +17,7 @@
       >
         {{ $t('resend_email') }}
       </a-button>
-      <a-notification color="success" :display="success" :timeout="2000">
+      <a-notification color="success" :display="!error" :timeout="2000">
         <p><a-icon class="mr-2" name="fa-solid fa-envelope" />{{ $t('email_sent') | capitalize }}</p>
       </a-notification>
     </div>
@@ -45,7 +45,6 @@ export default {
   data () {
     return {
       error: null,
-      success: false
     }
   },
   computed: {
@@ -62,10 +61,8 @@ export default {
     async resendEmail () {
       try {
         await this.$api.auth.sendValidationEmail({ id: this.userId })
-        this.success = true
         this.error = null
       } catch (error) {
-        this.success = false
         this.error = error?.data
       }
     }

@@ -10,19 +10,18 @@ export default {
   name: 'EditMeal',
   mixins: [mixin],
   middleware: ['auth-custom'],
-  data () {
+  data() {
     return {
-      errors: {},
-      globalError: null,
-      meal: null
+      errors: null,
+      meal: null,
     }
   },
   computed: {
-    mealId () {
+    mealId() {
       return this.$route.params.id
-    }
+    },
   },
-  async mounted () {
+  async mounted() {
     if (this.mealId) {
       const meal = await this.$api.meal.findOne(this.mealId)
       if (!this.isCreator(meal)) {
@@ -32,7 +31,7 @@ export default {
     }
   },
   methods: {
-    onSubmit (form) {
+    onSubmit(form) {
       this.$api.meal
         .update(this.meal.id, form)
         .then((data) => {
@@ -43,7 +42,7 @@ export default {
         .catch((response) => {
           this.errors = response
         })
-    }
-  }
+    },
+  },
 }
 </script>
