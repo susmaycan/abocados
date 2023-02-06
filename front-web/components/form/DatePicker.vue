@@ -9,7 +9,13 @@
       min-width="auto"
     >
       <template #activator="{ on }">
-        <a-button icon="fa-solid fa-calendar" :on="on" v-if="onlyIcon" />
+        <a-button
+          icon="fa-solid fa-calendar"
+          small
+          fab
+          :on="on"
+          v-if="onlyIcon"
+        />
         <form-text-input
           readonly
           v-else

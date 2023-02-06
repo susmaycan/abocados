@@ -1,22 +1,21 @@
 <template>
   <div>
-    <div class="d-flex justify-start mt-2">
+    <meal-week :selected-day="selectedDay" @select="selectDay" />
+    <div
+      v-if="selectedDay"
+      class="d-flex align-center justify-start my-2 text-left"
+    >
       <form-date-picker
         :only-icon="true"
         :value="calendarDate"
         @input="onCalendarDateChange"
       />
-    </div>
-    <meal-week :selected-day="selectedDay" @select="selectDay" />
-    <div
-      v-if="selectedDay"
-      class="d-flex align-center justify-space-between my-2 text-left"
-    >
-      <a-subtitle>
+      <a-subtitle class="ml-3">
         {{ $t(selectedDay.weekDay) | capitalize }}, {{ selectedDay.day }}
         {{ $t(selectedDay.monthText) | capitalize }}
       </a-subtitle>
       <a-button
+        class="ml-auto"
         v-if="!selectedMeal"
         icon="fa-solid fa-circle-plus"
         color="primary"
@@ -24,12 +23,13 @@
         small
         @click="addMeal"
       />
-      <div v-else class="d-flex">
+      <div v-else class="ml-auto d-flex">
         <a-button
           icon="fa-solid fa-pen"
           color="primary"
           fab
           small
+          class="mr-2"
           @click="editMeal(selectedMeal.id)"
         />
         <a-button
@@ -41,7 +41,7 @@
         />
       </div>
     </div>
-    <div v-if="selectedMeal" class="text-left">
+    <div v-if="selectedMeal" class="text-left my-5">
       <a-subtitle>{{ $t('breakfast') | capitalize }}</a-subtitle>
       <meal-recipe-list
         :recipe-list="selectedMeal.breakfast"
@@ -72,7 +72,7 @@
         </p>
       </a-modal>
     </div>
-    <p v-else>
+    <p v-else class="mt-5">
       {{ $t('no_meal_for_day') }}
     </p>
   </div>

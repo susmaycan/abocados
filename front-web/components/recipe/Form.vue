@@ -95,14 +95,14 @@
       >
         {{ $t('save') | capitalize }}
       </a-button>
-      <a-button
+      <!-- <a-button
         v-if="!isEditMode"
         :disabled="!valid"
         color="secondary"
         @click="onSubmit(SAVE_TYPE.SAVE_AND_ADD)"
       >
         {{ $t('save_add') | capitalize }}
-      </a-button>
+      </a-button> -->
     </div>
   </v-form>
 </template>

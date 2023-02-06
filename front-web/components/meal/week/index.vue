@@ -1,12 +1,13 @@
 <template>
-  <div v-if="selectedDay" class="d-flex justify-end align-center">
+  <div v-if="selectedDay" class="d-flex justify-space-between align-center">
     <a-button
       fab
+      x-large
       icon="fa-solid fa-circle-left"
       :class="previousButtonClass"
       @click="onPreviousDay"
     />
-    <vertical-scroll-container class="meal-week">
+    <vertical-scroll-container v-if="$device.isMobile" class="meal-week">
       <meal-week-day
         v-for="day in week"
         :key="day.key"
@@ -15,8 +16,18 @@
         @click="selectDay"
       />
     </vertical-scroll-container>
+    <div v-else class="d-flex">
+      <meal-week-day
+        v-for="day in week"
+        :key="day.key"
+        :day="day"
+        :selected="day.time === selectedDay.time"
+        @click="selectDay"
+      />
+    </div>
     <a-button
       fab
+      x-large
       icon="fa-solid fa-circle-right"
       :class="nextButtonClass"
       @click="onNextDay"
@@ -86,7 +97,7 @@ export default {
 </script>
 <style scoped>
 .pagination-button {
-  font-size: 40px;
+  font-size: 30px;
 }
 .pagination-button-mobile {
   font-size: 20px;

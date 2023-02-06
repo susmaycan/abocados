@@ -36,7 +36,7 @@ export default {
     },
   },
   methods: {
-    onSubmit() {
+    onSubmit(moreData) {
       if (this.valid) {
         this.formErrors = {}
         this.globalErrors = []
@@ -44,7 +44,7 @@ export default {
         if (typeof this.form.picture === 'string') {
           formData.picture = null
         }
-        this.$emit('submit', formData)
+        this.$emit('submit', formData, moreData)
       }
     },
     onCancel() {
