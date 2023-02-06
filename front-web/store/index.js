@@ -1,25 +1,25 @@
 export const state = () => ({
   loading: false,
   error: null,
-  categories: []
+  categories: [],
 })
 
 export const strict = false
 
 export const mutations = {
-  setIsLoading (state, loading) {
+  setIsLoading(state, loading) {
     state.loading = loading
   },
-  setError (state, error) {
+  setError(state, error) {
     state.error = error
   },
-  setCategories (state, categories) {
+  setCategories(state, categories) {
     state.categories = categories
-  }
+  },
 }
 
 export const actions = {
-  async loadCategories ({ commit }) {
+  async loadCategories({ commit }) {
     try {
       const response = await this.$api.category.list()
       return commit('setCategories', response.results)
@@ -27,13 +27,13 @@ export const actions = {
       return Promise.resolve(false)
     }
   },
-  nuxtServerInit ({ commit }, context) {
+  nuxtServerInit({ commit }, context) {
     commit('setIsLoading', true)
     const user = context.app.$cookies.get('user')
     const token = context.$cookies.get('token')
     if (token) {
-      commit('user/setUser', { user, access_token: token })
+      commit('user/setUser', { user, token })
     }
     commit('setIsLoading', false)
-  }
+  },
 }

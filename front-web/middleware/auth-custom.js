@@ -1,6 +1,6 @@
 export default function ({ store, redirect, app }) {
   const token = app.$cookies.get('token')
-  if (!store.state.user.loggedIn && !token) {
+  if (!token) {
     return redirect('/login')
   }
 }

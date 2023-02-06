@@ -24,17 +24,17 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'DefaultLayout',
   computed: {
-    ...mapState('user', ['loggedIn']),
-    ...mapState(['error'])
+    ...mapState('user', ['isLoggedIn']),
+    ...mapState(['error']),
   },
-  mounted () {
+  mounted() {
     if (this.loggedIn) {
       this.loadCategories()
     }
   },
   methods: {
-    ...mapActions(['loadCategories'])
-  }
+    ...mapActions(['loadCategories']),
+  },
 }
 </script>
 

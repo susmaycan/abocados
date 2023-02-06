@@ -42,7 +42,7 @@ export default {
       try {
         const data = await this.$api.auth.login(form)
         if (data) {
-          this.$store.commit('user/setUser', data)
+          this.$store.dispatch('user/setUserData', data)
           this.loadCategories()
           this.$router.push({
             name: 'index',

@@ -7,9 +7,9 @@ export default {
   layout: 'error',
   props: {
     error: {
-      type: String,
-      default: null
-    }
-  }
+      type: [String, Object],
+      default: null,
+    },
+  },
 }
 </script>
