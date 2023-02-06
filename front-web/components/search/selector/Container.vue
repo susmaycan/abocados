@@ -1,57 +1,54 @@
 <template>
-  <div
-    :class="filterClass"
-    v-bind="$attrs"
-    @click="onClick"
-  >
+  <div :class="filterClass" @click="onClick">
     <slot />
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'SmallFilterContainer',
   props: {
     selected: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
-    filterClass () {
-      let base = 'small-filter-container clickable'
-      if (this.selected) {
-        base += ' selected'
+    filterClass() {
+      return {
+        'filter-container': true,
+        'filter-container-selected': this.selected,
       }
-      return base
-    }
+    },
   },
   methods: {
-    onClick () {
+    onClick() {
       this.$emit('click')
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style scoped>
-.small-filter-container {
-  width: 100px;
-  height: 50px;
+<style lang="scss" scoped>
+.filter-container {
+  width: 90px;
+  height: 90px;
+  padding: 0.5em;
   margin-right: 1em;
   border-radius: 10px;
   border: 1px solid var(--v-secondary-base);
-  text-align: center;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
-.small-filter-container:hover {
+.filter-container:hover {
+  background-color: var(--v-secondary-base);
   border: 2px solid var(--v-secondary-base);
+  color: white;
 }
-.selected {
+.filter-container-selected {
   background-color: var(--v-secondary-base);
   border: 2px solid var(--v-secondary-base);
   color: white;

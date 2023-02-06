@@ -5,36 +5,33 @@
         <a-subtitle>
           <a-icon name="fa-solid fa-filter" />{{ $t('filters') | capitalize }}
         </a-subtitle>
-        <search-category-selector
+        <search-selector-category
           class="my-3"
           :name="$t('time') | capitalize"
           :categories="getCategoriesByType(categoryType.TIME)"
-          :category-filters="filters.category"
-          @select="selectCategory"
-          @unselect="unselectCategory"
+          :value="filters.category"
+          @input="selectCategory"
         />
-        <search-category-selector
+        <search-selector-category
           class="my-3"
           :name="$t('cuisine') | capitalize"
           :categories="getCategoriesByType(categoryType.CUISINE)"
-          :category-filters="filters.category"
-          @select="selectCategory"
-          @unselect="unselectCategory"
+          :value="filters.category"
+          @input="selectCategory"
         />
-        <search-category-selector
+        <search-selector-category
           class="my-3"
           :name="$t('food') | capitalize"
           :categories="getCategoriesByType(categoryType.FOOD)"
-          :category-filters="filters.category"
-          @select="selectCategory"
-          @unselect="unselectCategory"
+          :value="filters.category"
+          @input="selectCategory"
         />
-        <search-rating-selector
+        <search-selector-rating
           class="my-3"
           :value="filters.rating"
           @input="onInputChanges('rating', $event)"
         />
-        <search-duration-selector
+        <search-selector-duration
           class="my-3"
           :value="filters.duration"
           @input="onInputChanges('duration', $event)"
@@ -175,22 +172,12 @@ export default {
       }
       return initialCategories.map((categoryString) => parseInt(categoryString))
     },
-    selectCategory(id) {
+    selectCategory(categoryList) {
       if (!this.filters.category) {
         this.filters.category = []
       }
-      this.filters = {
-        ...this.filters,
-        category: [...this.filters.category, id],
-      }
-      this.getData()
-    },
-    unselectCategory(id) {
-      const filteredCategories = this.filters.category.filter(
-        (categoryId) => categoryId !== id
-      )
 
-      if (filteredCategories.length === 0) {
+      if (categoryList.length === 0) {
         this.filters = {
           ...this.filters,
           category: null,
@@ -199,9 +186,10 @@ export default {
       } else {
         this.filters = {
           ...this.filters,
-          category: filteredCategories,
+          category: categoryList,
         }
       }
+
       this.getData()
     },
     selectRating(id) {
