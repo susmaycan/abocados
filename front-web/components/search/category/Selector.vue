@@ -3,11 +3,12 @@
     <a-label>{{ name | capitalize }}:</a-label>
     <vertical-scroll-container class="py-3">
       <div v-for="category in categories" :key="category.id">
-        <search-category-filter
+        <!-- <search-category-filter
           :selected="isSelected(category.id)"
           :category="category"
           @click="onClick(category.id)"
-        />
+        /> -->
+        <category :category="category" @click="onClick(category.id)" />
       </div>
     </vertical-scroll-container>
   </div>

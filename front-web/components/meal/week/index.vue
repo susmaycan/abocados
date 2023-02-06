@@ -1,25 +1,27 @@
 <template>
-  <vertical-scroll-container v-if="selectedDay" class="align-center">
+  <div v-if="selectedDay" class="d-flex justify-end align-center">
     <a-button
-      text
+      fab
       icon="fa-solid fa-circle-left"
-      class="pagination-button"
+      :class="previousButtonClass"
       @click="onPreviousDay"
     />
-    <meal-week-day
-      v-for="day in week"
-      :key="day.key"
-      :day="day"
-      :selected="day.time === selectedDay.time"
-      @click="selectDay"
-    />
+    <vertical-scroll-container class="meal-week">
+      <meal-week-day
+        v-for="day in week"
+        :key="day.key"
+        :day="day"
+        :selected="day.time === selectedDay.time"
+        @click="selectDay"
+      />
+    </vertical-scroll-container>
     <a-button
-      text
+      fab
       icon="fa-solid fa-circle-right"
-      class="pagination-button"
+      :class="nextButtonClass"
       @click="onNextDay"
     />
-  </vertical-scroll-container>
+  </div>
 </template>
 <script>
 import { getDate } from '@/utils/functions'
@@ -43,6 +45,20 @@ export default {
         weekArray.push(day)
       }
       return weekArray
+    },
+    previousButtonClass() {
+      return {
+        'pagination-button': !this.$device.isMobile,
+        'pagination-button-mobile': this.$device.isMobile,
+        previous: this.$device.isMobile,
+      }
+    },
+    nextButtonClass() {
+      return {
+        'pagination-button': !this.$device.isMobile,
+        'pagination-button-mobile': this.$device.isMobile,
+        next: this.$device.isMobile,
+      }
     },
   },
   methods: {
@@ -68,3 +84,21 @@ export default {
   },
 }
 </script>
+<style scoped>
+.pagination-button {
+  font-size: 40px;
+}
+.pagination-button-mobile {
+  font-size: 20px;
+  position: absolute;
+}
+.previous {
+  left: 5px;
+}
+.next {
+  right: 5px;
+}
+.meal-week {
+  margin: 0 20px;
+}
+</style>

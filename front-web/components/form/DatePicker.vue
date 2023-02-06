@@ -3,15 +3,16 @@
     <v-menu
       ref="menu"
       v-model="menu"
-      :close-on-content-click="false"
-      :return-value.sync="inputValue"
+      :close-on-content-click="true"
       transition="scale-transition"
       offset-y
       min-width="auto"
     >
       <template #activator="{ on }">
+        <a-button icon="fa-solid fa-calendar" :on="on" v-if="onlyIcon" />
         <form-text-input
           readonly
+          v-else
           :value="inputDateFormatted"
           :label="label"
           v-bind="$attrs"
@@ -30,12 +31,6 @@
         @change="onChange"
       >
         <v-spacer />
-        <a-button text color="primary" @click="menu = false">
-          {{ $t('cancel') | capitalize }}
-        </a-button>
-        <a-button text color="primary" @click="$refs.menu.save(inputValue)">
-          {{ $t('accept') | capitalize }}
-        </a-button>
       </v-date-picker>
     </v-menu>
     <p v-if="inputErrors" class="text-error">
@@ -49,30 +44,36 @@ import InputMixin from '@/mixins/input'
 export default {
   name: 'DatePicker',
   mixins: [InputMixin],
-  data () {
+  props: {
+    onlyIcon: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
     return {
-      menu: false
+      menu: false,
     }
   },
   computed: {
-    inputDateFormatted () {
+    inputDateFormatted() {
       if (!this.inputValue) {
         return ''
       }
 
       return this.formatDate(this.inputValue)
-    }
+    },
   },
   methods: {
-    formatDate (date) {
+    formatDate(date) {
       if (!date) {
         return null
       }
 
       const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`
-    }
-  }
+    },
+  },
 }
 </script>
 <style>

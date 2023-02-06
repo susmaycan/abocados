@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div class="text-right">
-      <form-date-picker :value="calendarDate" @input="onCalendarDateChange" />
+    <div class="d-flex justify-start mt-2">
+      <form-date-picker
+        :only-icon="true"
+        :value="calendarDate"
+        @input="onCalendarDateChange"
+      />
     </div>
     <meal-week :selected-day="selectedDay" @select="selectDay" />
     <div
