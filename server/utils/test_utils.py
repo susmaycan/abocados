@@ -1,22 +1,25 @@
-from rest_framework.test import APIClient
-from django.test.client import encode_multipart
+import datetime
 import json
+
+from django.test.client import encode_multipart
+from rest_framework.test import APIClient
 
 
 class PATH:
-    RECIPE = '/recipes/'
-    CATEGORY = '/categories/'
-    USER = '/users/'
-    AUTH = '/auth/'
-    FAVOURITE = '/favourites/'
+    RECIPE = "/recipes/"
+    CATEGORY = "/categories/"
+    USER = "/users/"
+    AUTH = "/auth/"
+    FAVOURITE = "/favourites/"
+    MEAL = "/meals/"
 
 
 class API_ACTIONS:
-    POST = 'post'
-    PUT = 'put'
-    PATCH = 'patch'
-    DELETE = 'delete'
-    GET = 'get'
+    POST = "post"
+    PUT = "put"
+    PATCH = "patch"
+    DELETE = "delete"
+    GET = "get"
 
 
 class CustomResponse:
@@ -30,12 +33,12 @@ def make_api_call(route, user, action=API_ACTIONS.GET, body={}, query_params={})
     if user:
         client.force_authenticate(user=user)
 
-    content_type = 'multipart/form-data;boundary=BoUnDaRyStRiNg'
-    content = encode_multipart('BoUnDaRyStRiNg', body)
+    content_type = "multipart/form-data;boundary=BoUnDaRyStRiNg"
+    content = encode_multipart("BoUnDaRyStRiNg", body)
     if query_params:
-        route = route.__add__('?')
+        route = route.__add__("?")
         for key, value in query_params.items():
-            route = f'{route}{key}={value}&'
+            route = f"{route}{key}={value}&"
 
     if action == API_ACTIONS.GET:
         response = client.get(route, content_type=content_type)
@@ -58,8 +61,11 @@ def make_api_call(route, user, action=API_ACTIONS.GET, body={}, query_params={})
 
 def make_login_call(data):
     return make_api_call(
-        route=PATH.AUTH + 'login/',
-        action=API_ACTIONS.POST,
-        token=None,
-        body=data
+        route=PATH.AUTH + "login/", action=API_ACTIONS.POST, token=None, body=data
     )
+
+
+def format_date(str_date):
+    current_date_obj = datetime.datetime.strptime(str_date, "%Y-%m-%d")
+    formatted_date = current_date_obj.strftime("%d/%m/%Y")
+    return formatted_date

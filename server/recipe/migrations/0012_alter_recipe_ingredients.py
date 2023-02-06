@@ -7,13 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('recipe', '0011_alter_recipe_categories'),
+        ("recipe", "0011_alter_recipe_categories"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='recipe',
-            name='ingredients',
-            field=django.contrib.postgres.fields.ArrayField(base_field=models.CharField(db_index=True, max_length=2000), blank=True, default=list, size=None),
+            model_name="recipe",
+            name="ingredients",
+            field=django.contrib.postgres.fields.ArrayField(
+                base_field=models.CharField(db_index=True, max_length=2000),
+                blank=True,
+                default=list,
+                size=None,
+            ),
         ),
     ]

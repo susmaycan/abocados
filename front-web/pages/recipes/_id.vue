@@ -48,12 +48,13 @@
       </p>
 
       <div class="d-flex align-stretch justify-center my-2">
-        <span v-if="recipe.duration" class="mr-3"
-          ><a-icon name="fa-solid fa-clock" /> {{ recipe.duration }}
-          {{ $t("min") }}</span
-        >
+        <span
+          v-if="recipe.duration"
+          class="mr-3"
+        ><a-icon name="fa-solid fa-clock" /> {{ recipe.duration }}
+          {{ $t("min") }}</span>
         <v-divider v-if="recipe.duration" vertical />
-        <a-rating class="ml-2" :rating="recipe.rating" />
+        <recipe-rating class="ml-2" :rating="recipe.rating" />
       </div>
       <servings v-if="recipe.servings" :servings="recipe.servings" />
 
@@ -98,48 +99,48 @@
   </page-layout>
 </template>
 <script>
-import mixin from "@/utils/mixins/global";
+import mixin from '@/mixins/global'
 
 export default {
-  name: "RecipeDetail",
+  name: 'RecipeDetail',
   mixins: [mixin],
-  middleware: ["auth-custom"],
-  data() {
+  middleware: ['auth-custom'],
+  data () {
     return {
       recipe: null,
-      items: [this.$t("ingredients"), this.$t("directions")],
-    };
+      items: [this.$t('ingredients'), this.$t('directions')]
+    }
   },
   computed: {
-    recipeId() {
-      return this.$route.params.id;
+    recipeId () {
+      return this.$route.params.id
     },
-    title() {
-      return this.recipe ? this.recipe.name : this.$t("recipe");
-    },
+    title () {
+      return this.recipe ? this.recipe.name : this.$t('recipe')
+    }
   },
-  async mounted() {
-    this.recipe = await this.$api.recipe.findOne(this.recipeId);
+  async mounted () {
+    this.recipe = await this.$api.recipe.findOne(this.recipeId)
   },
   methods: {
-    onEdit() {
+    onEdit () {
       this.$router.push({
-        name: "recipes-edit-id",
-        params: { id: this.recipeId },
-      });
+        name: 'recipes-edit-id',
+        params: { id: this.recipeId }
+      })
     },
-    onDelete() {
-      this.$modal.show("delete-recipe");
+    onDelete () {
+      this.$modal.show('delete-recipe')
     },
-    toggleFavourite(value) {
-      this.recipe.favourited = value;
+    toggleFavourite (value) {
+      this.recipe.favourited = value
     },
-    async onAcceptDelete() {
-      await this.$api.recipe.delete(this.recipeId);
-      this.$router.push({ name: "recipes" });
-    },
-  },
-};
+    async onAcceptDelete () {
+      await this.$api.recipe.delete(this.recipeId)
+      this.$router.push({ name: 'recipes' })
+    }
+  }
+}
 </script>
 
 <style scoped>

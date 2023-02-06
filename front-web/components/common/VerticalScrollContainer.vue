@@ -1,5 +1,8 @@
 <template>
-  <div class="vertical-scroll">
+  <div
+    class="vertical-scroll"
+    v-bind="$attrs"
+  >
     <slot />
   </div>
 </template>

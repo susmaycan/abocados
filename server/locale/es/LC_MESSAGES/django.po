@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-23 09:10+0000\n"
-"PO-Revision-Date: 2022-07-23 09:13+0000\n"
+"POT-Creation-Date: 2022-09-17 21:52+0000\n"
+"PO-Revision-Date: 2022-09-17 21:53+0000\n"
 "Last-Translator:   <admin@abocados.app>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: abocados/settings.py:186
+#: abocados/settings.py:194
 msgid "English"
 msgstr "inglés"
 
-#: abocados/settings.py:187
+#: abocados/settings.py:195
 msgid "Spanish"
 msgstr "español"
 
@@ -38,35 +38,39 @@ msgstr "comida"
 msgid "cuisine"
 msgstr "cocina"
 
-#: category/models.py:17 recipe/models.py:16 user/models.py:19
+#: category/models.py:20 recipe/models.py:17 user/models.py:20
 msgid "name"
 msgstr "nombre"
 
-#: category/models.py:18
+#: category/models.py:23
 msgid "description"
 msgstr "descripcion"
 
-#: category/models.py:21
+#: category/models.py:27
 msgid "type"
 msgstr "tipo"
 
-#: category/models.py:27 recipe/models.py:20 user/models.py:20
+#: category/models.py:34 recipe/models.py:26 user/models.py:22
 msgid "picture"
 msgstr "imagen"
 
-#: recipe/models.py:18
-msgid "rating"
-msgstr "valoración"
+#: meal/serializers.py:58
+msgid "Meal with that date already exists"
+msgstr "Menú con esa fecha ya existe"
 
-#: recipe/models.py:19
+#: recipe/models.py:19 recipe/models.py:23
 msgid "directions"
 msgstr "descripción"
 
 #: recipe/models.py:21
+msgid "rating"
+msgstr "valoración"
+
+#: recipe/models.py:28
 msgid "duration"
 msgstr "duracion"
 
-#: recipe/models.py:22
+#: recipe/models.py:29
 msgid "servings"
 msgstr "comensales"
 
@@ -102,55 +106,55 @@ msgstr "Verifica tu cuenta de Abocados haciendo click en el botón de abajo"
 msgid "Verify here"
 msgstr "Verificar aquí"
 
-#: user/models.py:15
+#: user/models.py:16
 msgid "email"
 msgstr "correo electrónico"
 
-#: user/serializers.py:74
+#: user/serializers.py:60
 msgid "Invalid credentials"
 msgstr "credenciales inválidas"
 
-#: user/serializers.py:147 user/serializers.py:150 user/serializers.py:214
-#: user/serializers.py:250
+#: user/serializers.py:134 user/serializers.py:137 user/serializers.py:206
+#: user/serializers.py:241
 msgid "Email not registered"
 msgstr "Email no registrado"
 
-#: user/serializers.py:171 user/serializers.py:180 user/serializers.py:202
-#: user/serializers.py:205 user/serializers.py:212 user/serializers.py:241
-#: user/serializers.py:248 user/views.py:124 user/views.py:151
-#: user/views.py:167
+#: user/serializers.py:158 user/serializers.py:172 user/serializers.py:194
+#: user/serializers.py:197 user/serializers.py:204 user/serializers.py:233
+#: user/serializers.py:239 user/views.py:121 user/views.py:150
+#: user/views.py:168
 msgid "Token is invalid or expired"
 msgstr "El token es inválido o ha expirado"
 
-#: user/serializers.py:177
+#: user/serializers.py:164
 msgid "Email has already been verified"
 msgstr "El email ya ha sido confirmado"
 
-#: user/views.py:43
+#: user/views.py:46
 msgid "register Abocados"
 msgstr "Registro Abocados"
 
-#: user/views.py:60
+#: user/views.py:59
 msgid "Reset Password Abocados"
 msgstr "Abocados - Recuperar contraseña"
 
-#: user/views.py:109
+#: user/views.py:104
 msgid "Email is already verified"
 msgstr "El email ya ha sido confirmado"
 
-#: user/views.py:112
+#: user/views.py:108
 msgid "Validation email sent"
 msgstr "Email de validación enviado"
 
-#: user/views.py:114
+#: user/views.py:110
 msgid "Not found"
 msgstr "No encontrado"
 
-#: user/views.py:128
+#: user/views.py:126
 msgid "Email successfully confirmed"
 msgstr "El email ha sido confirmado con éxito"
 
-#: user/views.py:141
+#: user/views.py:139
 msgid "Reset password email sent"
 msgstr "Email de recuperación de contraseña enviado"
 
@@ -158,25 +162,23 @@ msgstr "Email de recuperación de contraseña enviado"
 msgid "Password token valid"
 msgstr "Token de contraseña correcto"
 
-#: user/views.py:174
-#| msgid "Reset Password Abocados"
+#: user/views.py:176
 msgid "Password changed"
 msgstr "Contraseña actualizada"
 
-#: user/views.py:221
+#: user/views.py:233
 msgid "User doesnt exist"
 msgstr "El usuario no existe"
 
-#: user/views.py:231
+#: user/views.py:244
 msgid "Recipe cannot be created by user"
 msgstr "Recetas de usuario no pueden ser añadidas a favoritos"
 
-#: user/views.py:234
-#| msgid "Email is already verified"
+#: user/views.py:249
 msgid "Recipe is already favourited"
 msgstr "La receta ya está añadida en favoritos"
 
-#: user/views.py:247
+#: user/views.py:263
 msgid "Recipe is not favourited"
 msgstr "La receta no está favoriteada"
 

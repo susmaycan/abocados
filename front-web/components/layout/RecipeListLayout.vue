@@ -5,7 +5,13 @@
     </div>
     <grid v-else>
       <div v-for="recipe in recipes" :key="recipe.id">
-        <recipe-card :recipe="recipe" @refresh="toggleFavourite(recipe.id, $event)" />
+        <recipe-card
+          :recipe="recipe"
+          :show-select="showSelect"
+          :selected="isRecipeSelected(recipe)"
+          @refresh="toggleFavourite(recipe.id, $event)"
+          @select="selectRecipe(recipe, $event)"
+        />
       </div>
     </grid>
     <div v-if="previous || next" class="d-flex justify-space-between align-center my-4">
@@ -45,6 +51,16 @@ export default {
     next: {
       type: Boolean,
       default: false
+    },
+    showSelect: {
+      type: Boolean,
+      default: false
+    },
+    selectedRecipes: {
+      type: Array,
+      default () {
+        return []
+      }
     }
   },
   data () {
@@ -56,6 +72,9 @@ export default {
     toggleFavourite (recipeId, value) {
       this.$emit('toggle-favourite', recipeId, value)
     },
+    selectRecipe (recipe, value) {
+      this.$emit('select', recipe, value)
+    },
     onNext () {
       this.actualPage = this.actualPage + 1
       this.$emit('search', this.actualPage)
@@ -63,6 +82,9 @@ export default {
     onPrevious () {
       this.actualPage = this.actualPage - 1
       this.$emit('search', this.actualPage)
+    },
+    isRecipeSelected (selectedRecipe) {
+      return !!this.selectedRecipes.find(recipe => recipe.id === selectedRecipe.id)
     }
   }
 }

@@ -12,7 +12,7 @@
     <div v-if="loading">
       <loader />
     </div>
-    <div v-else>
+    <div v-show="!loading">
       <slot />
     </div>
     <slot name="footer" />
