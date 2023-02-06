@@ -192,13 +192,6 @@ export default {
 
       this.getData()
     },
-    selectRating(id) {
-      this.filters = {
-        ...this.filters,
-        rating: id,
-      }
-      this.getData()
-    },
     getCategoriesByType(type) {
       return this.categories.filter((category) => category.type === type)
     },
