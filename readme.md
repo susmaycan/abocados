@@ -14,7 +14,7 @@ git clone https://github.com/susmaycan/abocados-docker.git
 make build
 ```
 
-**Note: You need docker, docker-compose and npm to be installed**
+**Note: You need docker, docker-compose to be installed**
 
 3 - Run the project:
 
@@ -22,15 +22,30 @@ make build
 make run
 ```
 
-4 - Open in the browser:
+4 - Migrate Django database and load data
 
-Front-end: [http://localhost:3000/](http://localhost:3000/)
+```sh
+make setup_database
+```
+
+5 - Open in the browser:
+
+Front-end: [http://localhost](http://localhost)
 
 Back-end: [http://localhost:3003/](http://localhost:3003/)
 
+Django admin: [http://localhost:3003/admin](http://localhost:3003/admin)
+
+## 👤 User credentials
+
+```sh
+email: phoebe_buffay@friends.com
+password: ab0cad0s
+```
+
 ## 🧪 Tests
 
-To run the tests:
+To run the API tests:
 
 ```sh
 make test
