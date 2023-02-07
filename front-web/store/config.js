@@ -27,10 +27,6 @@ export const getters = {
 
 export const actions = {
   async loadInitialConfig({ commit }) {
-    console.log(
-      'Actual local storage language',
-      localStorage.getItem('language')
-    )
     const localStorageLang =
       localStorage.getItem('language') || language.spanish
     const localStorageTheme = localStorage.getItem('theme') || theme.dark

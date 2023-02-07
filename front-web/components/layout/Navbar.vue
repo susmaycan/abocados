@@ -3,7 +3,7 @@
     <v-toolbar-title class="clickable" @click="onClick('index')">
       <div class="d-flex align-center">
         <app-logo width="40" height="50" />
-        <span class="font-weight-bold">{{ $t("app_name") }}</span>
+        <span class="font-weight-bold">{{ $t('app_name') }}</span>
       </div>
     </v-toolbar-title>
     <a-button
@@ -55,7 +55,7 @@
         <v-list-item @click="onLogOut">
           <v-list-item-title>
             <a-icon name="fa-solid fa-right-from-bracket" class="mr-2" />
-            {{ $t("logout") | capitalize }}
+            {{ $t('logout') | capitalize }}
           </v-list-item-title>
         </v-list-item>
       </v-list>
@@ -64,10 +64,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
+
 export default {
   name: 'Navbar',
-  data () {
+  data() {
     return {
       sidebar: false,
       itemsRight: [
@@ -75,66 +76,64 @@ export default {
           title: 'login',
           path: 'login',
           icon: 'fa-solid fa-arrow-right-to-bracket',
-          logged: false
+          logged: false,
         },
         {
           title: 'register',
           path: 'register',
           icon: 'fa-solid fa-user-plus',
-          logged: false
+          logged: false,
         },
         {
           title: 'recipe_book',
           path: 'recipes',
           icon: 'fa-solid fa-bookmark',
-          logged: true
+          logged: true,
         },
         {
           title: 'meals',
           path: 'meals',
           icon: 'fa-solid fa-calendar-days',
-          logged: true
-        }
+          logged: true,
+        },
       ],
       itemsLeft: [
         {
           title: 'search_recipes',
           path: 'search',
           icon: 'fa-solid fa-magnifying-glass',
-          logged: true
-        }
+          logged: true,
+        },
       ],
       dropdownItems: [
         {
           title: 'profile',
           path: 'account',
           icon: 'fa-solid fa-user',
-          logged: true
+          logged: true,
         },
         {
           title: 'settings',
           path: 'account-settings',
           icon: 'fa-solid fa-gear',
-          logged: true
-        }
+          logged: true,
+        },
       ],
-      openMenu: false
+      openMenu: false,
     }
   },
   computed: {
     ...mapState('user', ['user']),
-    isLoggedIn () {
-      return this.$store.state.user.loggedIn
-    }
+    ...mapGetters('user', ['isLoggedIn']),
   },
   methods: {
-    onClick (path) {
+    onClick(path) {
       this.$router.push({ name: path })
     },
-    onLogOut () {
-      this.$store.commit('user/removeUser')
+    onLogOut() {
+      this.$store.dispatch('user/removeUserData')
       this.$router.push({ name: 'index' })
-    }
-  }
+    },
+  },
 }
 </script>

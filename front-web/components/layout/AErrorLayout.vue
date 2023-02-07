@@ -2,8 +2,10 @@
   <v-container>
     <page-layout :title="$t(title) | capitalize">
       <p>{{ $t(message) | capitalize }}</p>
+      <h3>More info:</h3>
+      <p>{{ error }}</p>
       <a-button class="my-2" @click="$router.push({ name: 'index' })">
-        {{ $t("go_home") | capitalize }}
+        {{ $t('go_home') | capitalize }}
       </a-button>
     </page-layout>
   </v-container>
@@ -16,17 +18,17 @@ export default {
   name: 'AErrorLayout',
   props: {
     error: {
-      type: Number,
-      default: null
-    }
+      type: [Number, Object, String],
+      default: null,
+    },
   },
-  head () {
+  head() {
     return {
-      title: this.$t(this.title)
+      title: this.$t(this.title),
     }
   },
   computed: {
-    title () {
+    title() {
       switch (this.error) {
         case HTTP_ERROR_CODES.NOT_FOUND:
           return 'not_found_error'
@@ -40,7 +42,7 @@ export default {
         }
       }
     },
-    message () {
+    message() {
       switch (this.error) {
         case HTTP_ERROR_CODES.NOT_FOUND:
           return 'not_found_error_message'
@@ -53,7 +55,7 @@ export default {
           return 'server_error_message'
         }
       }
-    }
-  }
+    },
+  },
 }
 </script>

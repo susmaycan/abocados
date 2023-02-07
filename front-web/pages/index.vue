@@ -1,35 +1,35 @@
 <template>
-  <home-logged v-if="loggedIn" :recipes="recipes" :categories="categories" />
+  <home-logged v-if="isLoggedIn" :recipes="recipes" :categories="categories" />
   <home-guest v-else />
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Homepage',
-  data () {
+  data() {
     return {
       recipes: [],
-      categories: []
+      categories: [],
     }
   },
   computed: {
-    ...mapState('user', ['loggedIn'])
+    ...mapGetters('user', ['isLoggedIn']),
   },
-  mounted () {
-    if (this.loggedIn) {
+  mounted() {
+    if (this.isLoggedIn) {
       this.getData()
     }
   },
   methods: {
-    async getData () {
+    async getData() {
       const data = await this.$api.recipe.list({ limit: 4 })
       this.recipes = data.results
 
       const response = await this.$api.category.list({ limit: 10 })
       this.categories = response.results
-    }
-  }
+    },
+  },
 }
 </script>

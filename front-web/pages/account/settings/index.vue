@@ -8,7 +8,7 @@
         icon="fa-solid fa-pen"
         @click="$router.push({ name: 'account-edit' })"
       >
-        {{ $t("edit_profile") | capitalize }}
+        {{ $t('edit_profile') | capitalize }}
       </a-button>
     </div>
 
@@ -37,45 +37,45 @@
         icon="fa-solid fa-right-from-bracket"
         @click="onLogOut()"
       >
-        {{ $t("logout") | capitalize }}
+        {{ $t('logout') | capitalize }}
       </a-button>
     </template>
   </page-layout>
 </template>
 <script>
 export default {
-  name: "Settings",
-  middleware: ["auth-custom"],
+  name: 'Settings',
+  middleware: ['auth-custom'],
   data() {
     return {
       user: {},
       sections: [
         {
-          name: "account_settings",
-          icon: "fa-solid fa-user",
-          path: "account-settings-account",
+          name: 'account_settings',
+          icon: 'fa-solid fa-user',
+          path: 'account-settings-account',
         },
         {
-          name: "application_settings",
-          icon: "fa-solid fa-wrench",
-          path: "account-settings-app",
+          name: 'application_settings',
+          icon: 'fa-solid fa-wrench',
+          path: 'account-settings-app',
         },
       ],
-    };
+    }
   },
   mounted() {
-    this.getData();
+    this.getData()
   },
   methods: {
     onLogOut() {
-      this.$store.commit("user/removeUser");
-      this.$router.push({ name: "index" });
+      this.$store.dispatch('user/removeUserData')
+      this.$router.push({ name: 'index' })
     },
     async getData() {
-      this.user = await this.$api.auth.getUser();
+      this.user = await this.$api.auth.getUser()
     },
   },
-};
+}
 </script>
 <style scoped>
 .section-icon {

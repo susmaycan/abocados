@@ -1,21 +1,28 @@
 export const state = () => ({
   user: null,
   token: null,
-  loggedIn: false
 })
 
 export const mutations = {
-  setUser (state, data) {
+  setUser(state, data) {
     state.user = data.user
-    state.token = data.access_token
-    state.loggedIn = true
+    state.token = data.token
+  },
+}
+
+export const actions = {
+  setUserData({ commit }, data) {
+    commit('setUser', { ...data, token: data.access_token })
     this.$cookies.set('user', data.user)
     this.$cookies.set('token', data.access_token)
   },
-  removeUser (state) {
-    state.user = null
-    state.token = null
-    state.loggedIn = false
+  removeUserData({ commit }) {
+    commit('setUser', { user: null, token: null })
     this.$cookies.removeAll()
-  }
+  },
+}
+export const getters = {
+  isLoggedIn(state) {
+    return !!state.token && !!state.user
+  },
 }
