@@ -33,6 +33,8 @@ DEBUG = env("DJANGO_DEBUG")
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "abocados.onrender.com", "abocados-front-end.onrender.com", "https://abocados.onrender.com/", "https://abocados-front-end.onrender.com/", "https://abocados-front-end.onrender.com"]
 
 
+CORS_ORIGIN_ALLOW_ALL=True
+
 # Application definition
 
 INSTALLED_APPS = [
