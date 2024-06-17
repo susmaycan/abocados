@@ -8,7 +8,7 @@ WORKDIR /app
 FROM base as build
 
 COPY --link package*.json ./
-RUN npm ci
+RUN npm install
 
 # Run
 FROM base
