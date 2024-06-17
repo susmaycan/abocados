@@ -37,15 +37,15 @@ SERVER_CONTAINER=abocados-server
 
 .PHONY: run
 run:
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) up -d --remove-orphans
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) up -d --remove-orphans
 
 .PHONY: build
 build:
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) build
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) build
 
 .PHONY: stop
 stop:
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) stop
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) stop
 
 .PHONY: shell
 shell:
@@ -57,34 +57,34 @@ test:
 
 .PHONY: makemigrations
 makemigrations:
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py migrate
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py migrate
 
 .PHONY: migrate
 migrate:
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py migrate
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py migrate
 
 .PHONY: migrate_full
 migrate_full:
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py makemigrations
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py migrate
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py makemigrations
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py migrate
 
 .PHONY: load_data
 load_data:
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/user.json
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/category.json
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/recipe.json
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/user.json
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/category.json
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/recipe.json
 
 .PHONY: setup_database
 setup_database:
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py makemigrations
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py migrate
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/user.json
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/category.json
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/recipe.json
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py makemigrations
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py migrate
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/user.json
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/category.json
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py loaddata fixtures/recipe.json
 
 .PHONY: createsuperuser
 createsuperuser:
-	docker-compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py createsuperuser
+	docker compose -f $(DOCKER_COMPOSE_LOCAL) run --rm $(SERVER_SERVICE) python manage.py createsuperuser
 
 .PHONY: check_linting
 check_linting:

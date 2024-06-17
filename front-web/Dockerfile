@@ -1,11 +1,20 @@
-FROM node:12.16.3
+# syntax = docker/dockerfile:1
+
+FROM node:21-slim as base
 
 WORKDIR /app
 
-COPY package*.json ./
+# Build
+FROM base as build
 
-RUN npm install --silent
+COPY --link package*.json ./
+RUN npm ci
 
-COPY . .
+# Run
+FROM base
+
+COPY --from=build /app/node_modules /app/node_modules
+
+CMD [ "npm", "run", "dev" ]
 
 EXPOSE 3000
