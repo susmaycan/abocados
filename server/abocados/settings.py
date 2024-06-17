@@ -30,7 +30,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "167.99.38.227", "abocados.rocks", "www.abocados.rocks"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "167.99.38.227", "abocados.rocks", "www.abocados.rocks"]
 
 
 # Application definition
