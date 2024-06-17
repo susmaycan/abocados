@@ -27,7 +27,7 @@ services:
     restart: always
     build:
       context: ./front-web
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
     volumes:
