@@ -30,7 +30,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "abocados-api.onrender.com", "abocados-kuaj.onrender.com", "abocados.onrender.com"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", env("FRONT_END_URL"), env("BACK_END_URL")]
 
 
 CORS_ORIGIN_ALLOW_ALL=True
