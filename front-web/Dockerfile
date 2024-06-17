@@ -4,19 +4,14 @@ FROM node:21-slim as base
 
 WORKDIR /app
 
-# Build
-FROM base as build
+COPY package*.json ./
 
-COPY --link package*.json ./
-RUN npm ci
+RUN npm install
 
-# Run
-FROM base
-
-COPY --from=build /app/node_modules /app/node_modules
+COPY . .
 
 EXPOSE 3000
 
-CMD [ "npm", "run", "build" ]
+RUN npm run build
 
 CMD [ "npm", "run", "start" ]
