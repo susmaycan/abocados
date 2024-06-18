@@ -1,13 +1,6 @@
 <script setup lang="ts">
-const colorMode = useColorMode()
-const isDark = computed({
-  get() {
-    return colorMode.value === 'dark'
-  },
-  set() {
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-  },
-})
+const { colorMode, setColorMode } = useUserConfig()
+const isDark = computed(() => colorMode.value === EColorMode.dark)
 </script>
 <template>
   <client-only>
@@ -16,7 +9,7 @@ const isDark = computed({
       color="gray"
       :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
       variant="ghost"
-      @click="isDark = !isDark"
+      @click="setColorMode(isDark ? EColorMode.light : EColorMode.dark)"
     />
     <template #fallback>
       <div class="w-8 h-8" />

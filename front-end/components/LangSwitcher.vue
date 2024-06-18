@@ -1,18 +1,19 @@
 <script setup>
-const { locale: selectedLocale, locales, setLocale } = useI18n()
+const { locales } = useI18n()
+
+const { userLanguage, setLanguage } = useUserConfig()
 
 const flag = {
-  en: 'i-twemoji-flag-united-kingdom',
-  es: 'i-twemoji-flag-spain',
-  kr: 'i-twemoji-flag-south-korea',
+  [ELanguage.en]: 'i-twemoji-flag-united-kingdom',
+  [ELanguage.es]: 'i-twemoji-flag-spain',
 }
 const availableLocales = computed(() => {
   return locales.value.map((locale) => [
     {
       label: locale.name,
       icon: flag[locale.code],
-      disabled: locale.code === selectedLocale.value,
-      click: () => setLocale(locale.code),
+      disabled: locale.code === userLanguage.value,
+      click: () => setLanguage(locale.code),
     },
   ])
 })

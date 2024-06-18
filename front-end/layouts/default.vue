@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { initUserConfig } = useUserConfig()
+
+onMounted(() => initUserConfig())
+</script>
 
 <template>
   <div class="m-3">

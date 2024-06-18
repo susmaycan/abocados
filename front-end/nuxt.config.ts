@@ -24,4 +24,7 @@ export default defineNuxtConfig({
     langDir: 'locales',
     defaultLocale: 'en',
   },
+  imports: {
+    dirs: ['./types/**'],
+  },
 })
