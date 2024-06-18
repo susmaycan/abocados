@@ -20,10 +20,10 @@ const availableLocales = computed(() => {
 
 <template>
   <UDropdown :items="availableLocales" :popper="{ placement: 'bottom-start' }">
-    <UButton
+    <ab-button
       color="white"
-      leading-icon="i-heroicons-language-20-solid"
-      trailing-icon="i-heroicons-chevron-down-20-solid"
+      right-icon="i-heroicons-chevron-down-20-solid"
+      left-icon="i-heroicons-language-20-solid"
     />
     <template #item="{ item }">
       <span class="truncate">{{ item.label }}</span>
