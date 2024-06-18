@@ -1,14 +1,18 @@
 <script setup lang="ts">
 const { initUserConfig } = useUserConfig()
+const { initAuthentication } = useAuth()
 
-onMounted(() => initUserConfig())
+onBeforeMount(() => {
+  initAuthentication()
+  initUserConfig()
+})
 </script>
 
 <template>
   <div class="m-3">
     <top-bar />
     <div class="flex items-center">
-      <side-bar />
+      <!-- <side-bar /> -->
       <slot />
     </div>
   </div>
