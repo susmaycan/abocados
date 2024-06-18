@@ -1,10 +1,10 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
+  <div class="m-3">
     <top-bar />
     <div class="flex items-center">
-      <sidebar />
+      <side-bar />
       <slot />
     </div>
   </div>
