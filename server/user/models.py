@@ -23,3 +23,4 @@ class User(AbstractUser):
     )
     modified = models.DateTimeField(auto_now=True)
     saved_recipes = models.ManyToManyField("recipe.Recipe", blank=True)
+    is_demo_user = models.BooleanField(_("is_demo_user"), default=False)

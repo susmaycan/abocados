@@ -2,7 +2,7 @@ import { Redirect, Stack } from 'expo-router'
 import { useAuth } from '@/hooks/useAuth'
 
 export default function AppLayout() {
-  const { isAuthenticated, logout } = useAuth()
+  const { isAuthenticated } = useAuth()
 
   if (!isAuthenticated()) {
     return <Redirect href="/login" />
