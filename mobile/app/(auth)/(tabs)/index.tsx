@@ -1,44 +1,66 @@
-import AImage from '@/components/AImage'
-import Loader from '@/components/Loader'
-import { ScreenView } from '@/components/ScreenView'
-import useAPI from '@/hooks/useAPI'
-import { useAuth } from '@/hooks/useAuth'
-import { IRecipeList } from '@/types/IRecipeList'
 import { useEffect } from 'react'
-import { Text, View } from 'react-native'
+
+import CategoryCard from '@/components/CategoryCard'
+import Loader from '@/components/Loader'
+import RecipeCard from '@/components/Recipe/Card'
+import ScreenSection from '@/components/ScreenSection'
+import ScreenTitle from '@/components/ScreenTitle'
+import { ScreenView } from '@/components/ScreenView'
+import ScrollList from '@/components/ScrollList'
+
+import useAPI from '@/hooks/useAPI'
+
+import { ICategoryList } from '@/types/ICategoryList'
+import { IRecipeList } from '@/types/IRecipeList'
 
 export default function Index() {
-  const { user, logout } = useAuth()
-
-  const { fetchData, data, errors, isLoading } = useAPI<IRecipeList>()
+  const {
+    fetchData: fetchRecipes,
+    data: recipeData,
+    isLoading: isLoadingRecipes,
+  } = useAPI<IRecipeList>()
+  const {
+    fetchData: fetchCategories,
+    data: categoriesData,
+    isLoading: isLoadingCategories,
+  } = useAPI<ICategoryList>()
 
   useEffect(() => {
-    fetchData('recipes', { params: { limit: '8' } })
+    fetchCategories('categories')
+    fetchRecipes('recipes', { params: { limit: '8' } })
   }, [])
 
   const recipeList = () => {
-    return data ? data.results : []
+    return recipeData ? recipeData.results : []
+  }
+
+  const categoryList = () => {
+    return categoriesData ? categoriesData.results : []
   }
 
   return (
-    <ScreenView title="Welcome!">
-      <Text>Welcome back {user?.name}</Text>
-
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <View>
-          <Text>View all these recipes for you!</Text>
-          {recipeList().map((recipe) => (
-            <View key={recipe.id}>
-              {recipe.picture && (
-                <AImage url={recipe.picture} alt="Picture of food" />
-              )}
-              <Text>{recipe.name}</Text>
-            </View>
-          ))}
-        </View>
-      )}
+    <ScreenView>
+      <ScreenSection>
+        <ScreenTitle>aBocados 🥑</ScreenTitle>
+      </ScreenSection>
+      <ScreenSection title="Search by category">
+        <ScrollList horizontal={true}>
+          {isLoadingCategories && <Loader />}
+          {!isLoadingCategories &&
+            categoryList().map((category) => (
+              <CategoryCard key={category.id} category={category} />
+            ))}
+        </ScrollList>
+      </ScreenSection>
+      <ScreenSection title="Latest recipes">
+        <ScrollList horizontal={true}>
+          {isLoadingRecipes && <Loader />}
+          {!isLoadingRecipes &&
+            recipeList().map((recipe) => (
+              <RecipeCard key={recipe.id} recipe={recipe} />
+            ))}
+        </ScrollList>
+      </ScreenSection>
     </ScreenView>
   )
 }

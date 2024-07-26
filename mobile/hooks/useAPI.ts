@@ -14,7 +14,6 @@ export default function useApi<ResponseType>() {
   const [isLoading, setLoading] = useState(false)
 
   const { token } = useAuth()
-  console.log('🚀 ~ token:', token)
 
   const fetchData = async (route: string, config?: IFetchConfig) => {
     setLoading(true)
@@ -22,10 +21,14 @@ export default function useApi<ResponseType>() {
 
     const options: IFetchOptions = {
       method: config?.method || EHttpMethod.GET,
+      headers: {
+        'Accept-Language': 'en',
+      },
     }
 
     if (token) {
       options.headers = {
+        ...options.headers,
         Authorization: 'Token ' + token,
       }
     }
@@ -54,9 +57,6 @@ export default function useApi<ResponseType>() {
       : ''
 
     const url = `${base}${urlParams}`
-
-    console.log('🚀 ~ fetchData ~ url:', url)
-    console.log('🚀 ~ fetchData ~ options:', options)
 
     try {
       const response = await fetch(url, options)

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Text } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import { router } from 'expo-router'
 
 import { useAuth } from '@/hooks/useAuth'
@@ -34,18 +34,27 @@ export default function LoginScreen() {
 
   return (
     <ScreenView title="Login">
-      <AImage
-        alt="Abocados logo"
-        height={200}
-        url="https://abocados-s3-bucket.s3.eu-west-3.amazonaws.com/logo.png"
-        width={200}
-      />
-      <Text>Type your email and password to access</Text>
-      <LoginForm
-        isLoading={isLoading}
-        serverErrors={errors}
-        submit={handleLogin}
-      />
+      <View style={styles.container}>
+        <AImage
+          alt="Abocados logo"
+          height={200}
+          url="https://abocados-s3-bucket.s3.eu-west-3.amazonaws.com/logo.png"
+          width={200}
+        />
+        <Text>Type your email and password to access</Text>
+        <LoginForm
+          isLoading={isLoading}
+          serverErrors={errors}
+          submit={handleLogin}
+        />
+      </View>
     </ScreenView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+})

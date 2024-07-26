@@ -8,10 +8,10 @@ export default function AppLayout() {
     return <Redirect href="/login" />
   }
 
-  // This layout can be deferred because it's not the root layout.
   return (
     <Stack>
-      <Stack.Screen title="TABS" name="(tabs)" />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="recipes/[id]" />
     </Stack>
   )
 }

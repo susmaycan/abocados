@@ -35,6 +35,7 @@ export default function LoginForm({
         isRequired={true}
         label="Email"
         value={formData.email as string}
+        type="email"
         onChange={(e: string) => updateForm('email', e)}
       />
       <ATextInput

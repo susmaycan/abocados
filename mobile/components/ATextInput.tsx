@@ -1,12 +1,13 @@
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { HelperText, TextInput } from 'react-native-paper'
+import { useState } from 'react'
 
 interface ATextInputProps {
-  isRequired?: boolean
   errors?: string[]
+  isRequired?: boolean
   label: string
   onChange: (newValue: string) => void
-  type?: 'text' | 'password'
+  type?: 'email' | 'password'
   value: string
 }
 
@@ -18,11 +19,11 @@ export default function ATextInput({
   value,
   onChange,
 }: ATextInputProps) {
-  const hasErrors = () => !!errors
-
   const textLabel = isRequired ? `${label} *` : label
 
-  //   const displayedValue = type === 'password' ? value.replace(/./g, '*') : value
+  const [showPassword, setShowPassword] = useState(false)
+
+  const isTypePassword = () => type === 'password'
   return (
     <View>
       <TextInput
@@ -30,6 +31,16 @@ export default function ATextInput({
         mode="outlined"
         onChangeText={(text) => onChange(text)}
         value={value}
+        autoComplete={type}
+        secureTextEntry={isTypePassword() && !showPassword}
+        right={
+          isTypePassword() && (
+            <TextInput.Icon
+              icon={showPassword ? 'eye-off' : 'eye'}
+              onPress={() => setShowPassword(!showPassword)}
+            />
+          )
+        }
       />
       {errors?.map((error) => (
         <HelperText type="error" visible={!!error} key={error}>
